@@ -262,5 +262,4 @@ p{
 p{
   display: grid;
 }
-
 </style>
