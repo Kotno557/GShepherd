@@ -7,32 +7,87 @@
     export default {
         data() {
             return {
-                isLogin: false
+                isLogin: false,
+                selectBar: ['onSelect selecter','selecter']
             }
         },
         methods: {
-            
-        },
-        mounted() {
-            this.isLogin = false /* fetch something */
+            clickChange: function(){
+                if(this.isLogin==true){
+                    this.selectBar[0]='selecter';
+                    this.selectBar[1]='onSelect selecter'
+                }
+                else{
+                    this.selectBar[0]='onSelect selecter';
+                    this.selectBar[1]='selecter'
+                }
+            }
         }
     }
 </script>
 
 <template>
     <div id="wrapper">
-        <div id="select-bar">
-            <div id="sign-up">sign-up</div>
-            <div id="login">login</div>
-        </div>
-        <div id="input-aria">
-            <login v-if="this.isLogin" />
-            <sign_up v-else />
-            <button @click="this.isLogin = !this.isLogin">{{this.isLogin ? 'logout' : 'login'}}</button>
+        <div id="container">
+            <div>
+                <div id="logo"><img src="../../../assets/GShepherd Logo.png"></div>
+                <div id="select-bar">
+                    <div id="sign-up" :class="selectBar[0]" @click="isLogin=false;clickChange()">sign-up</div>
+                    <div id="login" :class="selectBar[1]" @click="isLogin=true;clickChange()">login</div>
+                </div>
+                <div id="input-aria">
+                    <login v-if="this.isLogin" />
+                    <sign_up v-else />
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+@import url('../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css');
+#logo img{
+    width: 40vmin;
+}
+#container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#wrapper{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../../../assets/login_assets/background-pexels-gdtography-911738.jpg);
+    background-size: cover;
+    background-position: 50% 50%;
+}
+#select-bar{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
 
+#container{
+    width: 50vmin;
+    height: 80vmin;
+    border-radius: 10vmin;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#input-aria{
+    
+    text-align: center;
+    height: 50vmin;
+    background-color: rgba(145, 151, 144, 0.7);
+}
+.selecter{
+    padding: 2vmin;
+    width: 50%;
+}
+.onSelect{
+    background-color:  rgba(145, 151, 144, 0.7);
+}
 </style>

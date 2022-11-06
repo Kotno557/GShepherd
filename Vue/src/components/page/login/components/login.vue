@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <p>Login page</p>
+    <div>Login page</div>
 </template>
 
 <style scoped>
