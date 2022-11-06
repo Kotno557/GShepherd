@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Gshepherd from './Gshepherd.vue'
 import login from './components/page/login/login_page.vue'
 import display from './components/page/display/display.vue'

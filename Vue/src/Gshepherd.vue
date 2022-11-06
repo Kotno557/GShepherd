@@ -115,7 +115,7 @@
         <div>請輸入房間#ID</div>
         <div><input id="room-id" type="text"/><br><input @click="jump_room()" type="button" value="Go!"></div>
         <div>或是...開啟新房間?</div>
-        <div @click="jump_login()"><input type="button" value="登入/註冊"></div>
+        <div @click="jump_login()"><input type="button" value="註冊/登入"></div>
         <div class="hint">↓滑動滾輪切換頁面 1/3</div>
       </div>
     </div>
