@@ -32,8 +32,8 @@
             <div>
                 <div id="logo"><img src="../../../assets/GShepherd Logo.png"></div>
                 <div id="select-bar">
-                    <div id="sign-up" :class="selectBar[0]" @click="isLogin=false;clickChange()">sign-up</div>
-                    <div id="login" :class="selectBar[1]" @click="isLogin=true;clickChange()">login</div>
+                    <div id="sign-up" :class="selectBar[0]" @click="isLogin=false;clickChange()"><h4>註冊</h4></div>
+                    <div id="login" :class="selectBar[1]" @click="isLogin=true;clickChange()"><h4>登入</h4></div>
                 </div>
                 <div id="input-aria">
                     <login v-if="this.isLogin" />
@@ -69,7 +69,12 @@
     text-align: center;
     justify-content: center;
 }
-
+#sign-up{
+    border-radius: 2vmin 0 0 0;
+}
+#login{
+    border-radius: 0 2vmin 0 0;
+}
 #container{
     width: 50vmin;
     height: 80vmin;
@@ -78,9 +83,11 @@
 }
 
 #input-aria{
-    
-    text-align: center;
-    height: 50vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0% 0% 2vmin 2vmin;
+    height: 45vmin;
     background-color: rgba(145, 151, 144, 0.7);
 }
 .selecter{
@@ -89,5 +96,12 @@
 }
 .onSelect{
     background-color:  rgba(145, 151, 144, 0.7);
+}
+
+div{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+h4{
+    font-size: 2.5vmin;
 }
 </style>
