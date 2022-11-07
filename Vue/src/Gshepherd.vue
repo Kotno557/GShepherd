@@ -32,7 +32,7 @@
     window.location.href = 'login';
   }
   function jump_room(){
-    let v = `display/${document.getElementById('room-id').value}`;
+    let v = `join/${document.getElementById('room-id').value}`;
     console.log(v);
     window.location.href = v;
   }
