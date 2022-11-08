@@ -23,14 +23,19 @@
         <input type="button" value="OK" @click="setSelection()"/> 
     </div>
     <div id="safe">
-        <div style="jusfy-content: center;">
+        <div class="myfont" style="jusfy-content: center;">
             <h4>{{roomTopic}}</h4>
-            <div>
-                <div class="bar" v-for="item in this.slection" style="margin: 5px">
-                    <input type="radio" name="radAnswer" />{{item}}
-                </div>
+            <div style="text-align: left; max-height: 40vh;" class="mt-5 mb-5 overflow-auto">
+                <ul class="list-group myfont">
+                    <li class="list-group-item" v-for="item in this.slection">
+                        <input class="form-check-input me-4" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"> 
+                        <label class="form-check-label" for="exampleRadios1">
+                            {{item}}
+                        </label>
+                    </li>
+                </ul>
             </div>
-            <button class="btn btn-primary">Submmit</button>
+            <button class="btn btn-dark" >Submmit</button>
         </div>
     </div>
 </template>
@@ -41,6 +46,7 @@ h4{
     font-size: 3.5vmin;
 }
 .bar{
+    justify-content: center;
     width: 15vmin;
     border: solid;
 }
@@ -63,5 +69,23 @@ h4{
     border: 1px black solid;
     height: 200px;
     width: 200px;
+}
+.myfont{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 2vmin; 
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
 }
 </style>

@@ -84,7 +84,7 @@ import vote from './vote.vue';
                     <option>選選日</option>
                 </select>
                 <br><br>
-                題目名稱：<input id="topicName" type="text"/>
+                題目名稱：<input id="topicName" type="text" style="width: 10vmin;"/>
                 <br><br>
                 是否已登入? <input type="checkbox" />
                 　<input type="button" value="OK" @click="setValue()"/>
@@ -96,9 +96,10 @@ import vote from './vote.vue';
 <style scoped>
 @import url('../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css');
 #sheet{
-    width: 40vw;
-    height: 60vh;
+    width: 30vw;
+    height: 70vh;
     background-color: rgba(175, 179, 174,0.6);
+    border-radius: 2vmin
 }
 #logo{
     height: 8vh;
