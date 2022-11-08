@@ -1,9 +1,25 @@
+<script setup>
+    import Sign_up from '../login/components/sign_up.vue';
+import vote from './vote.vue';
+    /*import think from './think.vue';
+    import test from './test.vue';
+    import rate from './rate.vue';
+    import discuss from './discuss.vue';
+    import compare from './compare.vue';
+    import lotto from './lotto.vue';
+    import scratch from './scratch.vue';
+    import date from './date.vue';*/
+</script>
 <script>
     export default { 
         data(){
             return {
                roomId: this.$route.params.id,
-               participantName: ""
+               participantName: "",
+               roomType: -1,
+               sRroomTopic: "None",
+               arr: {'投投票': 0,'想想看': 1,'測測驗': 2,'評評分': 3,'討討論': 4,'比比看': 5,'抽抽獎': 6,'刮刮樂': 7,'選選日': 8}
+
             }
         },
         methods: {
@@ -16,6 +32,10 @@
             getParticipantName: function(){
                 console.log('test');
                 this.participantName="temp_name";
+            },
+            setValue: function(){
+                this.roomType=this.arr[document.getElementById('activate').value];
+                this.sRroomTopic=document.getElementById('topicName').value;
             }
         },
         beforeMount(){
@@ -38,13 +58,21 @@
         </nav>
         <div id="middle">
             <div id="sheet">
-                the activate site
+                <vote v-if="this.roomType==0" :roomTopic=this.sRroomTopic />
+                <!--<think v-if="this.roomType==1"/>
+                <test v-if="this.roomType==2"/>
+                <rate v-if="this.roomType==5"/>
+                <discuss v-if="this.roomType==3"/>
+                <compare v-if="this.roomType==4"/>
+                <lotto v-if="this.roomType==6"/>
+                <scratch v-if="this.roomType==7"/>
+                <date v-if="this.roomType==8"/>-->
             </div>
             <img id="logo" src="../../../assets/GShepherd Logo.png" />
             <div id="cheetBar">
                 <p><small>這是一個展示用的控制台，實際成品不會有此區塊.</small></p>
                 <label for="cars">選擇活動：</label>
-                <select>
+                <select id="activate">
                     <option>投投票</option>
                     <option>想想看</option>
                     <option>測測驗</option>
@@ -56,9 +84,10 @@
                     <option>選選日</option>
                 </select>
                 <br><br>
-                題目名稱：<input type="text" size=13/>
+                題目名稱：<input id="topicName" type="text"/>
                 <br><br>
                 是否已登入? <input type="checkbox" />
+                　<input type="button" value="OK" @click="setValue()"/>
             </div>
         </div>
     </div>
