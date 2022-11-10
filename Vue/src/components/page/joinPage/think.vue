@@ -3,14 +3,10 @@
         props: ['roomTopic'],
         data(){
             return{
-                slection: ""
+                anwser: ""
             }
         },
         methods:{
-            setSelection: function(){
-                this.slection=document.getElementById('selections').value.split(',');
-                console.log(this.slection);
-            }
         }
     }
 </script>
@@ -18,20 +14,33 @@
 <template>
     <div class="cheet-bar">
         <small>Cheet Board</small><br>
-        選項:<input id="selections" type="text" placeholder="選項" style="width: 70%;"/>
-        <br>
-        <input type="button" value="OK" @click="setSelection()"/> 
+        空
     </div>
     <div id="safe">
         <div class="myfont" style="jusfy-content: center;">
             <h4>{{roomTopic}}</h4>
             <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto">
                 <ul class="list-group myfont" style="width: 35vw;">
-                    <li class="list-group-item" v-for="item in this.slection">
-                        <input class="form-check-input me-4" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"> 
-                        <label class="form-check-label" for="exampleRadios1">
-                            {{item}}
-                        </label>
+                    <li class="list-group-item">
+                        <input class="form-control" type="text" placeholder="IDEA">
+                    </li>
+                    <li class="list-group-item">
+                        <input class="form-control" type="text" placeholder="IDEA">
+                    </li>
+                    <li class="list-group-item">
+                        <input class="form-control" type="text" placeholder="IDEA">
+                    </li>
+                    <li class="list-group-item">
+                        <input class="form-control" type="text" placeholder="IDEA">
+                    </li>
+                    <li class="list-group-item">
+                        <input class="form-control" type="text" placeholder="IDEA">
+                    </li>
+                    <li class="list-group-item">
+                        <input class="form-control" type="text" placeholder="IDEA">
+                    </li>
+                    <li class="list-group-item">
+                        <input class="form-control" type="text" placeholder="IDEA">
                     </li>
                 </ul>
             </div>
@@ -44,6 +53,9 @@
 @import url('../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css');
 h4{
     font-size: 3.5vmin;
+}
+.form-control{
+    border: 0;
 }
 .bar{
     justify-content: center;

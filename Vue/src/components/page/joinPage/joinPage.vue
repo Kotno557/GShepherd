@@ -1,8 +1,8 @@
 <script setup>
     import Sign_up from '../login/components/sign_up.vue';
-import vote from './vote.vue';
-    /*import think from './think.vue';
-    import test from './test.vue';
+    import vote from './vote.vue';
+    import think from './think.vue';
+    /*import test from './test.vue';
     import rate from './rate.vue';
     import discuss from './discuss.vue';
     import compare from './compare.vue';
@@ -59,8 +59,8 @@ import vote from './vote.vue';
         <div id="middle">
             <div id="sheet">
                 <vote v-if="this.roomType==0" :roomTopic=this.sRroomTopic />
-                <!--<think v-if="this.roomType==1"/>
-                <test v-if="this.roomType==2"/>
+                <think v-if="this.roomType==1" :roomTopic=this.sRroomTopic />
+                <!--<test v-if="this.roomType==2"/>
                 <rate v-if="this.roomType==5"/>
                 <discuss v-if="this.roomType==3"/>
                 <compare v-if="this.roomType==4"/>
@@ -96,10 +96,10 @@ import vote from './vote.vue';
 <style scoped>
 @import url('../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css');
 #sheet{
-    width: 30vw;
+    width: 60vw;
     height: 70vh;
     background-color: rgba(175, 179, 174,0.6);
-    border-radius: 2vmin
+    border-radius: 2vmin;
 }
 #logo{
     height: 8vh;

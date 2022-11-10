@@ -60,7 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(../../../assets/login_assets/background-pexels-gdtography-911738.jpg);
+    background-image: url(./components/background.png);
     background-size: cover;
     background-position: 50% 50%;
 }
