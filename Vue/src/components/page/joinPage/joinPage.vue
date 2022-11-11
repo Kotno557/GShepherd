@@ -1,12 +1,11 @@
 <script setup>
-    import Sign_up from '../login/components/sign_up.vue';
     import vote from './vote.vue';
     import think from './think.vue';
-    /*import test from './test.vue';
+    import test from './test.vue';
     import rate from './rate.vue';
     import discuss from './discuss.vue';
     import compare from './compare.vue';
-    import lotto from './lotto.vue';
+    /*import lotto from './lotto.vue';
     import scratch from './scratch.vue';
     import date from './date.vue';*/
 </script>
@@ -35,6 +34,7 @@
             },
             setValue: function(){
                 this.roomType=this.arr[document.getElementById('activate').value];
+                console.log(this.roomType);
                 this.sRroomTopic=document.getElementById('topicName').value;
             }
         },
@@ -60,11 +60,11 @@
             <div id="sheet">
                 <vote v-if="this.roomType==0" :roomTopic=this.sRroomTopic />
                 <think v-if="this.roomType==1" :roomTopic=this.sRroomTopic />
-                <!--<test v-if="this.roomType==2"/>
-                <rate v-if="this.roomType==5"/>
-                <discuss v-if="this.roomType==3"/>
-                <compare v-if="this.roomType==4"/>
-                <lotto v-if="this.roomType==6"/>
+                <test v-if="this.roomType==2" :roomTopic=this.sRroomTopic />
+                <rate v-if="this.roomType==3" :roomTopic=this.sRroomTopic />
+                <discuss v-if="this.roomType==4" :roomTopic=this.sRroomTopic />
+                <compare v-if="this.roomType==5" :roomTopic=this.sRroomTopic />
+                <!--<lotto v-if="this.roomType==6"/>
                 <scratch v-if="this.roomType==7"/>
                 <date v-if="this.roomType==8"/>-->
             </div>

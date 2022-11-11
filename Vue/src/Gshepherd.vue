@@ -99,13 +99,13 @@
           <img src="/src/assets/profile/un_tyson_192b.png">
           <h3 style="margin: 2vh">楊大為</h3>
           <p><a style="margin: 2vh">testzzo.no1@gmail.com</a></p>
-          <input style="margin: 2vh; height: 5vmin; width: 10vmin;" type="button" value="Main Page" onclick="window.open('https://kotno557.github.io/Internet-fall-2022/')" />
+          <input style="margin: 2vh; height: 5vmin; width: 10vmin;" type="button" value="個人頁面" onclick="window.open('https://kotno557.github.io/Internet-fall-2022/')" />
         </div>
         <div class="profile">
           <img src="https://internet.nizw0.com/static/media/profile.27bb6496e46aef6d68c9.png">
           <h3 style="margin: 2vh">吳丞恩</h3>
           <p><a style="margin: 2vh">ce.wu@outlook.com</a></p>
-          <input style="margin: 2vh; height: 5vmin; width: 10vmin;" type="button" value="Main Page" onclick="window.open('https://internet.nizw0.com/')" />
+          <input style="margin: 2vh; height: 5vmin; width: 10vmin;" type="button" value="個人頁面" onclick="window.open('https://internet.nizw0.com/')" />
         </div>
       </div>
     </div>

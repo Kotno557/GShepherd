@@ -3,9 +3,7 @@
         props: ['roomTopic'],
         data(){
             return{
-                anwser: [
-                    { name: '' }
-                ],
+                
             }
         }
     }
@@ -14,22 +12,18 @@
 <template>
     <div class="cheet-bar">
         <small>Cheet Board</small><br>
-        空
     </div>
     <div id="safe">
         <div class="myfont" style="jusfy-content: center;">
             <h4>{{roomTopic}}</h4>
             <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto">
                 <ul class="list-group myfont" style="width: 35vw;">
-                    <li class="list-group-item" v-for="i in anwser">
-                        <input class="form-control" type="text" placeholder="Type Some Idea..." v-model="i.name">
+                    <li class="list-group-item">
+                        <textarea class="form-control" placeholder="Type Some Massage..." style="height: 40vh;" />
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-light" @click="this.anwser.push({name: ''})" >+ Idea</button>
             <button class="btn btn-dark mx-2" >繳交</button>
-            <button class="btn btn-light" @click="(this.anwser.length>1)?anwser.pop():pass">- Idea</button>
-
         </div>
     </div>
 </template>
