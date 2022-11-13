@@ -24,6 +24,8 @@ export default{
         <small>Cheet Board</small><br>
         是否中獎?
         <input type="checkbox" v-model="this.isWining" />
+        <br>
+        要重製刮刮樂請至別的活動之後再回來此活動
     </div>
     <div id="safe">
         <div class="myfont" style="jusfy-content: center;">

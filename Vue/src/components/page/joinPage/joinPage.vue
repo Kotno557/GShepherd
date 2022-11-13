@@ -36,6 +36,7 @@
                 this.roomType=this.arr[document.getElementById('activate').value];
                 console.log(this.roomType);
                 this.sRroomTopic=document.getElementById('topicName').value;
+                document.getElementById('topicName').value="";
             }
         },
         beforeMount(){

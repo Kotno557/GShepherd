@@ -63,7 +63,7 @@
     </div>
     <div id="safe">
         <div class="myfont" style="jusfy-content: center;">
-            <h4>{{roomTopic}}</h4>
+            <p class="mb-5">{{roomTopic}}</p>
             <div class="mt-3 mb-3 overflow-auto" v-bind="questionPointer">
                 <h4>{{question[questionPointer-1].name}}</h4>
                 <div style="justify-content: center; display: flex;" class="mt-5 mb-5">  
