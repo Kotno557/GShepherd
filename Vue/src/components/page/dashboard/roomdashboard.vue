@@ -3,62 +3,18 @@
         data(){
             return {
                 userId: this.$route.params.id,
-                event:
+                roomid: this.$route.params.roomId,
+                poll:
                 [
                     {
-                        name: "活動一",
-                        roomId: '265844'
-                    },
-                    {
-                        name: "活動二",
-                        roomId: '155940'
-                    },
-                    {
-                        name: "活動三",
-                        roomId: '118721'
-                    },
-                    {
-                        name: "活動四",
-                        roomId: '264687'
-                    },
-                    {
-                        name: "活動五",
-                        roomId: '264256'
-                    },
-                    {
-                        name: "活動六",
-                        roomId: '964256'
-                    },
-                    {
-                        name: "活動七",
-                        roomId: '984255'
-                    },
-                    {
-                        name: "活動八",
-                        roomId: '425256'
-                    },
-                    {
-                        name: "活動九",
-                        roomId: '525256'
-                    },
-                    {
-                        name: "活動十",
-                        roomId: '252566'
-                    },
-                    {
-                        name: "活動十一",
-                        roomId: '981256'
-                    },
-                    {
-                        name: "活動十二",
-                        roomId: '981256'
+                        type: 'forms_add_on'
                     }
                 ]
             }
         },
         methods:{
-            jumpToMain: function(){
-                window.location.href='/Gshepherd/';
+            jumpToBack: function(){
+                window.location.href=`/Gshepherd/dashboard/${this.userId}`;
             },
             jumpToLogin: function(){
                 window.location.href='/Gshepherd/login';
@@ -73,30 +29,29 @@
     <div id="page">
         <nav>
             <span class="material-symbols-outlined">
-                <button class="btn" @click="jumpToMain()">home</button>
+                <button class="btn" @click="jumpToBack()">arrow_back</button>
             </span>
-            <div id="band">Hello! {{this.userId}} </div>
+            <div id="band">#{{this.roomid}} </div>
             <span class="material-symbols-outlined">
                 <button class="btn" @click="jumpToLogin()">logout</button>
             </span>
         </nav>
         <div id="middle">
-            <div id="sheet">
-                <div id="name_and_add" class="mt-3 mx-4 myfont" style="font-size: 2vmin;">
-                    <text >活動：</text>
-                    <button style="float: right;" class="mx-4 btn btn-dark ">+ 新增活動</button>
-                </div>
-                <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;" class="m-3 overflow-auto">
-                    <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin" v-for="i in this.event">
-                        <a class="list-group-item" :href="`/Gshepherd/dashboard/${this.userId}/${i.roomId}`">
-                            <span class="material-symbols-outlined" >
-                                event
+            <div id="sheet" class="flex-center">
+                <div id="section1">
+                    <ul class="list-group myfont" style="width: 100%; font-size: 2vmin">
+                        <li class="list-group-item active flex-center" style="justify-content: space-between">
+                            <text>List：</text>
+                            <button style="float: right;" class="btn btn-dark ">+ 新增活動</button>
+                        </li>
+                        <li class="list-group-item" v-for="i in this.poll">
+                            <span class="material-symbols-outlined">
+                                {{i.type}}
                             </span>
-                            {{i.name}}
-                            <small style="color:rgb(102,98,98, 0.5); font-size: medium;">#{{i.roomId}}</small>
-                        </a>
+                        </li>
                     </ul>
                 </div>
+                <div id="section2">Live</div>
             </div>
             <img id="logo" src="../../../assets/GShepherd Logo.png" />
         </div>
@@ -145,6 +100,13 @@ nav span{
 .gray-hover a:hover{
     background-color: rgba(243, 243, 243, 0.74);
 }
+
+.list-group-item.active{
+    z-index: 2;
+    color: var(--bs-list-group-active-color);
+    background-color: rgb(122, 122, 122);
+    border-color: rgb(205, 207, 204);
+}
 nav #band{
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 2vmin; 
@@ -171,9 +133,34 @@ nav #band{
     align-content: center;    
     justify-content: center;
 }
+
+
+
+
+#section1{
+    background-color: aqua;
+    border-radius: 2vmin 0 0 2vmin;
+    height: 95%;
+    width: 45%;
+    max-height: max-content;
+    overflow: auto;
+}
+#section2{
+    background-color: aquamarine;
+    border-radius: 0 2vmin 2vmin 0;
+    height: 95%;
+    width: 45%;
+}
 .myfont{
     font-family: 'Noto Sans TC', sans-serif;
 }
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;

@@ -5,6 +5,7 @@ import login from './components/page/login/login_page.vue'
 import joinPage from './components/page/joinPage/joinPage.vue'
 import App from './App.vue'
 import dashboard from './components/page/dashboard/dashboard.vue'
+import roomdashboard from './components/page/dashboard/roomdashboard.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -23,6 +24,10 @@ const router = createRouter({
         {
             path: '/Gshepherd/dashboard/:id',
             component: dashboard
+        },
+        {
+            path: '/Gshepherd/dashboard/:id/:roomId',
+            component: roomdashboard
         },
         {
             path: '/:pathMatch(.*)*',
