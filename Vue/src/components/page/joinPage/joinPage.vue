@@ -6,8 +6,8 @@
     import discuss from './discuss.vue';
     import compare from './compare.vue';
     import lotto from './lotto.vue';
-    /*import scratch from './scratch.vue';
-    import date from './date.vue';*/
+    import scratch from './scratch.vue';
+    import date from './date.vue';
 </script>
 <script>
     export default { 
@@ -64,9 +64,9 @@
                 <rate v-if="this.roomType==3" :roomTopic=this.sRroomTopic />
                 <discuss v-if="this.roomType==4" :roomTopic=this.sRroomTopic />
                 <compare v-if="this.roomType==5" :roomTopic=this.sRroomTopic />
-                <lotto v-if="this.roomType==6"/>
-                <!--<scratch v-if="this.roomType==7"/>
-                <date v-if="this.roomType==8"/>-->
+                <lotto v-if="this.roomType==6" :roomTopic=this.sRroomTopic />
+                <scratch v-if="this.roomType==7" :roomTopic=this.sRroomTopic />
+                <date v-if="this.roomType==8" :roomTopic=this.sRroomTopic />
             </div>
             <img id="logo" src="../../../assets/GShepherd Logo.png" />
             <div id="cheetBar">
