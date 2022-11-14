@@ -53,7 +53,7 @@
                         name: "活動十二",
                         roomId: '981256'
                     }
-                ]
+                ],
             }
         },
         methods:{
@@ -83,12 +83,12 @@
         <div id="middle">
             <div id="sheet">
                 <div id="name_and_add" class="mt-3 mx-4 myfont" style="font-size: 2vmin;">
-                    <text >活動：</text>
+                    <text style="font-size: 3vmin">活動：</text>
                     <button style="float: right;" class="mx-4 btn btn-dark ">+ 新增活動</button>
                 </div>
                 <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;" class="m-3 overflow-auto">
-                    <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin" v-for="i in this.event">
-                        <a class="list-group-item" :href="`/Gshepherd/dashboard/${this.userId}/${i.roomId}`">
+                    <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
+                        <a class="list-group-item" v-for="i in this.event" :href="`/Gshepherd/dashboard/${this.userId}/${i.roomId}`">
                             <span class="material-symbols-outlined" >
                                 event
                             </span>
@@ -147,10 +147,10 @@ nav span{
 }
 nav #band{
     font-family: 'Noto Sans TC', sans-serif;
-    font-size: 2vmin; 
+    font-size: 4vmin; 
 }
 #page{
-    width: 100vm;
+    width: 100vw;
     height: 100vh;
 }
 #middle{
