@@ -10,28 +10,28 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/GShepherd/',
+            path: '/',
             component: Gshepherd,
         },
         {
-            path: '/GShepherd/login',
+            path: '/login',
             component: login
         },
         {
-            path: '/GShepherd/join/:id',
+            path: '/join/:id',
             component: joinPage
         },
         {
-            path: '/GShepherd/dashboard/:id',
+            path: '/dashboard/:id',
             component: dashboard
         },
         {
-            path: '/GShepherd/dashboard/:id/:roomId',
+            path: '/dashboard/:id/:roomId',
             component: roomdashboard
         },
         {
             path: '/:pathMatch(.*)*',
-            redirect: '/GShepherd/',
+            redirect: '/',
             hidden: true
         }
     ]
