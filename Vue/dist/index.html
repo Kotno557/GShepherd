@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="/GShepherd/assets/index.444bb1f8.css">
   </head>
   <body style="margin: 0%">
+    <script>
+      (function(){
+        let redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <div id="app"></div>
     
   </body>
