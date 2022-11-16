@@ -23,10 +23,10 @@
         },
         methods: {
             jumpToMain: function(){
-                window.location.href='/Gshepherd/';
+                window.location.href='/GShepherd/';
             },
             jumpToDashbord: function(){
-                window.location.href='/Gshepherd/login';
+                window.location.href='/GShepherd/login';
             },
             getParticipantName: function(){
                 console.log('test');
@@ -69,7 +69,7 @@
                 <scratch v-if="this.roomType==7" :roomTopic=this.sRroomTopic />
                 <date v-if="this.roomType==8" :roomTopic=this.sRroomTopic />
             </div>
-            <img id="logo" src="../../../assets/GShepherd Logo.png" />
+            <img id="logo" src="../../../assets/GShepherd_Logo.png" />
             <div id="cheetBar">
                 <p><small>這是一個展示用的控制台，實際成品不會有此區塊.</small></p>
                 <label for="cars">選擇活動：</label>

@@ -58,10 +58,10 @@
         },
         methods:{
             jumpToMain: function(){
-                window.location.href='/Gshepherd/';
+                window.location.href='/GShepherd/';
             },
             jumpToLogin: function(){
-                window.location.href='/Gshepherd/login';
+                window.location.href='/GShepherd/login';
             }
         }
     }
@@ -88,7 +88,7 @@
                 </div>
                 <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;" class="m-3 overflow-auto">
                     <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
-                        <a class="list-group-item" v-for="i in this.event" :href="`/Gshepherd/dashboard/${this.userId}/${i.roomId}`">
+                        <a class="list-group-item" v-for="i in this.event" :href="`/GShepherd/dashboard/${this.userId}/${i.roomId}`">
                             <span class="material-symbols-outlined" >
                                 event
                             </span>
@@ -98,7 +98,7 @@
                     </ul>
                 </div>
             </div>
-            <img id="logo" src="../../../assets/GShepherd Logo.png" />
+            <img id="logo" src="../../../assets/GShepherd_Logo.png" />
         </div>
     </div>
 </template>

@@ -53,10 +53,10 @@ export default {
   },
   methods: {
     jumpToBack() {
-      window.location.href = `/Gshepherd/dashboard/${this.userId}`;
+      window.location.href = `/GShepherd/dashboard/${this.userId}`;
     },
     jumpToLogin: function () {
-      window.location.href = "/Gshepherd/login";
+      window.location.href = "/GShepherd/login";
     },
     trace: function (i) {
       this.view_poll = parseInt(i);
@@ -344,7 +344,7 @@ export default {
           </ul>
         </div>
       </div>
-      <img id="logo" src="../../../assets/GShepherd Logo.png" />
+      <img id="logo" src="../../../assets/GShepherd_Logo.png" />
     </div>
   </div>
 </template>

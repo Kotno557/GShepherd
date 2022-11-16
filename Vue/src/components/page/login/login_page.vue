@@ -30,7 +30,7 @@
     <div id="wrapper">
         <div id="container">
             <div>
-                <div id="logo"><img src="../../../assets/GShepherd Logo.png"></div>
+                <div id="logo"><img src="../../../assets/GShepherd_Logo.png"></div>
                 <div id="select-bar">
                     <div id="sign-up" :class="selectBar[0]" @click="isLogin=false;clickChange()"><h4>註冊</h4></div>
                     <div id="login" :class="selectBar[1]" @click="isLogin=true;clickChange()"><h4>登入</h4></div>

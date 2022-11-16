@@ -34,7 +34,7 @@ export default{
                 :cardWidth="cardWidth"
                 :cardHeight="cardHeight"
                 :finishPercent="finishPercent"
-                imageUrl='/Gshepherd/src/components/page/joinPage/scratchbg.png'
+                imageUrl='/GShepherd/src/components/page/joinPage/scratchbg.png'
                 :forceReveal="forceReveal">
                 <h1 class="card-content">{{isWining?"恭喜您！您中獎了！":"銘謝惠顧，下次加油..."}}</h1>
             </scratch-card>

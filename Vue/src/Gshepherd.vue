@@ -1,5 +1,5 @@
 <script setup>
-  document.title = 'Gshepherd';
+  document.title = 'GShepherd';
   console.log('set');
   var lastRoll=0;
   window.addEventListener('mousewheel',function(event){
@@ -41,7 +41,7 @@
 <template>
   <div id="wapper">
     <div id="s1" class="slide show">
-      <span class="welcom">Welcome Gshepherd!</span>
+      <span class="welcom">Welcome GShepherd!</span>
     </div>
     <div id="s2" class="slide mask">
       <div>
