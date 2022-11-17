@@ -58,10 +58,10 @@
         },
         methods:{
             jumpToMain: function(){
-                window.location.href='/GShepherd/';
+                window.location.href='/';
             },
             jumpToLogin: function(){
-                window.location.href='/GShepherd/login';
+                window.location.href='/login';
             }
         }
     }

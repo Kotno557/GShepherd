@@ -53,10 +53,10 @@ export default {
   },
   methods: {
     jumpToBack() {
-      window.location.href = `/GShepherd/dashboard/${this.userId}`;
+      window.location.href = `/dashboard/${this.userId}`;
     },
     jumpToLogin: function () {
-      window.location.href = "/GShepherd/login";
+      window.location.href = "/login";
     },
     trace: function (i) {
       this.view_poll = parseInt(i);

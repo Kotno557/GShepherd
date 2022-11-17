@@ -7,7 +7,7 @@ import App from './App.vue'
 import dashboard from './components/page/dashboard/dashboard.vue'
 import roomdashboard from './components/page/dashboard/roomdashboard.vue'
 const router = createRouter({
-    history: createWebHistory('/GShepherd/'),
+    history: createWebHistory('/'),
     routes: [
         {
             path: '/',
