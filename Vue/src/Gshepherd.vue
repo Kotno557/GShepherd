@@ -1,79 +1,104 @@
 <script>
-
+  export default{
+    data() {
+      return {
+        isShow: true
+      }
+    }
+  }
 </script>
 
 <template>
-  <header>
-    <nav
-      class="navbar navbar-light navbar-expand-md bg-faded justify-content-center bg-light fixed-top"
-    >
-      <div class="container">
-        <img class="logo" src="./assets/GHepherd_Logo_small.png">
-        <span class="navbar-brand d-flex w-25 me-auto">
-          GShepherd
-        </span>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapsingNavbar3"
-        >
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
-          <ul class="navbar-nav w-100 justify-content-center">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
-            <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="#Room ID"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                GO!
-              </button>
-              　
-              <button class="btn btn-outline-secondary d-flex" type="button">
-                <span class="material-symbols-outlined">person</span>
-              </button>
-            </form>
-          </ul>
+  
+  <header >
+    <transition name="nav_bar" appear>
+      <nav
+        class="navbar navbar-light navbar-expand-md bg-faded justify-content-center bg-light fixed-top"
+        v-show="isShow"
+      >
+        <div class="container">
+          <img class="logo" src="./assets/GHepherd_Logo_small.png">
+          <span class="navbar-brand d-flex w-25 me-auto">
+            GShepherd
+          </span>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsingNavbar3"
+          >
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+            <ul class="navbar-nav w-100 justify-content-center">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">首頁</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#s2">介紹</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#s3">聯絡我們</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
+              <form class="d-flex">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="#Room ID"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  GO!
+                </button>
+                　
+                <button class="btn btn-outline-secondary d-flex" type="button">
+                  <span class="material-symbols-outlined">person</span>
+                </button>
+              </form>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </transition>
   </header>
   <main>
     <section class="sec">
       <div class="d-flex">
-        <div class="w-75" id="s1">
+        <transition name="slide_1" appear>
+        <div class="w-75" id="s1" v-show="isShow">
           <span class="welcom">Welcome GShepherd!</span>
+          <button @click="isShow =! isShow">Toggle</button>
         </div>
-        <div class="w-25 bar d-flex justify-content-center align-items-center">
-          <div>
-            <h2>哈囉，第一次來ㄇ?</h2>
-            請輸入房間#ID<br>
-            <input id="room-id" type="text"/><br><input @click="" type="button" value="Go!"><br>
-            或是...開啟新房間?<br>
-            <input type="button" value="註冊/登入">
-          </div>
+        </transition>
+        <div class="w-25 bar d-flex justify-content-center align-items-center" id="b1">
+            <transition name="slide_1_bar" appear>
+            <div v-show="isShow">
+              <h2>哈囉，第一次來ㄇ?</h2>
+              請輸入房間#ID<br>
+              <input
+                  class="form-control me-2"
+                  type="search"
+                  aria-label="Search"
+              />
+              <button class="btn btn-outline-success">
+                GO!
+              </button>
+              <br>
+              或是...開啟新房間?<br>
+              <button class="btn btn-outline-secondary d-flex">
+                註冊/登入
+              </button>
+            </div>
+          </transition>
         </div>
       </div>
     </section>
     <section class="sec">
       <div class="d-flex">
         <div class="w-75" id="s2">
-            <div><span class="welcom">Welcome GShepherd!</span></div>
+            <div><span class="welcom">What We Have?</span></div>
             <div style="display: flex; justify-content:left; margin-left: 6vw;">
         <div class="feature">
           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 122.34" style="enable-background:new 0 0 122.88 122.34" xml:space="preserve"><g><path fill="#ffffff" d="M58.61,28.13c-1.3,0-2.35-1.05-2.35-2.35c0-1.3,1.05-2.35,2.35-2.35h16.22c1.3,0,2.35,1.05,2.35,2.35 c0,1.3-1.05,2.35-2.35,2.35H58.61L58.61,28.13z M85.5,25.16h22.19c0.97,0,1.8,0.59,2.16,1.42l12.57,24.27 c0.2,0.38,0.28,0.8,0.26,1.2l0.21,67.94c0,1.29-1.05,2.34-2.34,2.34v0.01H2.35c-1.3,0-2.35-1.05-2.35-2.35V51.95l0-0.02l0-0.02 l0-0.02v0l0-0.02l0-0.02l0-0.02l0-0.01l0-0.02l0-0.03v0l0-0.01l0-0.04l0-0.01l0-0.01l0-0.04l0-0.01l0-0.01l0.01-0.04l0,0l0-0.02 l0.01-0.04l0,0l0,0l0.01-0.04l0-0.02v0l0.01-0.04l0.01-0.02l0-0.02l0-0.02l0-0.01l0-0.01l0.01-0.02l0.01-0.02l0-0.01l0-0.01 l0.01-0.02l0.01-0.02l0-0.01l0-0.01l0.01-0.02l0-0.01l0.01-0.03l0.01-0.02l0.01-0.02l0.01-0.02l0.01-0.02l0.01-0.02v0l0.01-0.02 l0.01-0.02v0l0.02-0.04L0.2,51l0.02-0.04l0,0l0.01-0.02l0.01-0.01l0-0.01l0.01-0.02l0.01-0.02l0.01-0.02l0.01-0.02l0.02-0.04 L0.3,50.8l0,0l0.02-0.03l0.01-0.02l0.01-0.02l0.01-0.02l12.78-24.3c0.42-0.8,1.23-1.25,2.07-1.25v-0.01h21.7V2.91 c0-0.8,0.33-1.53,0.85-2.06C38.28,0.33,39.01,0,39.81,0h42.78c0.8,0,1.53,0.33,2.06,0.85c0.53,0.53,0.85,1.25,0.85,2.06V25.16 L85.5,25.16z M36.9,29.85H16.61L6.23,49.6H116.5l-10.23-19.75H85.5v7.35h5.17c1.3,0,2.35,1.05,2.35,2.35c0,1.3-1.05,2.35-2.35,2.35 h-7.52H39.25h-6.3c-1.3,0-2.35-1.05-2.35-2.35c0-1.3,1.05-2.35,2.35-2.35h3.96V29.85L36.9,29.85z M4.69,54.3v63.35h113.5L118,54.3 H4.69L4.69,54.3z M80.81,4.69H41.59V37.2h39.22V4.69L80.81,4.69z M47.58,17.11c-1.3,0-2.35-1.05-2.35-2.35 c0-1.3,1.05-2.35,2.35-2.35h27.24c1.3,0,2.35,1.05,2.35,2.35c0,1.3-1.05,2.35-2.35,2.35H47.58L47.58,17.11z"/></g></svg>
@@ -120,14 +145,12 @@
         <div class="w-25 bar d-flex justify-content-center align-items-center" id="b2">
           <div>
             <h2>即時線上互動，教學好有趣!</h2>
-            <div id="login">
-              <div>在這裡，你可以...</div>
-              <div>
-                <li>立即開啟房間，加入群眾開始活動</li>
-                <li>預定活動，與觀眾互動不卡卡</li>
-                <li>活動結果即時呈現，讓氣氛嗨起來</li>
-              </div>
-            </div>
+                <ul class="list-group">
+                  <li class="list-group-item active">在這裡，你可以...</li>
+                  <li class="list-group-item">立即開啟房間，加入群眾開始活動</li>
+                  <li class="list-group-item">預定活動，與觀眾互動不卡卡</li>
+                  <li class="list-group-item">活動結果即時呈現，讓氣氛嗨起來</li>
+                </ul>
           </div>
         </div>
       </div>
@@ -135,15 +158,38 @@
     <section class="sec">
       <div class="d-flex">
         <div class="w-75" id="s3">
-            <span class="welcom">Welcome GShepherd!</span>
+            <span class="welcom">Contact Us!</span>
+            <div style="display: flex; justify-content: center"> 
+              <div class="profile">
+                <img src="/src/assets/profile/un_tyson_192b.png">
+                <h3 style="margin: 2vh">楊大為</h3>
+                <p><a style="margin: 2vh">testzzo.no1@gmail.com</a></p>
+                <a href="https://kotno557.github.io/Internet-fall-2022/" target="_blank">
+                  <button class="btn btn-info" type="submit">
+                    個人頁面
+                  </button>
+                </a>
+              </div>
+              <div class="profile">
+                <img src="https://internet.nizw0.com/static/media/profile.27bb6496e46aef6d68c9.png">
+                <h3 style="margin: 2vh">吳丞恩</h3>
+                <p><a style="margin: 2vh">ce.wu@outlook.com</a></p>
+                <a href="https://internet.nizw0.com/" target="_blank">
+                  <button class="btn btn-info" type="submit">
+                    個人頁面
+                  </button>
+                </a>
+              </div>
+            </div>
         </div>
+        
         <div class="w-25 bar d-flex justify-content-center align-items-center">
           <div id="b3">
-            <h2>遇到問題就聯絡我們ㄅ!</h2>
-            <div>
+            <div><h2>遇到問題就聯絡我們ㄅ!</h2></div>
+            <div class="card">
               <p>人生難免都會遇到問題。</p>
               <p>若在這裡碰到問題就趕緊連絡我們ㄅ!</p>
-              <p>工作人員將在兩到三個工作天之內回覆~</p>
+              <p>工作人員將在兩到三個工作天之內回覆</p>
             </div>
           </div>
         </div>
@@ -176,6 +222,7 @@ main {
   background-size: cover;
   background-position: right bottom;
   height: 95vh;
+  scroll-margin-top: 5vh;
 }
 #s3{
   background-image: url(/src/assets/shepherd/pexels-adam-kontor-333083.jpg);
@@ -205,10 +252,16 @@ header .w-25 {
     width: 45% !important;
 }
 
+#b1,#b2{
+  box-sizing: border-box;
+  border-bottom: solid rgb(224, 224, 224);
+}
+
 #b2 div{
   margin-top: 1vh;
   margin-left: 1vw;
   justify-content: center;
+  
 }
 
 #b3 div{
@@ -234,5 +287,60 @@ header .w-25 {
   margin-top: 26%;
   inline-size: 50%;
   height: 7vmin;
+}
+
+
+.profile{
+  display: block;
+  margin: 1em;
+}
+.profile img{
+  margin-top: 15vh;
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
+}
+
+.profile{
+  width: 20vw;
+  height: 70vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 2%;
+  border-radius: 5vh;
+  text-align: center;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: rgb(228, 227, 227);
+  font-size: 2.5vmin;
+}
+
+
+.slide_1-leave-active,.slide_1-enter-active{
+   transition: all 2s ease;
+}
+.slide_1-enter-from{
+   transform: translateX(-30%);
+}
+.slide_1-leave-to {
+   transform: translateX(30%);
+}
+
+.slide_1_bar-leave-active,.slide_1_bar-enter-active{
+   transition: all 1.5s ease;
+}
+.slide_1_bar-enter-from{
+   transform: translateX(30%);
+}
+.slide_1_bar-leave-to {
+   transform: translateX(-30%);
+}
+
+.nav_bar-leave-active,.nav_bar-enter-active{
+   transition: all 1s ease;
+}
+.nav_bar-enter-from{
+   transform: translateY(-100%);
+}
+.nav_bar-leave-to {
+   transform: translateY(100%);
 }
 </style>
