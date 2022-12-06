@@ -36,7 +36,7 @@
                     <div id="login" :class="selectBar[1]" @click="isLogin=true;clickChange()"><h4>登入</h4></div>
                 </div>
                 <div id="input-aria">
-                    <login v-if="this.isLogin" />
+                    <login v-if="isLogin" />
                     <sign_up v-else />
                 </div>
             </div>

@@ -59,15 +59,15 @@
         </nav>
         <div id="middle">
             <div id="sheet">
-                <vote v-if="this.roomType==0" :roomTopic=this.sRroomTopic />
-                <think v-if="this.roomType==1" :roomTopic=this.sRroomTopic />
-                <test v-if="this.roomType==2" :roomTopic=this.sRroomTopic />
-                <rate v-if="this.roomType==3" :roomTopic=this.sRroomTopic />
-                <discuss v-if="this.roomType==4" :roomTopic=this.sRroomTopic />
-                <compare v-if="this.roomType==5" :roomTopic=this.sRroomTopic />
-                <lotto v-if="this.roomType==6" :roomTopic=this.sRroomTopic />
-                <scratch v-if="this.roomType==7" :roomTopic=this.sRroomTopic />
-                <date v-if="this.roomType==8" :roomTopic=this.sRroomTopic />
+                <vote v-if="roomType==0" :roomTopic=sRroomTopic />
+                <think v-if="roomType==1" :roomTopic=sRroomTopic />
+                <test v-if="roomType==2" :roomTopic=sRroomTopic />
+                <rate v-if="roomType==3" :roomTopic=sRroomTopic />
+                <discuss v-if="roomType==4" :roomTopic=sRroomTopic />
+                <compare v-if="roomType==5" :roomTopic=sRroomTopic />
+                <lotto v-if="roomType==6" :roomTopic=sRroomTopic />
+                <scratch v-if="roomType==7" :roomTopic=sRroomTopic />
+                <date v-if="roomType==8" :roomTopic=sRroomTopic />
             </div>
             <img id="logo" src="../../../assets/GShepherd_Logo.png" />
             <div id="cheetBar">

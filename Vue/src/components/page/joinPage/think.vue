@@ -32,13 +32,13 @@ export default {
           </li>
         </ul>
       </div>
-      <button class="btn btn-light" @click="this.anwser.push({ name: '' })">
+      <button class="btn btn-light" @click="anwser.push({ name: '' })">
         + Idea
       </button>
       <button class="btn btn-dark mx-2">繳交</button>
       <button
         class="btn btn-light"
-        @click="this.anwser.length > 1 ? anwser.pop() : pass"
+        @click="anwser.length > 1 ? anwser.pop() : pass"
       >
         - Idea
       </button>

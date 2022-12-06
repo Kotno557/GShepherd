@@ -37,11 +37,11 @@
                     <input type="button" class="btn btn-primary" value="+" style="width: 30px; height: 30px;" @click="increaseRate()" />
                 </div>
                 <span>
-                    <span class="face" v-if="this.question.grade==1">😡</span>
-                    <span class="face" v-if="this.question.grade==2">😒</span>
-                    <span class="face" v-if="this.question.grade==3">😐</span>
-                    <span class="face" v-if="this.question.grade==4">🙂</span>
-                    <span class="face" v-if="this.question.grade==5">😀</span>
+                    <span class="face" v-if="question.grade==1">😡</span>
+                    <span class="face" v-if="question.grade==2">😒</span>
+                    <span class="face" v-if="question.grade==3">😐</span>
+                    <span class="face" v-if="question.grade==4">🙂</span>
+                    <span class="face" v-if="question.grade==5">😀</span>
                 </span>
             </div>
             <button class="btn btn-dark" >繳交</button>

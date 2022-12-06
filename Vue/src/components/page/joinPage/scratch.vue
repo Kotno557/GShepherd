@@ -23,7 +23,7 @@ export default{
     <div class="cheet-bar">
         <small>Cheet Board</small><br>
         是否中獎?
-        <input type="checkbox" v-model="this.isWining" />
+        <input type="checkbox" v-model="isWining" />
         <br>
         要重製刮刮樂請至別的活動之後再回來此活動
     </div>
@@ -34,7 +34,7 @@ export default{
                 :cardWidth="cardWidth"
                 :cardHeight="cardHeight"
                 :finishPercent="finishPercent"
-                imageUrl='/GShepherd/src/components/page/joinPage/scratchbg.png'
+                imageUrl='https://i.ibb.co/mCsPv07/scratchbg.png'
                 :forceReveal="forceReveal">
                 <h1 class="card-content">{{isWining?"恭喜您！您中獎了！":"銘謝惠顧，下次加油..."}}</h1>
             </scratch-card>

@@ -27,7 +27,7 @@
             <h4>{{roomTopic}}</h4>
             <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto">
                 <ul class="list-group myfont" style="width: 35vw;">
-                    <li class="list-group-item" v-for="item in this.slection">
+                    <li class="list-group-item" v-for="item in slection">
                         <input class="form-check-input me-4" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"> 
                         <label class="form-check-label" for="exampleRadios1">
                             {{item}}

@@ -12,9 +12,5 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  },
-  entry: [
-    'webpack-dev-server/client?http://0.0.0.0:80',
-     config.paths.demo
-  ]
+  }
 })

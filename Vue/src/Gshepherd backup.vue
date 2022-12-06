@@ -1,80 +1,53 @@
-<script>
-
+<script setup>
+  document.title = 'GShepherd';
+  console.log('set');
+  var lastRoll=0;
+  window.addEventListener('mousewheel',function(event){
+    let state='';
+    if(Date.now()-lastRoll>300){
+      if(event.deltaY>0){
+        state='down';
+      }
+      else if(event.deltaY<0){
+        state='up';
+      }
+      let s=document.getElementsByClassName('slide');
+      let b=document.getElementsByClassName('bar');
+      let now=0;
+      for(let i=0;i<s.length;i++){
+        if(s[i].classList.contains('show'))
+          now=i;
+      }
+      s[now].classList.replace('show','mask');
+      b[now].classList.replace('show','mask');
+      now+=state=='up'?-1:1;
+      if(now<0) now=0;
+      else if(now>2) now=2;
+      s[now].classList.replace('mask','show');
+      b[now].classList.replace('mask','show');
+      lastRoll=Date.now();
+    }
+  });
+  function jump_login(){
+    window.location.href = 'login';
+  }
+  function jump_room(){
+    let v = `join/${document.getElementById('room-id').value}`;
+    console.log(v);
+    window.location.href = v;
+  }
 </script>
 
 <template>
-  <header>
-    <nav
-      class="navbar navbar-light navbar-expand-md bg-faded justify-content-center bg-light fixed-top"
-    >
-      <div class="container">
-        <img class="logo" src="./assets/GHepherd_Logo_small.png">
-        <span class="navbar-brand d-flex w-25 me-auto">
-          GShepherd
-        </span>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapsingNavbar3"
-        >
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
-          <ul class="navbar-nav w-100 justify-content-center">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
-            <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="#Room ID"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                GO!
-              </button>
-              　
-              <button class="btn btn-outline-secondary d-flex" type="button">
-                <span class="material-symbols-outlined">person</span>
-              </button>
-            </form>
-          </ul>
-        </div>
+  <div id="wapper">
+    <div id="s1" class="slide show">
+      <span class="welcom">Welcome GShepherd!</span>
+    </div>
+    <div id="s2" class="slide mask">
+      <div>
+        <span class="welcom">What we have?</span>
       </div>
-    </nav>
-  </header>
-  <main>
-    <section class="sec">
-      <div class="d-flex">
-        <div class="w-75" id="s1">
-          <span class="welcom">Welcome GShepherd!</span>
-        </div>
-        <div class="w-25 bar d-flex justify-content-center align-items-center">
-          <div>
-            <h2>哈囉，第一次來ㄇ?</h2>
-            請輸入房間#ID<br>
-            <input id="room-id" type="text"/><br><input @click="" type="button" value="Go!"><br>
-            或是...開啟新房間?<br>
-            <input type="button" value="註冊/登入">
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="sec">
-      <div class="d-flex">
-        <div class="w-75" id="s2">
-            <div><span class="welcom">Welcome GShepherd!</span></div>
-            <div style="display: flex; justify-content:left; margin-left: 6vw;">
+      <div style="display: flex; justify-content:left; margin-left: 6vw;">
         <div class="feature">
           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 122.34" style="enable-background:new 0 0 122.88 122.34" xml:space="preserve"><g><path fill="#ffffff" d="M58.61,28.13c-1.3,0-2.35-1.05-2.35-2.35c0-1.3,1.05-2.35,2.35-2.35h16.22c1.3,0,2.35,1.05,2.35,2.35 c0,1.3-1.05,2.35-2.35,2.35H58.61L58.61,28.13z M85.5,25.16h22.19c0.97,0,1.8,0.59,2.16,1.42l12.57,24.27 c0.2,0.38,0.28,0.8,0.26,1.2l0.21,67.94c0,1.29-1.05,2.34-2.34,2.34v0.01H2.35c-1.3,0-2.35-1.05-2.35-2.35V51.95l0-0.02l0-0.02 l0-0.02v0l0-0.02l0-0.02l0-0.02l0-0.01l0-0.02l0-0.03v0l0-0.01l0-0.04l0-0.01l0-0.01l0-0.04l0-0.01l0-0.01l0.01-0.04l0,0l0-0.02 l0.01-0.04l0,0l0,0l0.01-0.04l0-0.02v0l0.01-0.04l0.01-0.02l0-0.02l0-0.02l0-0.01l0-0.01l0.01-0.02l0.01-0.02l0-0.01l0-0.01 l0.01-0.02l0.01-0.02l0-0.01l0-0.01l0.01-0.02l0-0.01l0.01-0.03l0.01-0.02l0.01-0.02l0.01-0.02l0.01-0.02l0.01-0.02v0l0.01-0.02 l0.01-0.02v0l0.02-0.04L0.2,51l0.02-0.04l0,0l0.01-0.02l0.01-0.01l0-0.01l0.01-0.02l0.01-0.02l0.01-0.02l0.01-0.02l0.02-0.04 L0.3,50.8l0,0l0.02-0.03l0.01-0.02l0.01-0.02l0.01-0.02l12.78-24.3c0.42-0.8,1.23-1.25,2.07-1.25v-0.01h21.7V2.91 c0-0.8,0.33-1.53,0.85-2.06C38.28,0.33,39.01,0,39.81,0h42.78c0.8,0,1.53,0.33,2.06,0.85c0.53,0.53,0.85,1.25,0.85,2.06V25.16 L85.5,25.16z M36.9,29.85H16.61L6.23,49.6H116.5l-10.23-19.75H85.5v7.35h5.17c1.3,0,2.35,1.05,2.35,2.35c0,1.3-1.05,2.35-2.35,2.35 h-7.52H39.25h-6.3c-1.3,0-2.35-1.05-2.35-2.35c0-1.3,1.05-2.35,2.35-2.35h3.96V29.85L36.9,29.85z M4.69,54.3v63.35h113.5L118,54.3 H4.69L4.69,54.3z M80.81,4.69H41.59V37.2h39.22V4.69L80.81,4.69z M47.58,17.11c-1.3,0-2.35-1.05-2.35-2.35 c0-1.3,1.05-2.35,2.35-2.35h27.24c1.3,0,2.35,1.05,2.35,2.35c0,1.3-1.05,2.35-2.35,2.35H47.58L47.58,17.11z"/></g></svg>
           <p>投投票</p>
@@ -116,74 +89,101 @@
           <p>選選日</p>
         </div>
       </div>
+    </div>
+    <div id="s3" class="slide mask">
+      <div>
+        <span class="welcom">Contact us!</span>
+      </div>
+      <div style="display: flex; justify-content: center"> 
+        <div class="profile">
+          <img src="/src/assets/profile/un_tyson_192b.png">
+          <h3 style="margin: 2vh">楊大為</h3>
+          <p><a style="margin: 2vh">testzzo.no1@gmail.com</a></p>
+          <input style="margin: 2vh; height: 5vmin; width: 10vmin;" type="button" value="個人頁面" onclick="window.open('https://kotno557.github.io/Internet-fall-2022/')" />
         </div>
-        <div class="w-25 bar d-flex justify-content-center align-items-center" id="b2">
-          <div>
-            <h2>即時線上互動，教學好有趣!</h2>
-            <div id="login">
-              <div>在這裡，你可以...</div>
-              <div>
-                <li>立即開啟房間，加入群眾開始活動</li>
-                <li>預定活動，與觀眾互動不卡卡</li>
-                <li>活動結果即時呈現，讓氣氛嗨起來</li>
-              </div>
-            </div>
-          </div>
+        <div class="profile">
+          <img src="https://internet.nizw0.com/static/media/profile.27bb6496e46aef6d68c9.png">
+          <h3 style="margin: 2vh">吳丞恩</h3>
+          <p><a style="margin: 2vh">ce.wu@outlook.com</a></p>
+          <input style="margin: 2vh; height: 5vmin; width: 10vmin;" type="button" value="個人頁面" onclick="window.open('https://internet.nizw0.com/')" />
         </div>
       </div>
-    </section>
-    <section class="sec">
-      <div class="d-flex">
-        <div class="w-75" id="s3">
-            <span class="welcom">Welcome GShepherd!</span>
-        </div>
-        <div class="w-25 bar d-flex justify-content-center align-items-center">
-          <div id="b3">
-            <h2>遇到問題就聯絡我們ㄅ!</h2>
-            <div>
-              <p>人生難免都會遇到問題。</p>
-              <p>若在這裡碰到問題就趕緊連絡我們ㄅ!</p>
-              <p>工作人員將在兩到三個工作天之內回覆~</p>
-            </div>
-          </div>
+    </div>
+    <div id="b1" class="bar show">
+      <div style="margin-top: 35vh"><h2>哈囉，第一次來ㄇ?</h2></div>
+      <div id="login">
+        <div>請輸入房間#ID</div>
+        <div><input id="room-id" type="text"/><br><input @click="jump_room()" type="button" value="Go!"></div>
+        <div>或是...開啟新房間?</div>
+        <div @click="jump_login()"><input type="button" value="註冊/登入"></div>
+        <div class="hint">↓滑動滾輪切換頁面 1/3</div>
+      </div>
+    </div>
+    <div id="b2" class="bar mask">
+      <div style="margin-top: 35vh"><h2>即時線上互動，教學好有趣!</h2></div>
+      <div id="login">
+        <div>在這裡，你可以...</div>
+        <div>
+          <li>立即開啟房間，加入群眾開始活動</li>
+          <li>預定活動，與觀眾互動不卡卡</li>
+          <li>活動結果即時呈現，讓氣氛嗨起來</li>
         </div>
       </div>
-    </section>
-  </main>
+      <div class="hint">↑↓ 2/3</div>
+    </div>
+    <div id="b3" class="bar mask">
+      <div style="margin-top: 35vh"><h2>遇到問題就聯絡我們ㄅ!</h2></div>
+      <div>
+        <div>人生難免都會遇到問題。</div>
+        <div>若在這裡碰到問題就趕緊連絡我們ㄅ!</div>
+        <div>工作人員將在兩到三個工作天之內回覆~</div>
+      </div>
+      <div class="hint">↑ 3/3</div>
+    </div>
+  </div>
 </template>
 
-<style scope>
-@import url("../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css");
-main {
-  padding-top: 70px;
-  background-color: #fafafa;
+<style scoped>
+div{
+  margin: 0%;
 }
-.logo{
-  width: 50px;
+p{
+  margin: 0%;
 }
-.sec{
-  height: 95vh;
+#wapper{
+  display: flex;
 }
-
-#s1{
-  background-image: url(/src/assets/shepherd/pexels-rachel-6302312.jpg);
-  background-size: cover;
-  background-position: 40%;
-  height: 95vh;
+#b1 div{
+  margin-top: 2vh;
+  margin-left: 3vw;
+  justify-content: center;
 }
-#s2{
-  background-image: url(/src/assets/shepherd/pexels-max-mishin-10026138.jpg);
-  background-size: cover;
-  background-position: right bottom;
-  height: 95vh;
+#b2 div{
+  margin-top: 1vh;
+  margin-left: 1vw;
+  justify-content: center;
 }
-#s3{
-  background-image: url(/src/assets/shepherd/pexels-adam-kontor-333083.jpg);
-  background-size: cover;
-  background-position: left bottom;
-  height: 95vh;
+#b3 div{
+  margin-top: 5vh;
+  margin-left: 2vw;
+  justify-content: center;
 }
-
+#b2 li{
+  margin: 3vh;
+}
+#b1,#b2,#b3{
+  position:relative;
+}
+.bar{
+  background-color: #d2d3d5;
+  width: 30%;
+  color: rgb(255, 255, 255);
+  font-size: 2.5vmin;
+}
+.bar input{
+  height: 5vmin;
+  font-size: 2vmin;
+}
 .welcom{
   padding: 2vh 2vw 2vh 2vw;
   margin: 4vh 2vw 2vh 2vw;
@@ -195,28 +195,26 @@ main {
   font-family: 'Raleway',sans-serif;
   border-radius: 5vh;
 }
-.bar{
-  background-color: #fafafa;
-  width: 30%;
-  font-size: 2.5vmin;
+.profile{
+  display: block;
+  margin: 1em;
 }
-
-header .w-25 {
-    width: 45% !important;
+.profile img{
+  margin-top: 15vh;
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
 }
-
-#b2 div{
-  margin-top: 1vh;
-  margin-left: 1vw;
-  justify-content: center;
+.mask{
+  display: none;
 }
-
-#b3 div{
-  margin-top: 5vh;
-  margin-left: 2vw;
-  justify-content: center;
+.show{
+  display: block;
 }
-
+.slide{
+  width: 70vw;
+  height: 100vh;
+}
 .feature{
   width: 10vw;
   height: 10vw;
@@ -229,10 +227,46 @@ header .w-25 {
   color: rgb(228, 227, 227);
   font-size: 2vmin;
 }
-
+.profile{
+  width: 20vw;
+  height: 70vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 2%;
+  border-radius: 5vh;
+  text-align: center;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: rgb(228, 227, 227);
+  font-size: 2.5vmin;
+}
 .feature svg{
   margin-top: 26%;
   inline-size: 50%;
   height: 7vmin;
+}
+.hint{
+  position:absolute;
+  bottom:0px;
+  right:0px;
+  color: rgb(238, 237, 237);
+  font-size: medium;
+}
+#s1{
+  background-image: url(/src/assets/shepherd/pexels-rachel-6302312.jpg);
+  background-size: cover;
+  background-position: 40%;
+  animation: fading 1s;
+}
+#s2{
+  background-image: url(/src/assets/shepherd/pexels-max-mishin-10026138.jpg);
+  background-size: cover;
+  background-position: right bottom;
+}
+#s3{
+  background-image: url(/src/assets/shepherd/pexels-adam-kontor-333083.jpg);
+  background-size: cover;
+  background-position: left bottom;
+}
+p{
+  display: grid;
 }
 </style>
