@@ -4,6 +4,14 @@
       return {
         isShow: true
       }
+    },
+    methods:{
+      scrollBehavior () {
+       return { x: 0, y: 0 }
+      }
+    },
+    mounted () {
+      this.scrollBehavior()
     }
   }
 </script>
@@ -321,7 +329,7 @@ header .w-25 {
    transform: translateX(-30%);
 }
 .slide_1-leave-to {
-   transform: translateX(30%);
+  opacity: 0;
 }
 
 .slide_1_bar-leave-active,.slide_1_bar-enter-active{
@@ -331,7 +339,7 @@ header .w-25 {
    transform: translateX(30%);
 }
 .slide_1_bar-leave-to {
-   transform: translateX(-30%);
+   opacity: 0;
 }
 
 .nav_bar-leave-active,.nav_bar-enter-active{
