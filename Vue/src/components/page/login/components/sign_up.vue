@@ -2,7 +2,7 @@
     export default{
         methods: {
             jumpDashboard: function(){
-                let v = `dashboard/getUsername_temp`;
+                let v = `/dashboard/getUsername_temp`;
                 window.location.href = v;
             }
         }
