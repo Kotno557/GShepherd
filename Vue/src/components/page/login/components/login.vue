@@ -18,7 +18,7 @@
         <div>Password:<br>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></div>
         <div class="d-flex align-items-center justify-content-center">
-            <button class="btn btn-dark" @click="jumpDashboard()">Submit!</button>
+            <a href="/dashboard/getUsername_temp"><button class="btn btn-dark">Submit!</button></a>
         </div>
     </div>
 </template>

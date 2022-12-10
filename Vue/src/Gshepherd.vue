@@ -119,7 +119,7 @@ export default {
                 v-model="roomID"
               />
               <a :href="'/join/' + roomID">
-                <button class="btn btn-outline-success">
+                <button class="btn btn-outline-secondary">
                   <span class="material-symbols-outlined d-flex">
                     subdirectory_arrow_right
                   </span>
