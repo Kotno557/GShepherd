@@ -30,7 +30,7 @@
     <div id="wrapper">
         <div id="container">
             <div>
-                <div id="logo"><img src="../../../assets/GShepherd_Logo.png"></div>
+                <div id="logo" class="d-flex justify-content-center"><img src="../../../assets/GShepherd_Logo.png"></div>
                 <div id="select-bar">
                     <div id="sign-up" :class="selectBar[0]" @click="isLogin=false;clickChange()"><h4>註冊</h4></div>
                     <div id="login" :class="selectBar[1]" @click="isLogin=true;clickChange()"><h4>登入</h4></div>
@@ -76,9 +76,9 @@
     border-radius: 0 2vmin 0 0;
 }
 #container{
-    width: 50vmin;
-    height: 80vmin;
-    border-radius: 10vmin;
+    width: 60vmin;
+    height: 95vmin;
+    border-radius: 4vmin;
     background-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -87,7 +87,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 0% 0% 2vmin 2vmin;
-    height: 45vmin;
+    height: 65vmin;
+    width: 50vmin;
     background-color: rgba(145, 151, 144, 0.7);
 }
 .selecter{
