@@ -5,17 +5,17 @@ export default {
       email: {
         value: "",
         class: "d-none",
-        valid: true
+        valid: true,
       },
       password: {
         value: "",
         class: "d-none",
-        stredch: true
+        stredch: true,
       },
       passwordAgain: {
         value: "",
         class: "d-none",
-        valid: true
+        valid: true,
       },
       //假設資料庫目前有以下的使用者資料
       userData: this.$parent.$options.data().userData,
@@ -27,34 +27,54 @@ export default {
       let v = `/dashboard/getUsername_temp`;
       window.location.href = v;
     },
-    checkPasswordAgain(newElement){
+    checkPasswordAgain() {
       let class_arr = ["d-none", "badge bg-danger text-wrap"];
-      if (newElement==this.password.value) {
-        this.passwordAgain.class=class_arr[0];
-        this.passwordAgain.valid=true;
+      if (this.passwordAgain.value == this.password.value) {
+        this.passwordAgain.class = class_arr[0];
+        this.passwordAgain.valid = true;
       } else {
-        this.passwordAgain.class=class_arr[1];
-        this.passwordAgain.valid=false;
+        this.passwordAgain.class = class_arr[1];
+        this.passwordAgain.valid = false;
       }
-    }
+    },
+    checkPasswordValid() {
+      let password = this.password.value;
+      let res = 0;
+      let simbol = [true, true, true, true];
+      if (password.length >= 8) res += 5;
+      if (password.length >= 12) res += 1;
+      for (let i = 0; i < password.length; i++) {
+        if (password[i] >= "a" && password[i] <= "z" && simbol[0])
+          res++, (simbol[0] = !simbol[0]);
+        else if (password[i] >= "A" && password[i] <= "Z")
+          res++, (simbol[1] = !simbol[1]);
+        else if (password[i] >= "0" && password[i] <= "9")
+          res++, (simbol[2] = !simbol[2]);
+        else if (password[i] >= "0" && password[i] <= "9")
+          res++, (simbol[3] = !simbol[3]);
+        else res++, (simbol[4] = !simbol[4]);
+      }
+    },
   },
   watch: {
-    'email.value': function (newElement, oldElement) {
+    "email.value": function (newElement, oldElement) {
       console.log(newElement);
       let class_arr = ["d-none", "badge bg-danger text-wrap"];
       if (this.emailchecker(newElement)) {
-        this.email.class=class_arr[0];
-        this.email.valid=true;
+        this.email.class = class_arr[0];
+        this.email.valid = true;
       } else {
-        this.email.class=class_arr[1];
-        this.email.valid=false;
+        this.email.class = class_arr[1];
+        this.email.valid = false;
       }
     },
-    password: function (newElement, oldElement) {
-      console.log(newElement, oldElement);
-      this.checkPasswordAgain(this.passwordAgain.value);
+    "password.value"() {
+      this.checkPasswordAgain();
+      this.checkPasswordValid();
     },
-    'passwordAgain.value': this.checkPasswordAgain
+    "passwordAgain.value"() {
+      this.checkPasswordAgain();
+    },
   },
 };
 </script>
