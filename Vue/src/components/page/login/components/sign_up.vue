@@ -9,12 +9,11 @@ export default {
       },
       password: {
         value: "",
-        class: "d-none",
-        stredch: true,
+        class: "d-show",
+        stredch: "",
       },
       passwordAgain: {
         value: "",
-        class: "d-none",
         valid: true,
       },
       //假設資料庫目前有以下的使用者資料
@@ -46,25 +45,36 @@ export default {
       for (let i = 0; i < password.length; i++) {
         if (password[i] >= "a" && password[i] <= "z" && simbol[0])
           res++, (simbol[0] = !simbol[0]);
-        else if (password[i] >= "A" && password[i] <= "Z")
+        else if (password[i] >= "A" && password[i] <= "Z" && simbol[1])
           res++, (simbol[1] = !simbol[1]);
-        else if (password[i] >= "0" && password[i] <= "9")
+        else if (password[i] >= "0" && password[i] <= "9" && simbol[2])
           res++, (simbol[2] = !simbol[2]);
-        else if (password[i] >= "0" && password[i] <= "9")
+        else if (
+          " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".includes(password[i]) &&
+          simbol[3]
+        )
           res++, (simbol[3] = !simbol[3]);
-        else res++, (simbol[4] = !simbol[4]);
       }
+      if (res < 6)
+        (this.password.stredch = "不符合規定"),
+          (this.password.class = "badge bg-danger text-wrap");
+      else if (res >= 6 && res <= 7)
+        (this.password.stredch = "弱"),
+          (this.password.class = "badge bg-warning text-wrap");
+      else if (res >= 8 && res <= 9)
+        (this.password.stredch = "中"),
+          (this.password.class = "badge bg-success text-wrap");
+      else
+        (this.password.stredch = "強"),
+          (this.password.class = "badge bg-primary text-wrap");
     },
   },
   watch: {
     "email.value": function (newElement, oldElement) {
       console.log(newElement);
-      let class_arr = ["d-none", "badge bg-danger text-wrap"];
       if (this.emailchecker(newElement)) {
-        this.email.class = class_arr[0];
         this.email.valid = true;
       } else {
-        this.email.class = class_arr[1];
         this.email.valid = false;
       }
     },
@@ -108,7 +118,7 @@ export default {
         v-model="password.value"
       />
       <div class="m-0">
-        密碼強度: <span class="badge bg-danger text-wrap">不符規定!</span>
+        密碼強度: <span :class="password.class">{{ password.stredch }}</span>
       </div>
     </div>
 
@@ -120,7 +130,11 @@ export default {
         id="exampleInputPassword2"
         placeholder="請輸入相同密碼"
         v-model="passwordAgain.value"
-      /><span :class="passwordAgain.class">密碼不一致</span>
+      />
+      <span class="badge bg-success text-wrap" v-if="passwordAgain.valid">
+        ✓
+      </span>
+      <span class="badge bg-danger text-wrap" v-else>密碼不一致</span>
     </div>
     <div class="d-flex align-items-center justify-content-center">
       <button class="btn btn-dark" @click="jumpDashboard()">Submit!</button>
