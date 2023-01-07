@@ -35,6 +35,11 @@ export default {
           email: "deniel@example.com",
           password: "deniel_password",
         },
+        {
+          id: "0",
+          email: "admin@admin.com",
+          password: "admin",
+        }
       ],
     };
   },
