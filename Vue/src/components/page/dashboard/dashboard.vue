@@ -1,57 +1,14 @@
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
             userId: this.$route.params.id,
-            event: [{
-                    name: "活動一",
-                    roomId: '265844'
-                },
-                {
-                    name: "活動二",
-                    roomId: '155940'
-                },
-                {
-                    name: "活動三",
-                    roomId: '118721'
-                },
-                {
-                    name: "活動四",
-                    roomId: '264687'
-                },
-                {
-                    name: "活動五",
-                    roomId: '264256'
-                },
-                {
-                    name: "活動六",
-                    roomId: '964256'
-                },
-                {
-                    name: "活動七",
-                    roomId: '984255'
-                },
-                {
-                    name: "活動八",
-                    roomId: '425256'
-                },
-                {
-                    name: "活動九",
-                    roomId: '525256'
-                },
-                {
-                    name: "活動十",
-                    roomId: '252566'
-                },
-                {
-                    name: "活動十一",
-                    roomId: '981256'
-                },
-                {
-                    name: "活動十二",
-                    roomId: '981256'
-                }
-            ],
+            room_name: "",
+            room: [{
+                name: "活動一",
+                roomId: '265844'
+            }]
         }
     },
     methods: {
@@ -60,45 +17,122 @@ export default {
         },
         jumpToLogin: function () {
             window.location.href = '/login';
+        },
+        new_room: function (newname) {
+            axios.post('https://localhost:3000/room', {
+                admins: [this.userId],
+                createdBy: new Date(Date.now()),
+                roomName: newname
+            })
+                .then(response => (this.room = response))
+                .catch(function (error) {
+                    console.log(error);
+                });
+            this.GetAllRoom();
+        },
+        GetAllRoom() {
+            axios.get('https://localhost:3000/room')
+                .then(response => (this.room = response))
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
+    },
+    mounted() {
+        this.GetAllRoom();
     }
 }
 </script>
 
 <template>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..300,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..300,0..1,-50..200" />
 
-<div id="page">
-    <nav>
-        <span class="material-symbols-outlined">
-            <button class="btn" @click="jumpToMain()">home</button>
-        </span>
-        <div id="band">Hello! {{this.userId}} </div>
-        <span class="material-symbols-outlined">
-            <button class="btn" @click="jumpToLogin()">logout</button>
-        </span>
-    </nav>
-    <div id="middle">
-        <div id="sheet">
-            <div id="name_and_add" class="mt-3 mx-4 myfont" style="font-size: 2vmin;">
-                <text style="font-size: 3vmin">活動：</text>
-                <button style="float: right;" class="mx-4 btn btn-dark ">+ 新增活動</button>
+    <div id="page">
+        <nav>
+            <span class="material-symbols-outlined">
+                <button class="btn" @click="jumpToMain()">home</button>
+            </span>
+            <div id="band">Hello! {{ this.userId }} </div>
+            <span class="material-symbols-outlined">
+                <button class="btn" @click="jumpToLogin()">logout</button>
+            </span>
+        </nav>
+        <div id="middle">
+            <div id="sheet">
+                <div id="name_and_add" class="mt-3 mx-4 myfont" style="font-size: 2vmin;">
+                    <text style="font-size: 3vmin">以下為您的所有活動：</text>
+                    <button style="float: right;" class="mx-1 btn btn-dark " data-bs-toggle="modal"
+                        data-bs-target="#createModal" @click="room_name = ''">+ 新增活動</button>
+                    <button style="float: right;" class=" btn btn-dark " data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">- 刪除活動</button>
+                </div>
+                <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;"
+                    class="m-3 overflow-auto">
+                    <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
+                        <a class="list-group-item" v-for="i in this.room"
+                            :href="`/dashboard/${this.userId}/${i.roomId}`">
+                            <span class="material-symbols-outlined">
+                                event
+                            </span>
+                            {{ i.name }}
+                            <small style="color:rgb(102,98,98, 0.5); font-size: medium;">#{{ i.roomId }}</small>
+                        </a>
+                    </ul>
+                </div>
             </div>
-            <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;" class="m-3 overflow-auto">
-                <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
-                    <a class="list-group-item" v-for="i in this.event" :href="`/dashboard/${this.userId}/${i.roomId}`">
-                        <span class="material-symbols-outlined">
-                            event
-                        </span>
-                        {{i.name}}
-                        <small style="color:rgb(102,98,98, 0.5); font-size: medium;">#{{i.roomId}}</small>
-                    </a>
-                </ul>
+            <img id="logo" src="../../../assets/GShepherd_Logo.png" />
+        </div>
+        <div class="modal fade" id="createModal" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">加入活動</h4>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <label for="recipient-name" class="col-form-label">請輸入活動名稱:</label>
+                        <input type="text" class="form-control" id="recipient-name" v-model="room_name">
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" :disabled="room_name==''"
+                            @click="new_room(room_name)">確認</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">關閉</button>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <img id="logo" src="../../../assets/GShepherd_Logo.png" />
+
+        <div class="modal fade" id="deleteModal" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">開發中，敬請期待...</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </template>
 
 <style scoped>

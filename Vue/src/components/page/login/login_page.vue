@@ -8,40 +8,8 @@ export default {
   data() {
     return {
       isLogin: false,
-      selectBar: ["onSelect selecter", "selecter"],
-      userData: [
-        {
-          id: "356a192b7913b04c54574d18c28d46e6395428ab",
-          email: "david@example.com",
-          password: "mypassword001",
-        },
-        {
-          id: "da4b9237bacccdf19c0760cab7aec4a8359010b0",
-          email: "niz@example.com",
-          password: "password2",
-        },
-        {
-          id: "77de68daecd823babbb58edb1c8e14d7106e83bb",
-          email: "jack@example.com",
-          password: "jackpassword",
-        },
-        {
-          id: "1b6453892473a467d07372d45eb05abc2031647a",
-          email: "maria@example.com",
-          password: "mariapassword",
-        },
-        {
-          id: "ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4",
-          email: "deniel@example.com",
-          password: "deniel_password",
-        },
-        {
-          id: "0",
-          email: "admin@admin.com",
-          password: "admin",
-        }
-      ],
-    };
+      selectBar: ["onSelect selecter", "selecter"]
+    }
   },
   methods: {
     clickChange: function () {
@@ -71,8 +39,6 @@ export default {
       if (at_index == -1) return false;
       let username = email.substring(0, at_index);
       let mailServer = email.substring(at_index + 1);
-      console.log(username);
-      console.log(mailServer);
 
       if (username == "" || mailServer == "") return false;
       // check for user name
@@ -119,33 +85,21 @@ export default {
           <img src="../../../assets/GShepherd_Logo.png" />
         </div>
         <div id="select-bar">
-          <div
-            id="sign-up"
-            :class="selectBar[0]"
-            @click="
-              isLogin = false;
-              clickChange();
-            "
-          >
+          <div id="sign-up" :class="selectBar[0]" @click="
+            isLogin = false;
+          clickChange();
+          ">
             <h4>註冊</h4>
           </div>
-          <div
-            id="login"
-            :class="selectBar[1]"
-            @click="
-              isLogin = true;
-              clickChange();
-            "
-          >
+          <div id="login" :class="selectBar[1]" @click="
+            isLogin = true;
+          clickChange();
+          ">
             <h4>登入</h4>
           </div>
         </div>
         <div id="input-aria">
-          <login
-            v-if="isLogin"
-            emailchecker="emailchecker"
-            userData="userData"
-          />
+          <login v-if="isLogin" emailchecker="emailchecker" userData="userData" />
           <sign_up v-else />
         </div>
       </div>
@@ -155,14 +109,17 @@ export default {
 
 <style scoped>
 @import url("../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css");
+
 #logo img {
   width: 40vmin;
 }
+
 #container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 #wrapper {
   width: 100vw;
   height: 100vh;
@@ -173,17 +130,21 @@ export default {
   background-size: cover;
   background-position: 50% 50%;
 }
+
 #select-bar {
   display: flex;
   text-align: center;
   justify-content: center;
 }
+
 #sign-up {
   border-radius: 2vmin 0 0 0;
 }
+
 #login {
   border-radius: 0 2vmin 0 0;
 }
+
 #container {
   width: 60vmin;
   height: 95vmin;
@@ -200,10 +161,12 @@ export default {
   width: 50vmin;
   background-color: rgba(145, 151, 144, 0.7);
 }
+
 .selecter {
   padding: 2vmin;
   width: 50%;
 }
+
 .onSelect {
   background-color: rgba(145, 151, 144, 0.7);
 }
@@ -211,6 +174,7 @@ export default {
 div {
   font-family: "Noto Sans TC", sans-serif;
 }
+
 h4 {
   font-size: 2.5vmin;
 }

@@ -1,7 +1,11 @@
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
+            nickName: "",
+            userName: "",
             email: {
                 value: "",
                 class: "d-none",
@@ -19,20 +23,31 @@ export default {
                 initial: false,
             },
             okForSubmmit: true,
-            //假設資料庫目前有以下的使用者資料
-            userData: this.$parent.$options.data().userData,
-            emailchecker: this.$parent.$options.methods.emailchecker,
+            okForSignin: false,
+            emailchecker: this.$parent.$options.methods.emailchecker
         };
     },
     methods: {
         jumpDashboard: function () {
             this.email.initial = true;
             this.passwordAgain.initial = true;
-            let v = `/dashboard/getUsername_temp`;
             console.log(this.email.valid, this.password.stredch, this.passwordAgain.valid)
             if (this.email.valid && this.password.stredch.length == 1 && this.passwordAgain.valid) {
                 this.okForSubmmit = true;
-                window.location.href = v;
+                axios.post('http://139.162.39.223:3000/user', {
+                    email: this.email.value,
+                    nickname: this.nickName,
+                    username: this.userName,
+                    password: this.password.value
+                })
+                    .then(response => {
+                        this.okForSignin = response.status == 200;
+                        //看這裡要不要加重設輸入
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             } else {
                 this.okForSubmmit = false;
             }
@@ -79,6 +94,13 @@ export default {
                 (this.password.stredch = "強"),
                     (this.password.class = "badge bg-primary text-wrap");
         },
+        clearAll(){
+            this.nickName="";
+            this.userName="";
+            this.email.value="";
+            this.passwordAgain.value="";
+            this.passwordAgain.value="";
+        }
     },
     watch: {
         "email.value": function (newElement, oldElement) {
@@ -107,6 +129,18 @@ export default {
             <div v-if="okForSubmmit == false" class="alert alert-danger" role="alert">
                 {{ "請確認所有資料符合規定後再送出" }}
             </div>
+            <div v-if="okForSignin == true" class="alert alert-success" role="alert">
+                {{ "註冊成功，請登入！" }}
+            </div>
+
+        </div>
+        <div>
+            Username:<br />
+            <input type="username" class="form-control" placeholder="Enter username" v-model="userName" />
+        </div>
+        <div>
+            Nickname:<br />
+            <input type="username" class="form-control" placeholder="Enter nickname" v-model="nickName" />
         </div>
         <div>
             E-mail:<br />
@@ -147,7 +181,7 @@ export default {
 @import url("../../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css");
 
 div {
-    margin-bottom: 1vmin;
+    margin-bottom: 0vmin;
     margin-top: 0.25vmin;
     font-size: 1.8vmin;
 }
@@ -162,6 +196,6 @@ input {
 }
 
 .form-control {
-    font-size: 2vmin;
+    font-size: 1.75vmin;
 }
 </style>
