@@ -34,7 +34,9 @@ export default {
                 createdBy: new Date().toISOString(),
                 name: newname
             })
-                .then(response => (this.room = response))
+                .then(response => {
+                    console.log(response);
+                })
                 .catch(function (error) {
                     console.log(error);
                 });
@@ -42,7 +44,7 @@ export default {
         },
         GetAllRoom() {
             axios.get(`${Global.backend}/room/`)
-                .then(response => (this.room = response))
+                .then(response => (this.room = response.data))
                 .catch(function (error) {
                     console.log(error);
                 });
@@ -79,12 +81,12 @@ export default {
                 <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;"
                     class="m-3 overflow-auto">
                     <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
-                        <a class="list-group-item" v-for="i in this.room" :href="`/dashboard/${this.userId}/${i.id}`">
+                        <a class="list-group-item" v-for="item in this.room" :href="`/dashboard/${this.userId}/${item.id}`">
                             <span class="material-symbols-outlined">
                                 event
                             </span>
-                            {{ i.name }}
-                            <small style="color:rgb(102,98,98, 0.5); font-size: medium;">#{{ i.id }}</small>
+                            {{ item.name }}
+                            <small style="color:rgb(102,98,98, 0.5); font-size: medium;">#{{ item.id }}</small>
                         </a>
                     </ul>
                 </div>

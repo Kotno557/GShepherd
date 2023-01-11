@@ -1,5 +1,5 @@
 <script>
-const backend = "/api";
+const backend = "http://139.162.39.223/api";
 const typeObject = {
     1: {
         "options": [],
