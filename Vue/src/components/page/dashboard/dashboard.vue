@@ -41,7 +41,7 @@ export default {
             this.GetAllRoom();
         },
         GetAllRoom() {
-            axios.get('http://139.162.39.223:10000/room')
+            axios.get(`${Global.backend}/room/`)
                 .then(response => (this.room = response))
                 .catch(function (error) {
                     console.log(error);
