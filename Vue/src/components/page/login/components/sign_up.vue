@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import Global from '../../../../Global.vue';
 
 export default {
     data() {
@@ -34,7 +35,7 @@ export default {
             console.log(this.email.valid, this.password.stredch, this.passwordAgain.valid)
             if (this.email.valid && this.password.stredch.length === 1 && this.passwordAgain.valid) {
                 this.okForSubmmit = true;
-                axios.post('http://139.162.39.223/api/user', {
+                axios.post(`${Global.backend}/user/`, {
                     email: this.email.value,
                     nickname: this.nickName,
                     username: this.userName,

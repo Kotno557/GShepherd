@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios'
-
+import Global from '../../../Global.vue';
 export default {
     data() {
         return {
@@ -29,7 +29,7 @@ export default {
             window.location.href = '/login';
         },
         new_room: function (newname) {
-            axios.post('https://localhost:10000/room', {
+            axios.post(`${Global.backend}/room/`, {
                 admins: [this.userId],
                 createdBy: new Date().toISOString(),
                 roomName: newname
