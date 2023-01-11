@@ -6,10 +6,19 @@ export default {
         return {
             userId: this.$route.params.id,
             room_name: "",
-            room: [{
-                name: "活動一",
-                roomId: '265844'
-            }]
+            room: [
+                {
+                    "name": "test",
+                    "code": "MC4yNj",
+                    "admins": [
+                        "63babf42102799dada53bc11"
+                    ],
+                    "createdBy": "63babf42102799dada53bc11",
+                    "createdAt": "2023-01-08T15:16:01.346Z",
+                    "updatedAt": "2023-01-08T15:16:01.346Z",
+                    "id": "63bade318b1be06bd2358e0b"
+                }
+            ]
         }
     },
     methods: {
@@ -19,7 +28,7 @@ export default {
         jumpToLogin: function () {
             window.location.href = '/login';
         },
-        /*new_room: function (newname) {
+        new_room: function (newname) {
             axios.post('https://localhost:3000/room', {
                 admins: [this.userId],
                 createdBy: new Date().toISOString(),
@@ -30,7 +39,7 @@ export default {
                     console.log(error);
                 });
             this.GetAllRoom();
-        },*/
+        },
         GetAllRoom() {
             axios.get('http://139.162.39.223:3000/room')
                 .then(response => (this.room = response))
@@ -70,8 +79,7 @@ export default {
                 <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;"
                     class="m-3 overflow-auto">
                     <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
-                        <a class="list-group-item" v-for="i in this.room"
-                            :href="`/dashboard/${this.userId}/${i.id}`">
+                        <a class="list-group-item" v-for="i in this.room" :href="`/dashboard/${this.userId}/${i.id}`">
                             <span class="material-symbols-outlined">
                                 event
                             </span>
@@ -100,7 +108,7 @@ export default {
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" :disabled="room_name==''"
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" :disabled="room_name == ''"
                             @click="new_room(room_name)">確認</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">關閉</button>
                     </div>

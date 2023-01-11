@@ -15,7 +15,7 @@ export default {
       axios.post('http://139.162.39.223:3000/auth/login', {
         username: this.email,
         password: this.password
-      })
+      }, { withCredentials: true })
         .then(response => {
           var flag = response.status == 200;
           console.log(response);
