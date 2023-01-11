@@ -21,7 +21,7 @@ export default {
           console.log(response);
           this.valid = flag;
           if (flag) {
-            //location.href = `/dashboard/`;
+            location.href = `/dashboard/${response.data.msg}`;
           }
         })
         .catch(error => {

@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+
 export default {
     data() {
         return {
@@ -18,10 +19,10 @@ export default {
         jumpToLogin: function () {
             window.location.href = '/login';
         },
-        new_room: function (newname) {
+        /*new_room: function (newname) {
             axios.post('https://localhost:3000/room', {
                 admins: [this.userId],
-                createdBy: new Date(Date.now()),
+                createdBy: new Date().toISOString(),
                 roomName: newname
             })
                 .then(response => (this.room = response))
@@ -29,9 +30,9 @@ export default {
                     console.log(error);
                 });
             this.GetAllRoom();
-        },
+        },*/
         GetAllRoom() {
-            axios.get('https://localhost:3000/room')
+            axios.get('http://139.162.39.223:3000/room')
                 .then(response => (this.room = response))
                 .catch(function (error) {
                     console.log(error);
@@ -47,7 +48,6 @@ export default {
 <template>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..300,0..1,-50..200" />
-
     <div id="page">
         <nav>
             <span class="material-symbols-outlined">
@@ -71,12 +71,12 @@ export default {
                     class="m-3 overflow-auto">
                     <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
                         <a class="list-group-item" v-for="i in this.room"
-                            :href="`/dashboard/${this.userId}/${i.roomId}`">
+                            :href="`/dashboard/${this.userId}/${i.id}`">
                             <span class="material-symbols-outlined">
                                 event
                             </span>
                             {{ i.name }}
-                            <small style="color:rgb(102,98,98, 0.5); font-size: medium;">#{{ i.roomId }}</small>
+                            <small style="color:rgb(102,98,98, 0.5); font-size: medium;">#{{ i.id }}</small>
                         </a>
                     </ul>
                 </div>
