@@ -1,52 +1,85 @@
 <script>
-    export default{
-        data(){
-            return{
-                submit: false
-            }
+
+import axios from 'axios';
+import Global from '../../../Global.vue';
+
+export default {
+    props: ['roomTopic'],
+    data() {
+        return {
+            submit: false,
+            par_name: '',
+            address: '',
+            phone: ''
+        }
+    },
+    methods: {
+        submitt() {
+            this.submit = true;
+            axios.post(`${Global.backend}/record`, {
+                eventId: this.roomTopic.id,
+                userId: "還沒設定",
+                address: this.slection,
+                name: this.par_name,
+                phone: this.phone
+            })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         }
     }
+}
 </script>
 
 <template>
     <div id="safe">
         <div class="myfont" style="jusfy-content: center;">
             <h4>提交抽獎基本資料</h4>
-            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="submit===false">
+            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="submit === false">
                 <ul class="list-group myfont" style="width: 35vw;">
                     <li class="list-group-item">
-                        <input class="form-control" type="text" placeholder="輸入中獎人真實姓名：">
+                        <input class="form-control" type="text"
+                            :placeholder="`輸入中獎人真實姓名：（${roomTopic.party_name === true ? '必填' : '選填'}）`" v-model="par_name">
                     </li>
                     <li class="list-group-item">
-                        <input class="form-control" type="text" placeholder="寄送獎品地址：">
+                        <input class="form-control" type="text"
+                            :placeholder="`寄送獎品地址：（${roomTopic.address === true ? '必填' : '選填'}）`" v-model="address">
                     </li>
                     <li class="list-group-item">
-                        <input class="form-control" type="text" placeholder="中獎人電話號碼：">
+                        <input class="form-control" type="text"
+                            :placeholder="`中獎人電話號碼：（${roomTopic.phone === true ? '必填' : '選填'}）`" v-model="phone">
                     </li>
                 </ul>
             </div>
             <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-else>
                 <h5>已提交資料！</h5>
             </div>
-            <button class="btn btn-dark mx-2" @click="submit=true" v-if="submit===false">送出</button>
+            <button class="btn btn-dark mx-2" @click="submitt()" v-if="submit === false">送出</button>
         </div>
     </div>
 </template>
 
 <style scoped>
 @import url('../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css');
-h4{
+
+h4 {
     font-size: 3.5vmin;
 }
-.form-control{
+
+.form-control {
     border: 0;
 }
-.bar{
+
+.bar {
     justify-content: center;
     width: 15vmin;
     border: solid;
 }
-#safe{
+
+#safe {
     position: relative;
     display: flex;
     align-items: center;
@@ -54,14 +87,17 @@ h4{
     height: 100%;
     width: 100%;
 }
+
 body {
-   overflow-y: hidden;
+    overflow-y: hidden;
 }
-#safe div{
+
+#safe div {
     text-align: center;
 }
-.cheet-bar{
-    background-color: rgba(205, 207, 204,0.6);
+
+.cheet-bar {
+    background-color: rgba(205, 207, 204, 0.6);
     position: absolute;
     top: 5vmin;
     left: 2vmin;
@@ -69,9 +105,10 @@ body {
     height: 200px;
     width: 200px;
 }
-.myfont{
+
+.myfont {
     font-family: 'Noto Sans TC', sans-serif;
-    font-size: 2vmin; 
+    font-size: 2vmin;
 }
 
 ::-webkit-scrollbar {
@@ -80,12 +117,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
 }
 </style>

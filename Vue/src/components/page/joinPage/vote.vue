@@ -1,56 +1,67 @@
 <script>
-    export default{
-        props: ['roomTopic'],
-        data(){
-            return{
-                slection: ""
-            }
-        },
-        methods:{
-            setSelection: function(){
-                this.slection=document.getElementById('selections').value.split(',');
-                console.log(this.slection);
-            }
+import axios from 'axios';
+import Global from '../../../Global.vue';
+
+export default {
+    props: ['roomTopic'],
+    data() {
+        return {
+            slection: ""
+        }
+    },
+    methods: {
+        submit() {
+            axios.post(`${Global.backend}/record`, {
+                category: 1,
+                eventId: this.roomTopic.id,
+                userId: "還沒設定",
+                option: this.slection
+            })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
     }
+}
 </script>
 
 <template>
-    <div class="cheet-bar">
-        <small>Cheet Board</small><br>
-        選項:<input id="selections" type="text" placeholder="選項" style="width: 70%;"/>
-        <br>
-        <input type="button" value="OK" @click="setSelection()"/> 
-    </div>
     <div id="safe">
         <div class="myfont" style="jusfy-content: center;">
-            <h4>{{roomTopic}}</h4>
+            <h4>{{ roomTopic.name }}</h4>
             <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto">
                 <ul class="list-group myfont" style="width: 35vw;">
-                    <li class="list-group-item" v-for="item in slection">
-                        <input class="form-check-input me-4" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"> 
+                    <li class="list-group-item" v-for="item in roomTopic.options">
+                        <input class="form-check-input me-4" type="radio" name="exampleRadios" id="exampleRadios1"
+                            @click="slection = item">
                         <label class="form-check-label" for="exampleRadios1">
-                            {{item}}
+                            {{ item }}
                         </label>
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-dark" >Submmit</button>
+            <button class="btn btn-dark" @click="submit()">Submmit</button>
         </div>
     </div>
 </template>
 
 <style scoped>
 @import url('../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css');
-h4{
+
+h4 {
     font-size: 3.5vmin;
 }
-.bar{
+
+.bar {
     justify-content: center;
     width: 15vmin;
     border: solid;
 }
-#safe{
+
+#safe {
     position: relative;
     display: flex;
     align-items: center;
@@ -58,14 +69,17 @@ h4{
     height: 100%;
     width: 100%;
 }
+
 body {
-   overflow-y: hidden;
+    overflow-y: hidden;
 }
-#safe div{
+
+#safe div {
     text-align: center;
 }
-.cheet-bar{
-    background-color: rgba(205, 207, 204,0.6);
+
+.cheet-bar {
+    background-color: rgba(205, 207, 204, 0.6);
     position: absolute;
     top: 5vmin;
     left: 2vmin;
@@ -73,9 +87,10 @@ body {
     height: 200px;
     width: 200px;
 }
-.myfont{
+
+.myfont {
     font-family: 'Noto Sans TC', sans-serif;
-    font-size: 2vmin; 
+    font-size: 2vmin;
 }
 
 ::-webkit-scrollbar {
@@ -84,12 +99,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
 }
 </style>
