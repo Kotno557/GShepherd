@@ -32,7 +32,7 @@ export default {
             axios.post(`${Global.backend}/room/`, {
                 admins: [this.userId],
                 createdBy: new Date().toISOString(),
-                roomName: newname
+                name: newname
             })
                 .then(response => (this.room = response))
                 .catch(function (error) {
