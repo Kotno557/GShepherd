@@ -22,7 +22,7 @@ export default {
           console.log(response);
           this.valid = flag;
           if (flag) {
-            //location.href = `/dashboard/${response.data.msg}`;
+            location.href = `/dashboard/${response.data.msg}`;
           }
         })
         .catch(error => {
