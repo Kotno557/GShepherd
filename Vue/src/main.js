@@ -6,6 +6,7 @@ import joinPage from './components/page/joinPage/joinPage.vue'
 import App from './App.vue'
 import dashboard from './components/page/dashboard/dashboard.vue'
 import roomdashboard from './components/page/dashboard/roomdashboard.vue'
+import display from './components/page/display/display.vue'
 const router = createRouter({
     history: createWebHistory('/'),
     routes: [
@@ -28,6 +29,10 @@ const router = createRouter({
         {
             path: '/dashboard/:id/:roomId',
             component: roomdashboard
+        },
+        {
+            path: '/display/:id',
+            component: display
         },
         {
             path: '/:pathMatch(.*)*',

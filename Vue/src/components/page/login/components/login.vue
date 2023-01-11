@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import Global from '../../../../Global.vue';
 
 export default {
   props: ['emailchecker', 'userData'],
@@ -12,23 +13,26 @@ export default {
   },
   methods: {
     submit: function () {
-      axios.post('http://139.162.39.223:3000/auth/login', {
+      axios.post(`${Global.backend}/auth/login/`, {
         username: this.email,
         password: this.password
-      }, { withCredentials: true })
+      }, { withCredentials: true})
         .then(response => {
-          var flag = response.status == 200;
+          var flag = response.status === 200;
           console.log(response);
           this.valid = flag;
           if (flag) {
-            location.href = `/dashboard/${response.data.msg}`;
+            //location.href = `/dashboard/${response.data.msg}`;
           }
         })
         .catch(error => {
           console.log(error);
           this.valid = false;
         });
+        
     }
+
+    
   }
 };
 </script>

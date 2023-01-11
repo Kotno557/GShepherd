@@ -31,7 +31,7 @@
     </div>
     <div id="safe">
         <div class="myfont">
-            <h4>{{roomTopic==""?"你喜歡的水果排名：":roomTopic}}</h4>
+            <h4>{{roomTopic===""?"你喜歡的水果排名：":roomTopic}}</h4>
             <p class="face">😍</p>
             <div style="max-height: 45vh;" class="overflow-auto">
                 <ul class="list-group myfont" style="width: 35vw;">

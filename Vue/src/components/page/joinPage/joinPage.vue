@@ -8,17 +8,14 @@ import compare from './compare.vue';
 import lotto from './lotto.vue';
 import scratch from './scratch.vue';
 import date from './date.vue';
+import axios from 'axios';
 </script>
 <script>
 export default {
     data() {
         return {
-            roomId: this.$route.params.id,
-            participantName: "",
-            roomType: -1,
-            sRroomTopic: "None",
-            arr: { '投投票': 0, '想想看': 1, '測測驗': 2, '評評分': 3, '討討論': 4, '比比看': 5, '抽抽獎': 6, '刮刮樂': 7, '選選日': 8 }
-
+            all_event: null,
+            roomType: 1
         }
     },
     methods: {
@@ -41,6 +38,30 @@ export default {
     },
     beforeMount() {
         this.getParticipantName()
+    },
+    mounted() {
+        // axios.get('http://139.162.39.223/api/event')
+        //     .then(response => {
+        //         var flag = response.status === 200;
+        //         console.log(response);
+        //         this.valid = flag;
+        //         if (flag) {
+        //             this.all_event = response.data;
+        //         }
+        //     });
+        this.all_event = {
+            "options": [
+			"a",
+			"b",
+			"c",
+			"d"
+		],
+		"roomId": "63badf188b1be06bd2358e1d",
+		"name": "test1",
+		"active": true,
+		"category": 1,
+		"id": "63be7296b7d716268b179fdb"
+        }
     }
 }
 </script>
@@ -60,15 +81,15 @@ export default {
         </nav>
         <div id="middle">
             <div id="sheet">
-                <vote v-if="roomType == 0" :roomTopic=sRroomTopic />
-                <think v-if="roomType == 1" :roomTopic=sRroomTopic />
-                <test v-if="roomType == 2" :roomTopic=sRroomTopic />
-                <rate v-if="roomType == 3" :roomTopic=sRroomTopic />
-                <discuss v-if="roomType == 4" :roomTopic=sRroomTopic />
-                <compare v-if="roomType == 5" :roomTopic=sRroomTopic />
-                <lotto v-if="roomType == 6" :roomTopic=sRroomTopic />
-                <scratch v-if="roomType == 7" :roomTopic=sRroomTopic />
-                <date v-if="roomType == 8" :roomTopic=sRroomTopic />
+                <vote v-if="roomType === 0" :roomTopic=sRroomTopic />
+                <think v-if="roomType === 1" :roomTopic=sRroomTopic />
+                <test v-if="roomType === 2" :roomTopic=sRroomTopic />
+                <rate v-if="roomType === 3" :roomTopic=sRroomTopic />
+                <discuss v-if="roomType === 4" :roomTopic=sRroomTopic />
+                <compare v-if="roomType === 5" :roomTopic=sRroomTopic />
+                <lotto v-if="roomType === 6" :roomTopic=sRroomTopic />
+                <scratch v-if="roomType === 7" :roomTopic=sRroomTopic />
+                <date v-if="roomType === 8" :roomTopic=sRroomTopic />
             </div>
             <img id="logo" src="../../../assets/GShepherd_Logo.png" />
             <div id="cheetBar">

@@ -12,7 +12,7 @@
     <div id="safe">
         <div class="myfont" style="jusfy-content: center;">
             <h4>提交抽獎基本資料</h4>
-            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="submit==false">
+            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="submit===false">
                 <ul class="list-group myfont" style="width: 35vw;">
                     <li class="list-group-item">
                         <input class="form-control" type="text" placeholder="輸入中獎人真實姓名：">
@@ -28,7 +28,7 @@
             <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-else>
                 <h5>已提交資料！</h5>
             </div>
-            <button class="btn btn-dark mx-2" @click="submit=true" v-if="submit==false">送出</button>
+            <button class="btn btn-dark mx-2" @click="submit=true" v-if="submit===false">送出</button>
         </div>
     </div>
 </template>

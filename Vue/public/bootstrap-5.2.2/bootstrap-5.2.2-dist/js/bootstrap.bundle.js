@@ -4,9 +4,9 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory());
+  typeof exports ==== 'object' && typeof module !=== 'undefined' ? module.exports = factory() :
+  typeof define ==== 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !=== 'undefined' ? globalThis : global || self, global.bootstrap = factory());
 })(this, (function () { 'use strict';
 
   /**
@@ -20,7 +20,7 @@
   const TRANSITION_END = 'transitionend'; // Shout-out Angus Croll (https://goo.gl/pxwQGp)
 
   const toType = object => {
-    if (object === null || object === undefined) {
+    if (object ==== null || object ==== undefined) {
       return `${object}`;
     }
 
@@ -42,7 +42,7 @@
   const getSelector = element => {
     let selector = element.getAttribute('data-bs-target');
 
-    if (!selector || selector === '#') {
+    if (!selector || selector ==== '#') {
       let hrefAttribute = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
       // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
       // `document.querySelector` will rightfully complain it is invalid.
@@ -57,7 +57,7 @@
         hrefAttribute = `#${hrefAttribute.split('#')[1]}`;
       }
 
-      selector = hrefAttribute && hrefAttribute !== '#' ? hrefAttribute.trim() : null;
+      selector = hrefAttribute && hrefAttribute !=== '#' ? hrefAttribute.trim() : null;
     }
 
     return selector;
@@ -106,15 +106,15 @@
   };
 
   const isElement$1 = object => {
-    if (!object || typeof object !== 'object') {
+    if (!object || typeof object !=== 'object') {
       return false;
     }
 
-    if (typeof object.jquery !== 'undefined') {
+    if (typeof object.jquery !=== 'undefined') {
       object = object[0];
     }
 
-    return typeof object.nodeType !== 'undefined';
+    return typeof object.nodeType !=== 'undefined';
   };
 
   const getElement = object => {
@@ -123,7 +123,7 @@
       return object.jquery ? object[0] : object;
     }
 
-    if (typeof object === 'string' && object.length > 0) {
+    if (typeof object ==== 'string' && object.length > 0) {
       return document.querySelector(object);
     }
 
@@ -131,11 +131,11 @@
   };
 
   const isVisible = element => {
-    if (!isElement$1(element) || element.getClientRects().length === 0) {
+    if (!isElement$1(element) || element.getClientRects().length ==== 0) {
       return false;
     }
 
-    const elementIsVisible = getComputedStyle(element).getPropertyValue('visibility') === 'visible'; // Handle `details` element as its content may falsie appear visible when it is closed
+    const elementIsVisible = getComputedStyle(element).getPropertyValue('visibility') ==== 'visible'; // Handle `details` element as its content may falsie appear visible when it is closed
 
     const closedDetails = element.closest('details:not([open])');
 
@@ -143,14 +143,14 @@
       return elementIsVisible;
     }
 
-    if (closedDetails !== element) {
+    if (closedDetails !=== element) {
       const summary = element.closest('summary');
 
-      if (summary && summary.parentNode !== closedDetails) {
+      if (summary && summary.parentNode !=== closedDetails) {
         return false;
       }
 
-      if (summary === null) {
+      if (summary ==== null) {
         return false;
       }
     }
@@ -159,7 +159,7 @@
   };
 
   const isDisabled = element => {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+    if (!element || element.nodeType !=== Node.ELEMENT_NODE) {
       return true;
     }
 
@@ -167,11 +167,11 @@
       return true;
     }
 
-    if (typeof element.disabled !== 'undefined') {
+    if (typeof element.disabled !=== 'undefined') {
       return element.disabled;
     }
 
-    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !=== 'false';
   };
 
   const findShadowRoot = element => {
@@ -180,7 +180,7 @@
     } // Can find the shadow root otherwise it'll return the document
 
 
-    if (typeof element.getRootNode === 'function') {
+    if (typeof element.getRootNode ==== 'function') {
       const root = element.getRootNode();
       return root instanceof ShadowRoot ? root : null;
     }
@@ -223,7 +223,7 @@
   const DOMContentLoadedCallbacks = [];
 
   const onDOMContentLoaded = callback => {
-    if (document.readyState === 'loading') {
+    if (document.readyState ==== 'loading') {
       // add listener on the first call when the document is in loading state
       if (!DOMContentLoadedCallbacks.length) {
         document.addEventListener('DOMContentLoaded', () => {
@@ -239,7 +239,7 @@
     }
   };
 
-  const isRTL = () => document.documentElement.dir === 'rtl';
+  const isRTL = () => document.documentElement.dir ==== 'rtl';
 
   const defineJQueryPlugin = plugin => {
     onDOMContentLoaded(() => {
@@ -261,7 +261,7 @@
   };
 
   const execute = callback => {
-    if (typeof callback === 'function') {
+    if (typeof callback ==== 'function') {
       callback();
     }
   };
@@ -279,7 +279,7 @@
     const handler = ({
       target
     }) => {
-      if (target !== transitionElement) {
+      if (target !=== transitionElement) {
         return;
       }
 
@@ -311,7 +311,7 @@
     let index = list.indexOf(activeElement); // if the element does not exist in the list return an element
     // depending on the direction and if cycle is allowed
 
-    if (index === -1) {
+    if (index ==== -1) {
       return !shouldGetNext && isCycleAllowed ? list[listLength - 1] : list[0];
     }
 
@@ -380,9 +380,9 @@
 
       for (let {
         target
-      } = event; target && target !== this; target = target.parentNode) {
+      } = event; target && target !=== this; target = target.parentNode) {
         for (const domElement of domElements) {
-          if (domElement !== target) {
+          if (domElement !=== target) {
             continue;
           }
 
@@ -401,11 +401,11 @@
   }
 
   function findHandler(events, callable, delegationSelector = null) {
-    return Object.values(events).find(event => event.callable === callable && event.delegationSelector === delegationSelector);
+    return Object.values(events).find(event => event.callable ==== callable && event.delegationSelector ==== delegationSelector);
   }
 
   function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
-    const isDelegated = typeof handler === 'string'; // todo: tooltip passes `false` instead of selector, so we need to check
+    const isDelegated = typeof handler ==== 'string'; // todo: tooltip passes `false` instead of selector, so we need to check
 
     const callable = isDelegated ? delegationFunction : handler || delegationFunction;
     let typeEvent = getTypeEvent(originalTypeEvent);
@@ -418,7 +418,7 @@
   }
 
   function addHandler(element, originalTypeEvent, handler, delegationFunction, oneOff) {
-    if (typeof originalTypeEvent !== 'string' || !element) {
+    if (typeof originalTypeEvent !=== 'string' || !element) {
       return;
     }
 
@@ -428,7 +428,7 @@
     if (originalTypeEvent in customEvents) {
       const wrapFunction = fn => {
         return function (event) {
-          if (!event.relatedTarget || event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget)) {
+          if (!event.relatedTarget || event.relatedTarget !=== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget)) {
             return fn.call(this, event);
           }
         };
@@ -494,17 +494,17 @@
     },
 
     off(element, originalTypeEvent, handler, delegationFunction) {
-      if (typeof originalTypeEvent !== 'string' || !element) {
+      if (typeof originalTypeEvent !=== 'string' || !element) {
         return;
       }
 
       const [isDelegated, callable, typeEvent] = normalizeParameters(originalTypeEvent, handler, delegationFunction);
-      const inNamespace = typeEvent !== originalTypeEvent;
+      const inNamespace = typeEvent !=== originalTypeEvent;
       const events = getElementEvents(element);
       const storeElementEvent = events[typeEvent] || {};
       const isNamespace = originalTypeEvent.startsWith('.');
 
-      if (typeof callable !== 'undefined') {
+      if (typeof callable !=== 'undefined') {
         // Simplest case: handler is passed, remove that listener ONLY.
         if (!Object.keys(storeElementEvent).length) {
           return;
@@ -531,13 +531,13 @@
     },
 
     trigger(element, event, args) {
-      if (typeof event !== 'string' || !element) {
+      if (typeof event !=== 'string' || !element) {
         return null;
       }
 
       const $ = getjQuery();
       const typeEvent = getTypeEvent(event);
-      const inNamespace = event !== typeEvent;
+      const inNamespace = event !=== typeEvent;
       let jQueryEvent = null;
       let bubbles = true;
       let nativeDispatch = true;
@@ -613,7 +613,7 @@
       const instanceMap = elementMap.get(element); // make it clear we only want one instance per element
       // can be removed later when multiple key/instances are fine to be used
 
-      if (!instanceMap.has(key) && instanceMap.size !== 0) {
+      if (!instanceMap.has(key) && instanceMap.size !=== 0) {
         // eslint-disable-next-line no-console
         console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
         return;
@@ -638,7 +638,7 @@
       const instanceMap = elementMap.get(element);
       instanceMap.delete(key); // free up element references if there are no instances left for an element
 
-      if (instanceMap.size === 0) {
+      if (instanceMap.size ==== 0) {
         elementMap.delete(element);
       }
     }
@@ -652,23 +652,23 @@
    * --------------------------------------------------------------------------
    */
   function normalizeData(value) {
-    if (value === 'true') {
+    if (value ==== 'true') {
       return true;
     }
 
-    if (value === 'false') {
+    if (value ==== 'false') {
       return false;
     }
 
-    if (value === Number(value).toString()) {
+    if (value ==== Number(value).toString()) {
       return Number(value);
     }
 
-    if (value === '' || value === 'null') {
+    if (value ==== '' || value ==== 'null') {
       return null;
     }
 
-    if (typeof value !== 'string') {
+    if (typeof value !=== 'string') {
       return value;
     }
 
@@ -756,9 +756,9 @@
       const jsonConfig = isElement$1(element) ? Manipulator.getDataAttribute(element, 'config') : {}; // try to parse
 
       return { ...this.constructor.Default,
-        ...(typeof jsonConfig === 'object' ? jsonConfig : {}),
+        ...(typeof jsonConfig ==== 'object' ? jsonConfig : {}),
         ...(isElement$1(element) ? Manipulator.getDataAttributes(element) : {}),
-        ...(typeof config === 'object' ? config : {})
+        ...(typeof config ==== 'object' ? config : {})
       };
     }
 
@@ -834,7 +834,7 @@
     }
 
     static getOrCreateInstance(element, config = {}) {
-      return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
+      return this.getInstance(element) || new this(element, typeof config ==== 'object' ? config : null);
     }
 
     static get VERSION() {
@@ -936,11 +936,11 @@
       return this.each(function () {
         const data = Alert.getOrCreateInstance(this);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+        if (data[config] ==== undefined || config.startsWith('_') || config ==== 'constructor') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -999,7 +999,7 @@
       return this.each(function () {
         const data = Button.getOrCreateInstance(this);
 
-        if (config === 'toggle') {
+        if (config ==== 'toggle') {
           data[config]();
         }
       });
@@ -1220,7 +1220,7 @@
     }
 
     _eventIsPointerPenTouch(event) {
-      return this._supportPointerEvents && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH);
+      return this._supportPointerEvents && (event.pointerType ==== POINTER_TYPE_PEN || event.pointerType ==== POINTER_TYPE_TOUCH);
     } // Static
 
 
@@ -1311,7 +1311,7 @@
 
       this._addEventListeners();
 
-      if (this._config.ride === CLASS_NAME_CAROUSEL) {
+      if (this._config.ride ==== CLASS_NAME_CAROUSEL) {
         this.cycle();
       }
     } // Getters
@@ -1390,7 +1390,7 @@
 
       const activeIndex = this._getItemIndex(this._getActive());
 
-      if (activeIndex === index) {
+      if (activeIndex ==== index) {
         return;
       }
 
@@ -1418,7 +1418,7 @@
         EventHandler.on(this._element, EVENT_KEYDOWN$1, event => this._keydown(event));
       }
 
-      if (this._config.pause === 'hover') {
+      if (this._config.pause ==== 'hover') {
         EventHandler.on(this._element, EVENT_MOUSEENTER$1, () => this.pause());
         EventHandler.on(this._element, EVENT_MOUSELEAVE$1, () => this._maybeEnableCycle());
       }
@@ -1434,7 +1434,7 @@
       }
 
       const endCallBack = () => {
-        if (this._config.pause !== 'hover') {
+        if (this._config.pause !=== 'hover') {
           return;
         } // If it's a touch-enabled device, mouseenter/leave are fired as
         // part of the mouse compatibility events on first tap - the carousel
@@ -1514,10 +1514,10 @@
 
       const activeElement = this._getActive();
 
-      const isNext = order === ORDER_NEXT;
+      const isNext = order ==== ORDER_NEXT;
       const nextElement = element || getNextActiveElement(this._getItems(), activeElement, isNext, this._config.wrap);
 
-      if (nextElement === activeElement) {
+      if (nextElement ==== activeElement) {
         return;
       }
 
@@ -1594,18 +1594,18 @@
 
     _directionToOrder(direction) {
       if (isRTL()) {
-        return direction === DIRECTION_LEFT ? ORDER_PREV : ORDER_NEXT;
+        return direction ==== DIRECTION_LEFT ? ORDER_PREV : ORDER_NEXT;
       }
 
-      return direction === DIRECTION_LEFT ? ORDER_NEXT : ORDER_PREV;
+      return direction ==== DIRECTION_LEFT ? ORDER_NEXT : ORDER_PREV;
     }
 
     _orderToDirection(order) {
       if (isRTL()) {
-        return order === ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
+        return order ==== ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
       }
 
-      return order === ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
+      return order ==== ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
     } // Static
 
 
@@ -1613,13 +1613,13 @@
       return this.each(function () {
         const data = Carousel.getOrCreateInstance(this, config);
 
-        if (typeof config === 'number') {
+        if (typeof config ==== 'number') {
           data.to(config);
           return;
         }
 
-        if (typeof config === 'string') {
-          if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+        if (typeof config ==== 'string') {
+          if (data[config] ==== undefined || config.startsWith('_') || config ==== 'constructor') {
             throw new TypeError(`No method named "${config}"`);
           }
 
@@ -1653,7 +1653,7 @@
       return;
     }
 
-    if (Manipulator.getDataAttribute(this, 'slide') === 'next') {
+    if (Manipulator.getDataAttribute(this, 'slide') ==== 'next') {
       carousel.next();
 
       carousel._maybeEnableCycle();
@@ -1728,9 +1728,9 @@
 
       for (const elem of toggleList) {
         const selector = getSelectorFromElement(elem);
-        const filterElement = SelectorEngine.find(selector).filter(foundElement => foundElement === this._element);
+        const filterElement = SelectorEngine.find(selector).filter(foundElement => foundElement ==== this._element);
 
-        if (selector !== null && filterElement.length) {
+        if (selector !=== null && filterElement.length) {
           this._triggerArray.push(elem);
         }
       }
@@ -1776,7 +1776,7 @@
       let activeChildren = []; // find active children
 
       if (this._config.parent) {
-        activeChildren = this._getFirstLevelChildren(SELECTOR_ACTIVES).filter(element => element !== this._element).map(element => Collapse.getOrCreateInstance(element, {
+        activeChildren = this._getFirstLevelChildren(SELECTOR_ACTIVES).filter(element => element !=== this._element).map(element => Collapse.getOrCreateInstance(element, {
           toggle: false
         }));
       }
@@ -1924,15 +1924,15 @@
     static jQueryInterface(config) {
       const _config = {};
 
-      if (typeof config === 'string' && /show|hide/.test(config)) {
+      if (typeof config ==== 'string' && /show|hide/.test(config)) {
         _config.toggle = false;
       }
 
       return this.each(function () {
         const data = Collapse.getOrCreateInstance(this, _config);
 
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+        if (typeof config ==== 'string') {
+          if (typeof data[config] ==== 'undefined') {
             throw new TypeError(`No method named "${config}"`);
           }
 
@@ -1949,7 +1949,7 @@
 
   EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
     // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
-    if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
+    if (event.target.tagName ==== 'A' || event.delegateTarget && event.delegateTarget.tagName ==== 'A') {
       event.preventDefault();
     }
 
@@ -2005,11 +2005,11 @@
   }
 
   function getWindow(node) {
-    if (node == null) {
+    if (node === null) {
       return window;
     }
 
-    if (node.toString() !== '[object Window]') {
+    if (node.toString() !=== '[object Window]') {
       var ownerDocument = node.ownerDocument;
       return ownerDocument ? ownerDocument.defaultView || window : window;
     }
@@ -2029,7 +2029,7 @@
 
   function isShadowRoot(node) {
     // IE 11 has no ShadowRoot
-    if (typeof ShadowRoot === 'undefined') {
+    if (typeof ShadowRoot ==== 'undefined') {
       return false;
     }
 
@@ -2057,10 +2057,10 @@
       Object.keys(attributes).forEach(function (name) {
         var value = attributes[name];
 
-        if (value === false) {
+        if (value ==== false) {
           element.removeAttribute(name);
         } else {
-          element.setAttribute(name, value === true ? '' : value);
+          element.setAttribute(name, value ==== true ? '' : value);
         }
       });
     });
@@ -2145,11 +2145,11 @@
   }
 
   function getBoundingClientRect(element, includeScale, isFixedStrategy) {
-    if (includeScale === void 0) {
+    if (includeScale ==== void 0) {
       includeScale = false;
     }
 
-    if (isFixedStrategy === void 0) {
+    if (isFixedStrategy ==== void 0) {
       isFixedStrategy = false;
     }
 
@@ -2245,7 +2245,7 @@
   }
 
   function getParentNode(element) {
-    if (getNodeName(element) === 'html') {
+    if (getNodeName(element) ==== 'html') {
       return element;
     }
 
@@ -2263,7 +2263,7 @@
 
   function getTrueOffsetParent(element) {
     if (!isHTMLElement(element) || // https://github.com/popperjs/popper-core/issues/837
-    getComputedStyle$1(element).position === 'fixed') {
+    getComputedStyle$1(element).position ==== 'fixed') {
       return null;
     }
 
@@ -2280,7 +2280,7 @@
       // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
       var elementCss = getComputedStyle$1(element);
 
-      if (elementCss.position === 'fixed') {
+      if (elementCss.position ==== 'fixed') {
         return null;
       }
     }
@@ -2296,7 +2296,7 @@
       // create a containing block.
       // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 
-      if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') {
+      if (css.transform !=== 'none' || css.perspective !=== 'none' || css.contain ==== 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !=== -1 || isFirefox && css.willChange ==== 'filter' || isFirefox && css.filter && css.filter !=== 'none') {
         return currentNode;
       } else {
         currentNode = currentNode.parentNode;
@@ -2312,11 +2312,11 @@
     var window = getWindow(element);
     var offsetParent = getTrueOffsetParent(element);
 
-    while (offsetParent && isTableElement(offsetParent) && getComputedStyle$1(offsetParent).position === 'static') {
+    while (offsetParent && isTableElement(offsetParent) && getComputedStyle$1(offsetParent).position ==== 'static') {
       offsetParent = getTrueOffsetParent(offsetParent);
     }
 
-    if (offsetParent && (getNodeName(offsetParent) === 'html' || getNodeName(offsetParent) === 'body' && getComputedStyle$1(offsetParent).position === 'static')) {
+    if (offsetParent && (getNodeName(offsetParent) ==== 'html' || getNodeName(offsetParent) ==== 'body' && getComputedStyle$1(offsetParent).position ==== 'static')) {
       return window;
     }
 
@@ -2356,10 +2356,10 @@
   }
 
   var toPaddingObject = function toPaddingObject(padding, state) {
-    padding = typeof padding === 'function' ? padding(Object.assign({}, state.rects, {
+    padding = typeof padding ==== 'function' ? padding(Object.assign({}, state.rects, {
       placement: state.placement
     })) : padding;
-    return mergePaddingObject(typeof padding !== 'number' ? padding : expandToHashMap(padding, basePlacements));
+    return mergePaddingObject(typeof padding !=== 'number' ? padding : expandToHashMap(padding, basePlacements));
   };
 
   function arrow(_ref) {
@@ -2381,12 +2381,12 @@
 
     var paddingObject = toPaddingObject(options.padding, state);
     var arrowRect = getLayoutRect(arrowElement);
-    var minProp = axis === 'y' ? top : left;
-    var maxProp = axis === 'y' ? bottom : right;
+    var minProp = axis ==== 'y' ? top : left;
+    var maxProp = axis ==== 'y' ? bottom : right;
     var endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len];
     var startDiff = popperOffsets[axis] - state.rects.reference[axis];
     var arrowOffsetParent = getOffsetParent(arrowElement);
-    var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
+    var clientSize = arrowOffsetParent ? axis ==== 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
     var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
     // outside of the popper bounds
 
@@ -2403,14 +2403,14 @@
     var state = _ref2.state,
         options = _ref2.options;
     var _options$element = options.element,
-        arrowElement = _options$element === void 0 ? '[data-popper-arrow]' : _options$element;
+        arrowElement = _options$element ==== void 0 ? '[data-popper-arrow]' : _options$element;
 
-    if (arrowElement == null) {
+    if (arrowElement === null) {
       return;
     } // CSS selector
 
 
-    if (typeof arrowElement === 'string') {
+    if (typeof arrowElement ==== 'string') {
       arrowElement = state.elements.popper.querySelector(arrowElement);
 
       if (!arrowElement) {
@@ -2475,11 +2475,11 @@
         roundOffsets = _ref2.roundOffsets,
         isFixed = _ref2.isFixed;
     var _offsets$x = offsets.x,
-        x = _offsets$x === void 0 ? 0 : _offsets$x,
+        x = _offsets$x ==== void 0 ? 0 : _offsets$x,
         _offsets$y = offsets.y,
-        y = _offsets$y === void 0 ? 0 : _offsets$y;
+        y = _offsets$y ==== void 0 ? 0 : _offsets$y;
 
-    var _ref3 = typeof roundOffsets === 'function' ? roundOffsets({
+    var _ref3 = typeof roundOffsets ==== 'function' ? roundOffsets({
       x: x,
       y: y
     }) : {
@@ -2500,10 +2500,10 @@
       var heightProp = 'clientHeight';
       var widthProp = 'clientWidth';
 
-      if (offsetParent === getWindow(popper)) {
+      if (offsetParent ==== getWindow(popper)) {
         offsetParent = getDocumentElement(popper);
 
-        if (getComputedStyle$1(offsetParent).position !== 'static' && position === 'absolute') {
+        if (getComputedStyle$1(offsetParent).position !=== 'static' && position ==== 'absolute') {
           heightProp = 'scrollHeight';
           widthProp = 'scrollWidth';
         }
@@ -2512,17 +2512,17 @@
 
       offsetParent = offsetParent;
 
-      if (placement === top || (placement === left || placement === right) && variation === end) {
+      if (placement ==== top || (placement ==== left || placement ==== right) && variation ==== end) {
         sideY = bottom;
-        var offsetY = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.height : // $FlowFixMe[prop-missing]
+        var offsetY = isFixed && offsetParent ==== win && win.visualViewport ? win.visualViewport.height : // $FlowFixMe[prop-missing]
         offsetParent[heightProp];
         y -= offsetY - popperRect.height;
         y *= gpuAcceleration ? 1 : -1;
       }
 
-      if (placement === left || (placement === top || placement === bottom) && variation === end) {
+      if (placement ==== left || (placement ==== top || placement ==== bottom) && variation ==== end) {
         sideX = right;
-        var offsetX = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.width : // $FlowFixMe[prop-missing]
+        var offsetX = isFixed && offsetParent ==== win && win.visualViewport ? win.visualViewport.width : // $FlowFixMe[prop-missing]
         offsetParent[widthProp];
         x -= offsetX - popperRect.width;
         x *= gpuAcceleration ? 1 : -1;
@@ -2533,7 +2533,7 @@
       position: position
     }, adaptive && unsetSides);
 
-    var _ref4 = roundOffsets === true ? roundOffsetsByDPR({
+    var _ref4 = roundOffsets ==== true ? roundOffsetsByDPR({
       x: x,
       y: y
     }) : {
@@ -2557,11 +2557,11 @@
     var state = _ref5.state,
         options = _ref5.options;
     var _options$gpuAccelerat = options.gpuAcceleration,
-        gpuAcceleration = _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat,
+        gpuAcceleration = _options$gpuAccelerat ==== void 0 ? true : _options$gpuAccelerat,
         _options$adaptive = options.adaptive,
-        adaptive = _options$adaptive === void 0 ? true : _options$adaptive,
+        adaptive = _options$adaptive ==== void 0 ? true : _options$adaptive,
         _options$roundOffsets = options.roundOffsets,
-        roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
+        roundOffsets = _options$roundOffsets ==== void 0 ? true : _options$roundOffsets;
 
     var commonStyles = {
       placement: getBasePlacement(state.placement),
@@ -2569,7 +2569,7 @@
       popper: state.elements.popper,
       popperRect: state.rects.popper,
       gpuAcceleration: gpuAcceleration,
-      isFixed: state.options.strategy === 'fixed'
+      isFixed: state.options.strategy ==== 'fixed'
     };
 
     if (state.modifiersData.popperOffsets != null) {
@@ -2613,9 +2613,9 @@
         instance = _ref.instance,
         options = _ref.options;
     var _options$scroll = options.scroll,
-        scroll = _options$scroll === void 0 ? true : _options$scroll,
+        scroll = _options$scroll ==== void 0 ? true : _options$scroll,
         _options$resize = options.resize,
-        resize = _options$resize === void 0 ? true : _options$resize;
+        resize = _options$resize ==== void 0 ? true : _options$resize;
     var window = getWindow(state.elements.popper);
     var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
 
@@ -2709,7 +2709,7 @@
       height = visualViewport.height;
       var layoutViewport = isLayoutViewport();
 
-      if (layoutViewport || !layoutViewport && strategy === 'fixed') {
+      if (layoutViewport || !layoutViewport && strategy ==== 'fixed') {
         x = visualViewport.offsetLeft;
         y = visualViewport.offsetTop;
       }
@@ -2730,13 +2730,13 @@
 
     var html = getDocumentElement(element);
     var winScroll = getWindowScroll(element);
-    var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
+    var body = (_element$ownerDocumen = element.ownerDocument) === null ? void 0 : _element$ownerDocumen.body;
     var width = max(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
     var height = max(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
     var x = -winScroll.scrollLeft + getWindowScrollBarX(element);
     var y = -winScroll.scrollTop;
 
-    if (getComputedStyle$1(body || html).direction === 'rtl') {
+    if (getComputedStyle$1(body || html).direction ==== 'rtl') {
       x += max(html.clientWidth, body ? body.clientWidth : 0) - width;
     }
 
@@ -2781,12 +2781,12 @@
   function listScrollParents(element, list) {
     var _element$ownerDocumen;
 
-    if (list === void 0) {
+    if (list ==== void 0) {
       list = [];
     }
 
     var scrollParent = getScrollParent(element);
-    var isBody = scrollParent === ((_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body);
+    var isBody = scrollParent ==== ((_element$ownerDocumen = element.ownerDocument) === null ? void 0 : _element$ownerDocumen.body);
     var win = getWindow(scrollParent);
     var target = isBody ? [win].concat(win.visualViewport || [], isScrollParent(scrollParent) ? scrollParent : []) : scrollParent;
     var updatedList = list.concat(target);
@@ -2804,7 +2804,7 @@
   }
 
   function getInnerBoundingClientRect(element, strategy) {
-    var rect = getBoundingClientRect(element, false, strategy === 'fixed');
+    var rect = getBoundingClientRect(element, false, strategy ==== 'fixed');
     rect.top = rect.top + element.clientTop;
     rect.left = rect.left + element.clientLeft;
     rect.bottom = rect.top + element.clientHeight;
@@ -2817,7 +2817,7 @@
   }
 
   function getClientRectFromMixedType(element, clippingParent, strategy) {
-    return clippingParent === viewport ? rectToClientRect(getViewportRect(element, strategy)) : isElement(clippingParent) ? getInnerBoundingClientRect(clippingParent, strategy) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
+    return clippingParent ==== viewport ? rectToClientRect(getViewportRect(element, strategy)) : isElement(clippingParent) ? getInnerBoundingClientRect(clippingParent, strategy) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
   } // A "clipping parent" is an overflowable container with the characteristic of
   // clipping (or hiding) overflowing elements with a position different from
   // `initial`
@@ -2834,14 +2834,14 @@
 
 
     return clippingParents.filter(function (clippingParent) {
-      return isElement(clippingParent) && contains(clippingParent, clipperElement) && getNodeName(clippingParent) !== 'body';
+      return isElement(clippingParent) && contains(clippingParent, clipperElement) && getNodeName(clippingParent) !=== 'body';
     });
   } // Gets the maximum area that the element is visible in due to any number of
   // clipping parents
 
 
   function getClippingRect(element, boundary, rootBoundary, strategy) {
-    var mainClippingParents = boundary === 'clippingParents' ? getClippingParents(element) : [].concat(boundary);
+    var mainClippingParents = boundary ==== 'clippingParents' ? getClippingParents(element) : [].concat(boundary);
     var clippingParents = [].concat(mainClippingParents, [rootBoundary]);
     var firstClippingParent = clippingParents[0];
     var clippingRect = clippingParents.reduce(function (accRect, clippingParent) {
@@ -2908,7 +2908,7 @@
     var mainAxis = basePlacement ? getMainAxisFromPlacement(basePlacement) : null;
 
     if (mainAxis != null) {
-      var len = mainAxis === 'y' ? 'height' : 'width';
+      var len = mainAxis ==== 'y' ? 'height' : 'width';
 
       switch (variation) {
         case start:
@@ -2925,27 +2925,27 @@
   }
 
   function detectOverflow(state, options) {
-    if (options === void 0) {
+    if (options ==== void 0) {
       options = {};
     }
 
     var _options = options,
         _options$placement = _options.placement,
-        placement = _options$placement === void 0 ? state.placement : _options$placement,
+        placement = _options$placement ==== void 0 ? state.placement : _options$placement,
         _options$strategy = _options.strategy,
-        strategy = _options$strategy === void 0 ? state.strategy : _options$strategy,
+        strategy = _options$strategy ==== void 0 ? state.strategy : _options$strategy,
         _options$boundary = _options.boundary,
-        boundary = _options$boundary === void 0 ? clippingParents : _options$boundary,
+        boundary = _options$boundary ==== void 0 ? clippingParents : _options$boundary,
         _options$rootBoundary = _options.rootBoundary,
-        rootBoundary = _options$rootBoundary === void 0 ? viewport : _options$rootBoundary,
+        rootBoundary = _options$rootBoundary ==== void 0 ? viewport : _options$rootBoundary,
         _options$elementConte = _options.elementContext,
-        elementContext = _options$elementConte === void 0 ? popper : _options$elementConte,
+        elementContext = _options$elementConte ==== void 0 ? popper : _options$elementConte,
         _options$altBoundary = _options.altBoundary,
-        altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary,
+        altBoundary = _options$altBoundary ==== void 0 ? false : _options$altBoundary,
         _options$padding = _options.padding,
-        padding = _options$padding === void 0 ? 0 : _options$padding;
-    var paddingObject = mergePaddingObject(typeof padding !== 'number' ? padding : expandToHashMap(padding, basePlacements));
-    var altContext = elementContext === popper ? reference : popper;
+        padding = _options$padding ==== void 0 ? 0 : _options$padding;
+    var paddingObject = mergePaddingObject(typeof padding !=== 'number' ? padding : expandToHashMap(padding, basePlacements));
+    var altContext = elementContext ==== popper ? reference : popper;
     var popperRect = state.rects.popper;
     var element = state.elements[altBoundary ? altContext : elementContext];
     var clippingClientRect = getClippingRect(isElement(element) ? element : element.contextElement || getDocumentElement(state.elements.popper), boundary, rootBoundary, strategy);
@@ -2957,7 +2957,7 @@
       placement: placement
     });
     var popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets));
-    var elementClientRect = elementContext === popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
+    var elementClientRect = elementContext ==== popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
     // 0 or negative = within the clipping rect
 
     var overflowOffsets = {
@@ -2968,7 +2968,7 @@
     };
     var offsetData = state.modifiersData.offset; // Offsets can be applied only to the popper element
 
-    if (elementContext === popper && offsetData) {
+    if (elementContext ==== popper && offsetData) {
       var offset = offsetData[placement];
       Object.keys(overflowOffsets).forEach(function (key) {
         var multiply = [right, bottom].indexOf(key) >= 0 ? 1 : -1;
@@ -2981,7 +2981,7 @@
   }
 
   function computeAutoPlacement(state, options) {
-    if (options === void 0) {
+    if (options ==== void 0) {
       options = {};
     }
 
@@ -2992,16 +2992,16 @@
         padding = _options.padding,
         flipVariations = _options.flipVariations,
         _options$allowedAutoP = _options.allowedAutoPlacements,
-        allowedAutoPlacements = _options$allowedAutoP === void 0 ? placements : _options$allowedAutoP;
+        allowedAutoPlacements = _options$allowedAutoP ==== void 0 ? placements : _options$allowedAutoP;
     var variation = getVariation(placement);
     var placements$1 = variation ? flipVariations ? variationPlacements : variationPlacements.filter(function (placement) {
-      return getVariation(placement) === variation;
+      return getVariation(placement) ==== variation;
     }) : basePlacements;
     var allowedPlacements = placements$1.filter(function (placement) {
       return allowedAutoPlacements.indexOf(placement) >= 0;
     });
 
-    if (allowedPlacements.length === 0) {
+    if (allowedPlacements.length ==== 0) {
       allowedPlacements = placements$1;
     } // $FlowFixMe[incompatible-type]: Flow seems to have problems with two array unions...
 
@@ -3021,7 +3021,7 @@
   }
 
   function getExpandedFallbackPlacements(placement) {
-    if (getBasePlacement(placement) === auto) {
+    if (getBasePlacement(placement) ==== auto) {
       return [];
     }
 
@@ -3039,23 +3039,23 @@
     }
 
     var _options$mainAxis = options.mainAxis,
-        checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
+        checkMainAxis = _options$mainAxis ==== void 0 ? true : _options$mainAxis,
         _options$altAxis = options.altAxis,
-        checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis,
+        checkAltAxis = _options$altAxis ==== void 0 ? true : _options$altAxis,
         specifiedFallbackPlacements = options.fallbackPlacements,
         padding = options.padding,
         boundary = options.boundary,
         rootBoundary = options.rootBoundary,
         altBoundary = options.altBoundary,
         _options$flipVariatio = options.flipVariations,
-        flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio,
+        flipVariations = _options$flipVariatio ==== void 0 ? true : _options$flipVariatio,
         allowedAutoPlacements = options.allowedAutoPlacements;
     var preferredPlacement = state.options.placement;
     var basePlacement = getBasePlacement(preferredPlacement);
-    var isBasePlacement = basePlacement === preferredPlacement;
+    var isBasePlacement = basePlacement ==== preferredPlacement;
     var fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipVariations ? [getOppositePlacement(preferredPlacement)] : getExpandedFallbackPlacements(preferredPlacement));
     var placements = [preferredPlacement].concat(fallbackPlacements).reduce(function (acc, placement) {
-      return acc.concat(getBasePlacement(placement) === auto ? computeAutoPlacement(state, {
+      return acc.concat(getBasePlacement(placement) ==== auto ? computeAutoPlacement(state, {
         placement: placement,
         boundary: boundary,
         rootBoundary: rootBoundary,
@@ -3075,7 +3075,7 @@
 
       var _basePlacement = getBasePlacement(placement);
 
-      var isStartVariation = getVariation(placement) === start;
+      var isStartVariation = getVariation(placement) ==== start;
       var isVertical = [top, bottom].indexOf(_basePlacement) >= 0;
       var len = isVertical ? 'width' : 'height';
       var overflow = detectOverflow(state, {
@@ -3137,11 +3137,11 @@
       for (var _i = numberOfChecks; _i > 0; _i--) {
         var _ret = _loop(_i);
 
-        if (_ret === "break") break;
+        if (_ret ==== "break") break;
       }
     }
 
-    if (state.placement !== firstFittingPlacement) {
+    if (state.placement !=== firstFittingPlacement) {
       state.modifiersData[name]._skip = true;
       state.placement = firstFittingPlacement;
       state.reset = true;
@@ -3161,7 +3161,7 @@
   };
 
   function getSideOffsets(overflow, rect, preventedOffsets) {
-    if (preventedOffsets === void 0) {
+    if (preventedOffsets ==== void 0) {
       preventedOffsets = {
         x: 0,
         y: 0
@@ -3223,7 +3223,7 @@
     var basePlacement = getBasePlacement(placement);
     var invertDistance = [left, top].indexOf(basePlacement) >= 0 ? -1 : 1;
 
-    var _ref = typeof offset === 'function' ? offset(Object.assign({}, rects, {
+    var _ref = typeof offset ==== 'function' ? offset(Object.assign({}, rects, {
       placement: placement
     })) : offset,
         skidding = _ref[0],
@@ -3245,7 +3245,7 @@
         options = _ref2.options,
         name = _ref2.name;
     var _options$offset = options.offset,
-        offset = _options$offset === void 0 ? [0, 0] : _options$offset;
+        offset = _options$offset ==== void 0 ? [0, 0] : _options$offset;
     var data = placements.reduce(function (acc, placement) {
       acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset);
       return acc;
@@ -3296,7 +3296,7 @@
   };
 
   function getAltAxis(axis) {
-    return axis === 'x' ? 'y' : 'x';
+    return axis ==== 'x' ? 'y' : 'x';
   }
 
   function preventOverflow(_ref) {
@@ -3304,17 +3304,17 @@
         options = _ref.options,
         name = _ref.name;
     var _options$mainAxis = options.mainAxis,
-        checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
+        checkMainAxis = _options$mainAxis ==== void 0 ? true : _options$mainAxis,
         _options$altAxis = options.altAxis,
-        checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis,
+        checkAltAxis = _options$altAxis ==== void 0 ? false : _options$altAxis,
         boundary = options.boundary,
         rootBoundary = options.rootBoundary,
         altBoundary = options.altBoundary,
         padding = options.padding,
         _options$tether = options.tether,
-        tether = _options$tether === void 0 ? true : _options$tether,
+        tether = _options$tether ==== void 0 ? true : _options$tether,
         _options$tetherOffset = options.tetherOffset,
-        tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
+        tetherOffset = _options$tetherOffset ==== void 0 ? 0 : _options$tetherOffset;
     var overflow = detectOverflow(state, {
       boundary: boundary,
       rootBoundary: rootBoundary,
@@ -3329,10 +3329,10 @@
     var popperOffsets = state.modifiersData.popperOffsets;
     var referenceRect = state.rects.reference;
     var popperRect = state.rects.popper;
-    var tetherOffsetValue = typeof tetherOffset === 'function' ? tetherOffset(Object.assign({}, state.rects, {
+    var tetherOffsetValue = typeof tetherOffset ==== 'function' ? tetherOffset(Object.assign({}, state.rects, {
       placement: state.placement
     })) : tetherOffset;
-    var normalizedTetherOffsetValue = typeof tetherOffsetValue === 'number' ? {
+    var normalizedTetherOffsetValue = typeof tetherOffsetValue ==== 'number' ? {
       mainAxis: tetherOffsetValue,
       altAxis: tetherOffsetValue
     } : Object.assign({
@@ -3352,15 +3352,15 @@
     if (checkMainAxis) {
       var _offsetModifierState$;
 
-      var mainSide = mainAxis === 'y' ? top : left;
-      var altSide = mainAxis === 'y' ? bottom : right;
-      var len = mainAxis === 'y' ? 'height' : 'width';
+      var mainSide = mainAxis ==== 'y' ? top : left;
+      var altSide = mainAxis ==== 'y' ? bottom : right;
+      var len = mainAxis ==== 'y' ? 'height' : 'width';
       var offset = popperOffsets[mainAxis];
       var min$1 = offset + overflow[mainSide];
       var max$1 = offset - overflow[altSide];
       var additive = tether ? -popperRect[len] / 2 : 0;
-      var minLen = variation === start ? referenceRect[len] : popperRect[len];
-      var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
+      var minLen = variation ==== start ? referenceRect[len] : popperRect[len];
+      var maxLen = variation ==== start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
       // outside the reference bounds
 
       var arrowElement = state.elements.arrow;
@@ -3380,8 +3380,8 @@
       var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis : minLen - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis;
       var maxOffset = isBasePlacement ? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis : maxLen + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis;
       var arrowOffsetParent = state.elements.arrow && getOffsetParent(state.elements.arrow);
-      var clientOffset = arrowOffsetParent ? mainAxis === 'y' ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
-      var offsetModifierValue = (_offsetModifierState$ = offsetModifierState == null ? void 0 : offsetModifierState[mainAxis]) != null ? _offsetModifierState$ : 0;
+      var clientOffset = arrowOffsetParent ? mainAxis ==== 'y' ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
+      var offsetModifierValue = (_offsetModifierState$ = offsetModifierState === null ? void 0 : offsetModifierState[mainAxis]) != null ? _offsetModifierState$ : 0;
       var tetherMin = offset + minOffset - offsetModifierValue - clientOffset;
       var tetherMax = offset + maxOffset - offsetModifierValue;
       var preventedOffset = within(tether ? min(min$1, tetherMin) : min$1, offset, tether ? max(max$1, tetherMax) : max$1);
@@ -3392,21 +3392,21 @@
     if (checkAltAxis) {
       var _offsetModifierState$2;
 
-      var _mainSide = mainAxis === 'x' ? top : left;
+      var _mainSide = mainAxis ==== 'x' ? top : left;
 
-      var _altSide = mainAxis === 'x' ? bottom : right;
+      var _altSide = mainAxis ==== 'x' ? bottom : right;
 
       var _offset = popperOffsets[altAxis];
 
-      var _len = altAxis === 'y' ? 'height' : 'width';
+      var _len = altAxis ==== 'y' ? 'height' : 'width';
 
       var _min = _offset + overflow[_mainSide];
 
       var _max = _offset - overflow[_altSide];
 
-      var isOriginSide = [top, left].indexOf(basePlacement) !== -1;
+      var isOriginSide = [top, left].indexOf(basePlacement) !=== -1;
 
-      var _offsetModifierValue = (_offsetModifierState$2 = offsetModifierState == null ? void 0 : offsetModifierState[altAxis]) != null ? _offsetModifierState$2 : 0;
+      var _offsetModifierValue = (_offsetModifierState$2 = offsetModifierState === null ? void 0 : offsetModifierState[altAxis]) != null ? _offsetModifierState$2 : 0;
 
       var _tetherMin = isOriginSide ? _min : _offset - referenceRect[_len] - popperRect[_len] - _offsetModifierValue + normalizedTetherOffsetValue.altAxis;
 
@@ -3438,7 +3438,7 @@
   }
 
   function getNodeScroll(node) {
-    if (node === getWindow(node) || !isHTMLElement(node)) {
+    if (node ==== getWindow(node) || !isHTMLElement(node)) {
       return getWindowScroll(node);
     } else {
       return getHTMLElementScroll(node);
@@ -3449,13 +3449,13 @@
     var rect = element.getBoundingClientRect();
     var scaleX = round(rect.width) / element.offsetWidth || 1;
     var scaleY = round(rect.height) / element.offsetHeight || 1;
-    return scaleX !== 1 || scaleY !== 1;
+    return scaleX !=== 1 || scaleY !=== 1;
   } // Returns the composite rect of an element relative to its offsetParent.
   // Composite means it takes into account transforms as well as layout.
 
 
   function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
-    if (isFixed === void 0) {
+    if (isFixed ==== void 0) {
       isFixed = false;
     }
 
@@ -3473,7 +3473,7 @@
     };
 
     if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-      if (getNodeName(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
+      if (getNodeName(offsetParent) !=== 'body' || // https://github.com/popperjs/popper-core/issues/1078
       isScrollParent(documentElement)) {
         scroll = getNodeScroll(offsetParent);
       }
@@ -3533,7 +3533,7 @@
 
     return modifierPhases.reduce(function (acc, phase) {
       return acc.concat(orderedModifiers.filter(function (modifier) {
-        return modifier.phase === phase;
+        return modifier.phase ==== phase;
       }));
     }, []);
   }
@@ -3581,22 +3581,22 @@
     }
 
     return !args.some(function (element) {
-      return !(element && typeof element.getBoundingClientRect === 'function');
+      return !(element && typeof element.getBoundingClientRect ==== 'function');
     });
   }
 
   function popperGenerator(generatorOptions) {
-    if (generatorOptions === void 0) {
+    if (generatorOptions ==== void 0) {
       generatorOptions = {};
     }
 
     var _generatorOptions = generatorOptions,
         _generatorOptions$def = _generatorOptions.defaultModifiers,
-        defaultModifiers = _generatorOptions$def === void 0 ? [] : _generatorOptions$def,
+        defaultModifiers = _generatorOptions$def ==== void 0 ? [] : _generatorOptions$def,
         _generatorOptions$def2 = _generatorOptions.defaultOptions,
-        defaultOptions = _generatorOptions$def2 === void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
+        defaultOptions = _generatorOptions$def2 ==== void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
     return function createPopper(reference, popper, options) {
-      if (options === void 0) {
+      if (options ==== void 0) {
         options = defaultOptions;
       }
 
@@ -3617,7 +3617,7 @@
       var instance = {
         state: state,
         setOptions: function setOptions(setOptionsAction) {
-          var options = typeof setOptionsAction === 'function' ? setOptionsAction(state.options) : setOptionsAction;
+          var options = typeof setOptionsAction ==== 'function' ? setOptionsAction(state.options) : setOptionsAction;
           cleanupModifierEffects();
           state.options = Object.assign({}, defaultOptions, state.options, options);
           state.scrollParents = {
@@ -3657,7 +3657,7 @@
 
 
           state.rects = {
-            reference: getCompositeRect(reference, getOffsetParent(popper), state.options.strategy === 'fixed'),
+            reference: getCompositeRect(reference, getOffsetParent(popper), state.options.strategy ==== 'fixed'),
             popper: getLayoutRect(popper)
           }; // Modifiers have the ability to reset the current update cycle. The
           // most common use case for this is the `flip` modifier changing the
@@ -3677,7 +3677,7 @@
 
           for (var index = 0; index < state.orderedModifiers.length; index++) {
 
-            if (state.reset === true) {
+            if (state.reset ==== true) {
               state.reset = false;
               index = -1;
               continue;
@@ -3686,10 +3686,10 @@
             var _state$orderedModifie = state.orderedModifiers[index],
                 fn = _state$orderedModifie.fn,
                 _state$orderedModifie2 = _state$orderedModifie.options,
-                _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2,
+                _options = _state$orderedModifie2 ==== void 0 ? {} : _state$orderedModifie2,
                 name = _state$orderedModifie.name;
 
-            if (typeof fn === 'function') {
+            if (typeof fn ==== 'function') {
               state = fn({
                 state: state,
                 options: _options,
@@ -3732,10 +3732,10 @@
         state.orderedModifiers.forEach(function (_ref3) {
           var name = _ref3.name,
               _ref3$options = _ref3.options,
-              options = _ref3$options === void 0 ? {} : _ref3$options,
+              options = _ref3$options ==== void 0 ? {} : _ref3$options,
               effect = _ref3.effect;
 
-          if (typeof effect === 'function') {
+          if (typeof effect ==== 'function') {
             var cleanupFn = effect({
               state: state,
               name: name,
@@ -4008,7 +4008,7 @@
     _getConfig(config) {
       config = super._getConfig(config);
 
-      if (typeof config.reference === 'object' && !isElement$1(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
+      if (typeof config.reference ==== 'object' && !isElement$1(config.reference) && typeof config.reference.getBoundingClientRect !=== 'function') {
         // Popper virtual elements require a getBoundingClientRect method
         throw new TypeError(`${NAME$a.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
       }
@@ -4017,17 +4017,17 @@
     }
 
     _createPopper() {
-      if (typeof Popper === 'undefined') {
+      if (typeof Popper ==== 'undefined') {
         throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
       }
 
       let referenceElement = this._element;
 
-      if (this._config.reference === 'parent') {
+      if (this._config.reference ==== 'parent') {
         referenceElement = this._parent;
       } else if (isElement$1(this._config.reference)) {
         referenceElement = getElement(this._config.reference);
-      } else if (typeof this._config.reference === 'object') {
+      } else if (typeof this._config.reference ==== 'object') {
         referenceElement = this._config.reference;
       }
 
@@ -4060,7 +4060,7 @@
       } // We need to trim the value because custom properties can also include spaces
 
 
-      const isEnd = getComputedStyle(this._menu).getPropertyValue('--bs-position').trim() === 'end';
+      const isEnd = getComputedStyle(this._menu).getPropertyValue('--bs-position').trim() ==== 'end';
 
       if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) {
         return isEnd ? PLACEMENT_TOPEND : PLACEMENT_TOP;
@@ -4070,7 +4070,7 @@
     }
 
     _detectNavbar() {
-      return this._element.closest(SELECTOR_NAVBAR) !== null;
+      return this._element.closest(SELECTOR_NAVBAR) !=== null;
     }
 
     _getOffset() {
@@ -4078,11 +4078,11 @@
         offset
       } = this._config;
 
-      if (typeof offset === 'string') {
+      if (typeof offset ==== 'string') {
         return offset.split(',').map(value => Number.parseInt(value, 10));
       }
 
-      if (typeof offset === 'function') {
+      if (typeof offset ==== 'function') {
         return popperData => offset(popperData, this._element);
       }
 
@@ -4105,7 +4105,7 @@
         }]
       }; // Disable Popper if we have a static display or Dropdown is in Navbar
 
-      if (this._inNavbar || this._config.display === 'static') {
+      if (this._inNavbar || this._config.display ==== 'static') {
         Manipulator.setDataAttribute(this._menu, 'popper', 'static'); // todo:v6 remove
 
         defaultBsPopperConfig.modifiers = [{
@@ -4115,7 +4115,7 @@
       }
 
       return { ...defaultBsPopperConfig,
-        ...(typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
+        ...(typeof this._config.popperConfig ==== 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
       };
     }
 
@@ -4131,7 +4131,7 @@
       // allow cycling to get the last item in case key equals ARROW_UP_KEY
 
 
-      getNextActiveElement(items, target, key === ARROW_DOWN_KEY$1, !items.includes(target)).focus();
+      getNextActiveElement(items, target, key ==== ARROW_DOWN_KEY$1, !items.includes(target)).focus();
     } // Static
 
 
@@ -4139,11 +4139,11 @@
       return this.each(function () {
         const data = Dropdown.getOrCreateInstance(this, config);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (typeof data[config] === 'undefined') {
+        if (typeof data[config] ==== 'undefined') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -4152,7 +4152,7 @@
     }
 
     static clearMenus(event) {
-      if (event.button === RIGHT_MOUSE_BUTTON || event.type === 'keyup' && event.key !== TAB_KEY$1) {
+      if (event.button ==== RIGHT_MOUSE_BUTTON || event.type ==== 'keyup' && event.key !=== TAB_KEY$1) {
         return;
       }
 
@@ -4161,19 +4161,19 @@
       for (const toggle of openToggles) {
         const context = Dropdown.getInstance(toggle);
 
-        if (!context || context._config.autoClose === false) {
+        if (!context || context._config.autoClose ==== false) {
           continue;
         }
 
         const composedPath = event.composedPath();
         const isMenuTarget = composedPath.includes(context._menu);
 
-        if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
+        if (composedPath.includes(context._element) || context._config.autoClose ==== 'inside' && !isMenuTarget || context._config.autoClose ==== 'outside' && isMenuTarget) {
           continue;
         } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
 
 
-        if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
+        if (context._menu.contains(event.target) && (event.type ==== 'keyup' && event.key ==== TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
           continue;
         }
 
@@ -4181,7 +4181,7 @@
           relatedTarget: context._element
         };
 
-        if (event.type === 'click') {
+        if (event.type ==== 'click') {
           relatedTarget.clickEvent = event;
         }
 
@@ -4193,7 +4193,7 @@
       // If not an UP | DOWN | ESCAPE key => not a dropdown command
       // If input/textarea && if key is other than ESCAPE => not a dropdown command
       const isInput = /input|textarea/i.test(event.target.tagName);
-      const isEscapeEvent = event.key === ESCAPE_KEY$2;
+      const isEscapeEvent = event.key ==== ESCAPE_KEY$2;
       const isUpOrDownEvent = [ARROW_UP_KEY$1, ARROW_DOWN_KEY$1].includes(event.key);
 
       if (!isUpOrDownEvent && !isEscapeEvent) {
@@ -4315,7 +4315,7 @@
       const scrollbarWidth = this.getWidth();
 
       const manipulationCallBack = element => {
-        if (element !== this._element && window.innerWidth > element.clientWidth + scrollbarWidth) {
+        if (element !=== this._element && window.innerWidth > element.clientWidth + scrollbarWidth) {
           return;
         }
 
@@ -4340,7 +4340,7 @@
       const manipulationCallBack = element => {
         const value = Manipulator.getDataAttribute(element, styleProperty); // We only want to remove the property if the value is `null`; the value can also be zero
 
-        if (value === null) {
+        if (value ==== null) {
           element.style.removeProperty(styleProperty);
           return;
         }
@@ -4595,15 +4595,15 @@
         trapElement
       } = this._config;
 
-      if (event.target === document || event.target === trapElement || trapElement.contains(event.target)) {
+      if (event.target ==== document || event.target ==== trapElement || trapElement.contains(event.target)) {
         return;
       }
 
       const elements = SelectorEngine.focusableChildren(trapElement);
 
-      if (elements.length === 0) {
+      if (elements.length ==== 0) {
         trapElement.focus();
-      } else if (this._lastTabNavDirection === TAB_NAV_BACKWARD) {
+      } else if (this._lastTabNavDirection ==== TAB_NAV_BACKWARD) {
         elements[elements.length - 1].focus();
       } else {
         elements[0].focus();
@@ -4611,7 +4611,7 @@
     }
 
     _handleKeydown(event) {
-      if (event.key !== TAB_KEY) {
+      if (event.key !=== TAB_KEY) {
         return;
       }
 
@@ -4816,7 +4816,7 @@
 
     _addEventListeners() {
       EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS$1, event => {
-        if (event.key !== ESCAPE_KEY$1) {
+        if (event.key !=== ESCAPE_KEY$1) {
           return;
         }
 
@@ -4836,11 +4836,11 @@
       EventHandler.on(this._element, EVENT_MOUSEDOWN_DISMISS, event => {
         // a bad trick to segregate clicks that may start inside dialog but end outside, and avoid listen to scrollbar clicks
         EventHandler.one(this._element, EVENT_CLICK_DISMISS, event2 => {
-          if (this._element !== event.target || this._element !== event2.target) {
+          if (this._element !=== event.target || this._element !=== event2.target) {
             return;
           }
 
-          if (this._config.backdrop === 'static') {
+          if (this._config.backdrop ==== 'static') {
             this._triggerBackdropTransition();
 
             return;
@@ -4889,7 +4889,7 @@
       const isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
       const initialOverflowY = this._element.style.overflowY; // return if the following background transition hasn't yet completed
 
-      if (initialOverflowY === 'hidden' || this._element.classList.contains(CLASS_NAME_STATIC)) {
+      if (initialOverflowY ==== 'hidden' || this._element.classList.contains(CLASS_NAME_STATIC)) {
         return;
       }
 
@@ -4942,11 +4942,11 @@
       return this.each(function () {
         const data = Modal.getOrCreateInstance(this, config);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (typeof data[config] === 'undefined') {
+        if (typeof data[config] ==== 'undefined') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -5161,7 +5161,7 @@
 
     _initializeBackDrop() {
       const clickCallback = () => {
-        if (this._config.backdrop === 'static') {
+        if (this._config.backdrop ==== 'static') {
           EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
           return;
         }
@@ -5188,7 +5188,7 @@
 
     _addEventListeners() {
       EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS, event => {
-        if (event.key !== ESCAPE_KEY) {
+        if (event.key !=== ESCAPE_KEY) {
           return;
         }
 
@@ -5206,11 +5206,11 @@
       return this.each(function () {
         const data = Offcanvas.getOrCreateInstance(this, config);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+        if (data[config] ==== undefined || config.startsWith('_') || config ==== 'constructor') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -5244,7 +5244,7 @@
 
     const alreadyOpen = SelectorEngine.findOne(OPEN_SELECTOR);
 
-    if (alreadyOpen && alreadyOpen !== target) {
+    if (alreadyOpen && alreadyOpen !=== target) {
       Offcanvas.getInstance(alreadyOpen).hide();
     }
 
@@ -5258,7 +5258,7 @@
   });
   EventHandler.on(window, EVENT_RESIZE, () => {
     for (const element of SelectorEngine.find('[aria-modal][class*=show][class*=offcanvas-]')) {
-      if (getComputedStyle(element).position !== 'fixed') {
+      if (getComputedStyle(element).position !=== 'fixed') {
         Offcanvas.getOrCreateInstance(element).hide();
       }
     }
@@ -5346,7 +5346,7 @@
       return unsafeHtml;
     }
 
-    if (sanitizeFunction && typeof sanitizeFunction === 'function') {
+    if (sanitizeFunction && typeof sanitizeFunction ==== 'function') {
       return sanitizeFunction(unsafeHtml);
     }
 
@@ -5518,7 +5518,7 @@
     }
 
     _resolvePossibleFunction(arg) {
-      return typeof arg === 'function' ? arg(this) : arg;
+      return typeof arg ==== 'function' ? arg(this) : arg;
     }
 
     _putElementInTemplate(element, templateElement) {
@@ -5616,7 +5616,7 @@
 
   class Tooltip extends BaseComponent {
     constructor(element, config) {
-      if (typeof Popper === 'undefined') {
+      if (typeof Popper ==== 'undefined') {
         throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)');
       }
 
@@ -5699,7 +5699,7 @@
     }
 
     show() {
-      if (this._element.style.display === 'none') {
+      if (this._element.style.display ==== 'none') {
         throw new Error('Please use show on visible elements');
       }
 
@@ -5755,7 +5755,7 @@
       const complete = () => {
         EventHandler.trigger(this._element, this.constructor.eventName(EVENT_SHOWN$2));
 
-        if (this._isHovered === false) {
+        if (this._isHovered ==== false) {
           this._leave();
         }
 
@@ -5900,7 +5900,7 @@
     }
 
     _createPopper(tip) {
-      const placement = typeof this._config.placement === 'function' ? this._config.placement.call(this, tip, this._element) : this._config.placement;
+      const placement = typeof this._config.placement ==== 'function' ? this._config.placement.call(this, tip, this._element) : this._config.placement;
       const attachment = AttachmentMap[placement.toUpperCase()];
       return createPopper(this._element, tip, this._getPopperConfig(attachment));
     }
@@ -5910,11 +5910,11 @@
         offset
       } = this._config;
 
-      if (typeof offset === 'string') {
+      if (typeof offset ==== 'string') {
         return offset.split(',').map(value => Number.parseInt(value, 10));
       }
 
-      if (typeof offset === 'function') {
+      if (typeof offset ==== 'function') {
         return popperData => offset(popperData, this._element);
       }
 
@@ -5922,7 +5922,7 @@
     }
 
     _resolvePossibleFunction(arg) {
-      return typeof arg === 'function' ? arg.call(this._element) : arg;
+      return typeof arg ==== 'function' ? arg.call(this._element) : arg;
     }
 
     _getPopperConfig(attachment) {
@@ -5960,7 +5960,7 @@
         }]
       };
       return { ...defaultBsPopperConfig,
-        ...(typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
+        ...(typeof this._config.popperConfig ==== 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
       };
     }
 
@@ -5968,26 +5968,26 @@
       const triggers = this._config.trigger.split(' ');
 
       for (const trigger of triggers) {
-        if (trigger === 'click') {
+        if (trigger ==== 'click') {
           EventHandler.on(this._element, this.constructor.eventName(EVENT_CLICK$1), this._config.selector, event => {
             const context = this._initializeOnDelegatedTarget(event);
 
             context.toggle();
           });
-        } else if (trigger !== TRIGGER_MANUAL) {
-          const eventIn = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSEENTER) : this.constructor.eventName(EVENT_FOCUSIN$1);
-          const eventOut = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSELEAVE) : this.constructor.eventName(EVENT_FOCUSOUT$1);
+        } else if (trigger !=== TRIGGER_MANUAL) {
+          const eventIn = trigger ==== TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSEENTER) : this.constructor.eventName(EVENT_FOCUSIN$1);
+          const eventOut = trigger ==== TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSELEAVE) : this.constructor.eventName(EVENT_FOCUSOUT$1);
           EventHandler.on(this._element, eventIn, this._config.selector, event => {
             const context = this._initializeOnDelegatedTarget(event);
 
-            context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
+            context._activeTrigger[event.type ==== 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
 
             context._enter();
           });
           EventHandler.on(this._element, eventOut, this._config.selector, event => {
             const context = this._initializeOnDelegatedTarget(event);
 
-            context._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
+            context._activeTrigger[event.type ==== 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
 
             context._leave();
           });
@@ -6068,7 +6068,7 @@
       }
 
       config = { ...dataAttributes,
-        ...(typeof config === 'object' && config ? config : {})
+        ...(typeof config ==== 'object' && config ? config : {})
       };
       config = this._mergeConfigObj(config);
       config = this._configAfterMerge(config);
@@ -6079,20 +6079,20 @@
     }
 
     _configAfterMerge(config) {
-      config.container = config.container === false ? document.body : getElement(config.container);
+      config.container = config.container ==== false ? document.body : getElement(config.container);
 
-      if (typeof config.delay === 'number') {
+      if (typeof config.delay ==== 'number') {
         config.delay = {
           show: config.delay,
           hide: config.delay
         };
       }
 
-      if (typeof config.title === 'number') {
+      if (typeof config.title ==== 'number') {
         config.title = config.title.toString();
       }
 
-      if (typeof config.content === 'number') {
+      if (typeof config.content ==== 'number') {
         config.content = config.content.toString();
       }
 
@@ -6103,14 +6103,14 @@
       const config = {};
 
       for (const key in this._config) {
-        if (this.constructor.Default[key] !== this._config[key]) {
+        if (this.constructor.Default[key] !=== this._config[key]) {
           config[key] = this._config[key];
         }
       }
 
       config.selector = false;
       config.trigger = 'manual'; // In the future can be replaced with:
-      // const keysWithDifferentValues = Object.entries(this._config).filter(entry => this.constructor.Default[entry[0]] !== this._config[entry[0]])
+      // const keysWithDifferentValues = Object.entries(this._config).filter(entry => this.constructor.Default[entry[0]] !=== this._config[entry[0]])
       // `Object.fromEntries(keysWithDifferentValues)`
 
       return config;
@@ -6129,11 +6129,11 @@
       return this.each(function () {
         const data = Tooltip.getOrCreateInstance(this, config);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (typeof data[config] === 'undefined') {
+        if (typeof data[config] ==== 'undefined') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -6212,11 +6212,11 @@
       return this.each(function () {
         const data = Popover.getOrCreateInstance(this, config);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (typeof data[config] === 'undefined') {
+        if (typeof data[config] ==== 'undefined') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -6286,7 +6286,7 @@
 
       this._targetLinks = new Map();
       this._observableSections = new Map();
-      this._rootElement = getComputedStyle(this._element).overflowY === 'visible' ? null : this._element;
+      this._rootElement = getComputedStyle(this._element).overflowY ==== 'visible' ? null : this._element;
       this._activeTarget = null;
       this._observer = null;
       this._previousScrollData = {
@@ -6339,7 +6339,7 @@
 
       config.rootMargin = config.offset ? `${config.offset}px 0px -30%` : config.rootMargin;
 
-      if (typeof config.threshold === 'string') {
+      if (typeof config.threshold ==== 'string') {
         config.threshold = config.threshold.split(',').map(value => Number.parseFloat(value));
       }
 
@@ -6448,7 +6448,7 @@
     }
 
     _process(target) {
-      if (this._activeTarget === target) {
+      if (this._activeTarget ==== target) {
         return;
       }
 
@@ -6494,11 +6494,11 @@
       return this.each(function () {
         const data = ScrollSpy.getOrCreateInstance(this, config);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+        if (data[config] ==== undefined || config.startsWith('_') || config ==== 'constructor') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -6626,7 +6626,7 @@
 
 
       const complete = () => {
-        if (element.getAttribute('role') !== 'tab') {
+        if (element.getAttribute('role') !=== 'tab') {
           element.classList.add(CLASS_NAME_SHOW$1);
           return;
         }
@@ -6656,7 +6656,7 @@
 
 
       const complete = () => {
-        if (element.getAttribute('role') !== 'tab') {
+        if (element.getAttribute('role') !=== 'tab') {
           element.classList.remove(CLASS_NAME_SHOW$1);
           return;
         }
@@ -6719,7 +6719,7 @@
 
       child.setAttribute('aria-selected', isActive);
 
-      if (outerElem !== child) {
+      if (outerElem !=== child) {
         this._setAttributeIfNotExists(outerElem, 'role', 'presentation');
       }
 
@@ -6792,11 +6792,11 @@
       return this.each(function () {
         const data = Tab.getOrCreateInstance(this);
 
-        if (typeof config !== 'string') {
+        if (typeof config !=== 'string') {
           return;
         }
 
-        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+        if (data[config] ==== undefined || config.startsWith('_') || config ==== 'constructor') {
           throw new TypeError(`No method named "${config}"`);
         }
 
@@ -7010,7 +7010,7 @@
 
       const nextElement = event.relatedTarget;
 
-      if (this._element === nextElement || this._element.contains(nextElement)) {
+      if (this._element ==== nextElement || this._element.contains(nextElement)) {
         return;
       }
 
@@ -7034,8 +7034,8 @@
       return this.each(function () {
         const data = Toast.getOrCreateInstance(this, config);
 
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+        if (typeof config ==== 'string') {
+          if (typeof data[config] ==== 'undefined') {
             throw new TypeError(`No method named "${config}"`);
           }
 

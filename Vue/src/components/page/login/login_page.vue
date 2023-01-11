@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     clickChange: function () {
-      if (this.isLogin == true) {
+      if (this.isLogin === true) {
         this.selectBar[0] = "selecter";
         this.selectBar[1] = "onSelect selecter";
       } else {
@@ -24,23 +24,23 @@ export default {
     emailchecker: function (email) {
       function find_at(str) {
         for (let i = 0; i < str.length; i++) {
-          if (str[i] == "@") return i;
+          if (str[i] === "@") return i;
         }
         return -1;
       }
       function find_dot(str) {
         let res = [];
         for (let i = 0; i < str.length; i++) {
-          if (str[i] == ".") res.push(i);
+          if (str[i] === ".") res.push(i);
         }
         return res;
       }
       let at_index = find_at(email);
-      if (at_index == -1) return false;
+      if (at_index === -1) return false;
       let username = email.substring(0, at_index);
       let mailServer = email.substring(at_index + 1);
 
-      if (username == "" || mailServer == "") return false;
+      if (username === "" || mailServer === "") return false;
       // check for user name
       for (let i = 0; i < username.length; i++) {
         let now = username[i];
@@ -49,15 +49,15 @@ export default {
             (now >= "a" && now <= "z") ||
             (now >= "A" && now <= "Z") ||
             (now >= "0" && now <= "9") ||
-            now == "." ||
-            now == "_"
+            now === "." ||
+            now === "_"
           )
         ) {
           return false;
         }
         if (
-          (i == 0 || i == username.length - 1) &&
-          (now == "." || now == "_")
+          (i === 0 || i === username.length - 1) &&
+          (now === "." || now === "_")
         ) {
           return false;
         }
@@ -66,7 +66,7 @@ export default {
       let dots_index = find_dot(mailServer);
       if (dots_index.length < 1) return false;
       for (let i = 0; i < dots_index.length - 1; i++) {
-        if (dots_index[i + 1] - dots_index[i] == 1) {
+        if (dots_index[i + 1] - dots_index[i] === 1) {
           return false;
         }
       }

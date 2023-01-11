@@ -29,7 +29,7 @@ export default {
             window.location.href = '/login';
         },
         new_room: function (newname) {
-            axios.post('https://localhost:3000/room', {
+            axios.post('https://localhost:10000/room', {
                 admins: [this.userId],
                 createdBy: new Date().toISOString(),
                 roomName: newname
@@ -41,7 +41,7 @@ export default {
             this.GetAllRoom();
         },
         GetAllRoom() {
-            axios.get('http://139.162.39.223:3000/room')
+            axios.get('http://139.162.39.223:10000/room')
                 .then(response => (this.room = response))
                 .catch(function (error) {
                     console.log(error);
@@ -70,11 +70,11 @@ export default {
         <div id="middle">
             <div id="sheet">
                 <div id="name_and_add" class="mt-3 mx-4 myfont" style="font-size: 2vmin;">
-                    <text style="font-size: 3vmin">以下為您的所有活動：</text>
+                    <text style="font-size: 3vmin">以下為您的所有房間：</text>
                     <button style="float: right;" class="mx-1 btn btn-dark " data-bs-toggle="modal"
-                        data-bs-target="#createModal" @click="room_name = ''">+ 新增活動</button>
+                        data-bs-target="#createModal" @click="room_name = ''">+ 新增房間</button>
                     <button style="float: right;" class=" btn btn-dark " data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">- 刪除活動</button>
+                        data-bs-target="#deleteModal">- 刪除房間</button>
                 </div>
                 <div style="text-align: left; max-height: max-content;height: 65vh; margin-left: vmin;"
                     class="m-3 overflow-auto">
@@ -108,7 +108,7 @@ export default {
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" :disabled="room_name == ''"
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" :disabled="room_name === ''"
                             @click="new_room(room_name)">確認</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">關閉</button>
                     </div>

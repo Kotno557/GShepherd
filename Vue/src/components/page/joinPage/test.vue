@@ -60,7 +60,7 @@ export default {
           >
             <li class="list-group-item">
               <input
-                v-if="question[questionPointer - 1].is_multiple == false"
+                v-if="question[questionPointer - 1].is_multiple === false"
                 class="form-check-input me-4"
                 type="radio"
                 name="exampleRadios"

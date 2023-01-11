@@ -18,7 +18,7 @@ window.addEventListener("mousewheel", function (event) {
     }
     s[now].classList.replace("show", "mask");
     b[now].classList.replace("show", "mask");
-    now += state == "up" ? -1 : 1;
+    now += state === "up" ? -1 : 1;
     if (now < 0) now = 0;
     else if (now > 2) now = 2;
     s[now].classList.replace("mask", "show");

@@ -32,16 +32,16 @@ export default {
             this.email.initial = true;
             this.passwordAgain.initial = true;
             console.log(this.email.valid, this.password.stredch, this.passwordAgain.valid)
-            if (this.email.valid && this.password.stredch.length == 1 && this.passwordAgain.valid) {
+            if (this.email.valid && this.password.stredch.length === 1 && this.passwordAgain.valid) {
                 this.okForSubmmit = true;
-                axios.post('http://139.162.39.223:3000/user', {
+                axios.post('http://139.162.39.223/api/user', {
                     email: this.email.value,
                     nickname: this.nickName,
                     username: this.userName,
                     password: this.password.value
                 })
                     .then(response => {
-                        this.okForSignin = response.status == 200;
+                        this.okForSignin = response.status === 200;
                         //看這裡要不要加重設輸入
                         console.log(response);
                     })
@@ -54,7 +54,7 @@ export default {
         },
         checkPasswordAgain() {
             let class_arr = ["d-none", "badge bg-danger text-wrap"];
-            if (this.passwordAgain.value == this.password.value) {
+            if (this.passwordAgain.value === this.password.value) {
                 this.passwordAgain.class = class_arr[0];
                 this.passwordAgain.valid = true;
             } else {
@@ -126,10 +126,10 @@ export default {
 <template>
     <div>
         <div>
-            <div v-if="okForSubmmit == false" class="alert alert-danger" role="alert">
+            <div v-if="okForSubmmit === false" class="alert alert-danger" role="alert">
                 {{ "請確認所有資料符合規定後再送出" }}
             </div>
-            <div v-if="okForSignin == true" class="alert alert-success" role="alert">
+            <div v-if="okForSignin === true" class="alert alert-success" role="alert">
                 {{ "註冊成功，請登入！" }}
             </div>
 
