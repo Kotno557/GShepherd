@@ -43,6 +43,12 @@ export default {
       new_type: ""
     };
   },
+  mounted() {
+    axios.get(`${Global.backend}/event/${this.userId}`)
+      .then(response => {
+        this.event = response.data;
+      })
+  },
   methods: {
     jumpToBack() {
       window.location.href = `/dashboard/${this.userId}`;
@@ -93,6 +99,12 @@ export default {
         .catch(error => {
           console.log(error);
         });
+      this.event.push({
+        "category": this.new_type,
+        "roomId": this.roomid,
+        "name": this.new_name,
+        "options": []
+      });
     },
     del() {
       axios.delete(`${Global.backend}/event/${now.id}`)
