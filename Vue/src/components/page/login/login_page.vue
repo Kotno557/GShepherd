@@ -86,14 +86,14 @@ export default {
         </div>
         <div id="select-bar">
           <div id="sign-up" :class="selectBar[0]" @click="
-            isLogin = false;
-          clickChange();
+  isLogin = false;
+clickChange();
           ">
             <h4>註冊</h4>
           </div>
           <div id="login" :class="selectBar[1]" @click="
-            isLogin = true;
-          clickChange();
+  isLogin = true;
+clickChange();
           ">
             <h4>登入</h4>
           </div>

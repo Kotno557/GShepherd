@@ -9,7 +9,7 @@ import lotto from './lotto.vue';
 import scratch from './scratch.vue';
 import date from './date.vue';
 import axios from 'axios';
-import Global from '../../../Global.vue';
+import Global from '../../../Global.js';
 </script>
 <script>
 export default {

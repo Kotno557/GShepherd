@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import Global from '../../../../Global.vue';
+import Global from '../../../../Global.js';
 
 export default {
   props: ['emailchecker', 'userData'],
