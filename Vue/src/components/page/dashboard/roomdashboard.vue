@@ -41,6 +41,12 @@ export default {
       new_type: '',
     };
   },
+  mounted() {
+    axios.get(`${Global.backend}/event/${this.userId}`)
+      .then(response => {
+        this.event = response.data;
+      })
+  },
   methods: {
     jumpToBack() {
       window.location.href = `/dashboard/${this.userId}`;
