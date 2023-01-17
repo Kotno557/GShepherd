@@ -7,40 +7,38 @@ export default {
   data() {
     return {
       userId: this.$route.params.id,
-      roomid: this.$route.params.roomId,
-      eventType: { 1: "check_box", 2: "cloudy", 3: "token" },
-      event: [
+      roomId: this.$route.params.roomId,
+      eventType: { 1: 'check_box', 2: 'cloudy', 3: 'token' },
+      events: [
         {
-          "options": [],
-          "roomId": "63badf188b1be06bd2358e1d",
-          "name": "下次聚會投票",
-          "multyple": "",
-          "active": true,
-          "category": 1,
-          "id": "63be7296b7d716268b179fdb"
+          id: '63be7296b7d716268b179fdb',
+          roomId: '63badf188b1be06bd2358e1d',
+          name: '下次聚會投票',
+          active: true,
+          category: 1,
+          options: ['a', 'b', 'c'],
         },
         {
-          "roomId": "63badf188b1be06bd2358e1d",
-          "name": "想想下次的開會主題",
-          "active": true,
-          "category": 2,
-          "id": "63be7296b7d716268b179fdb",
-          "limits": ""
+          id: '63be7296b7d716268b179fdb',
+          roomId: '63badf188b1be06bd2358e1d',
+          name: '想想下次的開會主題',
+          active: true,
+          category: 2,
         },
         {
-          "phone": "",
-          "party_name": "",
-          "address": "",
-          "roomId": "63badf188b1be06bd2358e1d",
-          "name": "年終加菜抽大獎",
-          "active": true,
-          "category": 3,
-          "id": "63be7296b7d716268b179fdb"
-        }
+          id: '63be7296b7d716268b179fdb',
+          roomId: '63badf188b1be06bd2358e1d',
+          name: '年終加菜抽大獎',
+          active: true,
+          category: 3,
+          fullName: false,
+          phone: false,
+          address: false,
+        },
       ],
       view_poll: -1,
-      new_name: "",
-      new_type: ""
+      new_name: '',
+      new_type: '',
     };
   },
   methods: {
@@ -48,7 +46,7 @@ export default {
       window.location.href = `/dashboard/${this.userId}`;
     },
     jumpToLogin: function () {
-      window.location.href = "/login";
+      window.location.href = '/login';
     },
     trace: function (i) {
       this.view_poll = parseInt(i);
@@ -58,62 +56,76 @@ export default {
     },
     rename() {
       console.log(this.$refs.name.value);
-      this.event[this.view_poll].name = this.$refs.name.value;
+      this.events[this.view_poll].name = this.$refs.name.value;
     },
-    change() {
-      let now = this.event[this.view_poll];
-      axios.put(`${Global.backend}/event/${now.id}`, {
-        "category": now.category,
-        "roomId": now.roomId,
-        "name": now.name,
-        "active": true,
-        "options": now.options
-      })
-        .then(response => {
-          console.log(response);
+    getEvents() {
+      axios
+        .get(`${Global.backend}/event/`)
+        .catch((err) => {
+          console.error(err);
         })
-        .catch(error => {
-          console.log(error);
-          this.valid = false;
+        .then((res) => {
+          this.events = res.data;
         });
     },
-    new_event() {
-      axios.put(`${Global.backend}/event/`, {
-        "category": this.new_type,
-        "roomId": this.roomid,
-        "name": this.new_name,
-        "options": []
-      })
-        .then(response => {
+    createEvent() {
+      axios
+        .put(`${Global.backend}/event/`, {
+          category: this.new_type,
+          roomId: this.roomId,
+          name: this.new_name,
+          options: [],
+        })
+        .then((response) => {
           console.log(response);
           if (response.status === 200) {
-            this.event.push(response.data);
+            this.events.push(response.data);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
+      this.getEvents();
     },
-    del() {
-      axios.delete(`${Global.backend}/event/${now.id}`)
-        .then(response => {
-          console.log(response);
+    updateEvent() {
+      let now = this.events[this.view_poll];
+      axios
+        .put(`${Global.backend}/event/${now.id}`, {
+          category: now.category,
+          roomId: now.roomId,
+          name: now.name,
+          active: true,
+          options: now.options,
         })
-        .catch(error => {
-          console.log(error);
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
           this.valid = false;
         });
-      this.event = Global.array_delete(this.event, this.view_poll);
-      this.view_poll = -1;
-      console.log(this.event);
-    }
+    },
+    deleteEvent() {
+      axios
+        .delete(`${Global.backend}/event/${now.id}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.valid = false;
+        });
+      this.getEvents();
+    },
   },
 };
 </script>
 
 <template>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..300,0..1,-50..200" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..300,0..1,-50..200"
+  />
 
   <div id="page">
     <nav>
@@ -129,22 +141,30 @@ export default {
       <div id="sheet" class="flex-center">
         <div id="section1">
           <ul class="list-group myfont" style="width: 100%; font-size: 2vmin">
-            <li class="list-group-item active flex-center" style="justify-content: space-between">
+            <li
+              class="list-group-item active flex-center"
+              style="justify-content: space-between"
+            >
               <text>活動列表：</text>
               <dev style="float: right">
                 <a :href="`/display/${this.roomid}`" target="_blank">
-                  <button class="btn btn-dark m-1">
-                    👀 查看活動展示
-                  </button>
+                  <button class="btn btn-dark m-1">👀 查看活動展示</button>
                 </a>
-                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createModal">
+                <button
+                  class="btn btn-dark"
+                  data-bs-toggle="modal"
+                  data-bs-target="#createModal"
+                >
                   + 新增活動
                 </button>
-
               </dev>
             </li>
-            <li class="list-group-item list" v-for="(item, index) in this.event" style="display: flex"
-              @click="trace(index)">
+            <li
+              class="list-group-item list"
+              v-for="(item, index) in this.event"
+              style="display: flex"
+              @click="trace(index)"
+            >
               <span class="material-symbols-outlined mx-3">
                 {{ this.eventType[item.category] }}
               </span>
@@ -154,46 +174,77 @@ export default {
         </div>
         <div id="section2">
           <ul class="list-group myfont" style="width: 100%; font-size: 2vmin">
-            <li class="list-group-item active flex-center" style="justify-content: space-between">
+            <li
+              class="list-group-item active flex-center"
+              style="justify-content: space-between"
+            >
               <text>{{
-                this.view_poll < 0 ? "null" : event[view_poll].name
+                this.view_poll < 0 ? 'null' : events[view_poll].name
               }}</text>
-                  <button style="float: right" class="btn btn-dark" @click="myclose()">
-                    {{ this.view_poll < 0 ? "功能開發維護中" : "Ｘ" }} </button>
+              <button
+                style="float: right"
+                class="btn btn-dark"
+                @click="myclose()"
+              >
+                {{ this.view_poll < 0 ? '功能開發維護中' : 'Ｘ' }}
+              </button>
             </li>
-            <li v-if="this.view_poll < 0" style="
+            <li
+              v-if="this.view_poll < 0"
+              style="
                 height: 64.25vmin;
                 max-height: 64.25vmin;
                 overflow: auto;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-              ">
+              "
+            >
               <h4>請選擇一個活動...</h4>
             </li>
-            <li v-else class="list-group-item" style="height: 64.25vmin; max-height: 64.25vmin; overflow: auto">
+            <li
+              v-else
+              class="list-group-item"
+              style="height: 64.25vmin; max-height: 64.25vmin; overflow: auto"
+            >
               <div class="child">
                 <h5>名稱：</h5>
                 <div style="display: flex; margin-left: 2rem">
-                  <input type="text" ref="name" placeholder="重新命名" v-model="event[view_poll].name" />
+                  <input
+                    type="text"
+                    ref="name"
+                    placeholder="重新命名"
+                    v-model="events[view_poll].name"
+                  />
                 </div>
               </div>
-              <div v-if="event[view_poll].category === 1">
+              <div v-if="events[view_poll].category === 1">
                 <h5>選項：</h5>
-                <div v-for="(item, index) in event[view_poll].options" style="margin-left: 2rem">
-                  <input type="text" v-model="event[view_poll].options[index]" />
+                <div
+                  v-for="(item, index) in events[view_poll].options"
+                  style="margin-left: 2rem"
+                >
+                  <input
+                    type="text"
+                    v-model="events[view_poll].options[index]"
+                  />
                 </div>
-                <button class="btn btn-secondary" style="margin-left: 2rem; font-size: 0.5rem"
-                  @click="event[view_poll].options.push('')">
+                <button
+                  class="btn btn-secondary"
+                  style="margin-left: 2rem; font-size: 0.5rem"
+                  @click="events[view_poll].options.push('')"
+                >
                   + 新增選項
                 </button>
-                <button class="btn btn-secondary" style="font-size: 0.5rem" @click="event[view_poll].options.pop()">
+                <button
+                  class="btn btn-secondary"
+                  style="font-size: 0.5rem"
+                  @click="events[view_poll].options.pop()"
+                >
                   - 刪除選項
                 </button>
               </div>
-              <div>
-
-              </div>
+              <div></div>
               <!-- <div v-if="event[view_poll].category===">
                 <h5>問題：</h5>
                 <div v-for="(item, index) in event[view_poll].question" style="margin-left: 2rem">
@@ -238,10 +289,10 @@ export default {
                   - 刪除問題
                 </button>
               </div> -->
-              <div v-if="event[view_poll].category === 2" class="child">
+              <div v-if="events[view_poll].category === 2" class="child">
                 <h5>每人想法限制：</h5>
                 <div style="margin-left: 2rem">
-                  <input type="text" v-model="event[view_poll].limits" />
+                  <input type="text" v-model="events[view_poll].limits" />
                   個
                 </div>
               </div>
@@ -272,22 +323,31 @@ export default {
                   {{ this.poll[this.view_poll] }}
                 </div>
               </div> -->
-              <div v-if="event[view_poll].category === 3" class="child">
+              <div v-if="events[view_poll].category === 3" class="child">
                 <h5>資訊需求：</h5>
                 <div style="margin-left: 2rem">
                   電話：
-                  <input type="checkbox" v-model="event[view_poll].phone" /><br>
+                  <input
+                    type="checkbox"
+                    v-model="events[view_poll].phone"
+                  /><br />
                   名字：
-                  <input type="checkbox" v-model="event[view_poll].party_name" /><br>
+                  <input
+                    type="checkbox"
+                    v-model="events[view_poll].party_name"
+                  /><br />
                   地址：
-                  <input type="checkbox" v-model="event[view_poll].address" /><br>
+                  <input
+                    type="checkbox"
+                    v-model="events[view_poll].address"
+                  /><br />
                 </div>
               </div>
               <div class="child">
-                <button class="btn btn-primary" @click="change()">
+                <button class="btn btn-primary" @click="updateEvent()">
                   確定
                 </button>
-                <button class="btn btn-danger" @click="del()">
+                <button class="btn btn-danger" @click="deleteEvent()">
                   刪除此活動
                 </button>
               </div>
@@ -302,7 +362,6 @@ export default {
   <div class="modal fade" id="createModal" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">加入活動</h4>
@@ -310,31 +369,54 @@ export default {
 
         <!-- Modal body -->
         <div class="modal-body">
-          <label for="recipient-name" class="col-form-label">請輸入活動名稱：</label>
-          <input type="text" class="form-control" id="recipient-name" v-model="new_name">
-          <label for="recipient-name" class="col-form-label">請選擇活動類別：</label>
-          <select id="cars" name="carlist" form="carform" class="form-select" v-model="new_type">
-            <option value=1>投投票</option>
-            <option value=2>想想看</option>
-            <option value=3>抽抽獎</option>
-            <option value=-1>其他（開發維護中）</option>
+          <label for="recipient-name" class="col-form-label"
+            >請輸入活動名稱：</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="recipient-name"
+            v-model="new_name"
+          />
+          <label for="recipient-name" class="col-form-label"
+            >請選擇活動類別：</label
+          >
+          <select
+            id="cars"
+            name="carlist"
+            form="carform"
+            class="form-select"
+            v-model="new_type"
+          >
+            <option value="1">投投票</option>
+            <option value="2">想想看</option>
+            <option value="3">抽抽獎</option>
+            <option value="-1">其他（開發維護中）</option>
           </select>
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-            :disabled="new_name === '' || new_type === ''" @click="new_event()">確認</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">關閉</button>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-dismiss="modal"
+            :disabled="new_name === '' || new_type === ''"
+            @click="createEvent()"
+          >
+            確認
+          </button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            關閉
+          </button>
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-@import url("../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css");
+@import url('../../../../public/bootstrap-5.2.2/bootstrap-5.2.2-dist/css/bootstrap.css');
 
 #sheet {
   width: 85vw;
@@ -391,7 +473,7 @@ nav span {
 }
 
 nav #band {
-  font-family: "Noto Sans TC", sans-serif;
+  font-family: 'Noto Sans TC', sans-serif;
   font-size: 4vmin;
 }
 
@@ -441,7 +523,7 @@ nav #band {
 }
 
 .myfont {
-  font-family: "Noto Sans TC", sans-serif;
+  font-family: 'Noto Sans TC', sans-serif;
 }
 
 .flex-center {
