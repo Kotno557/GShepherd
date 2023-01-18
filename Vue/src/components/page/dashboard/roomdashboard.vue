@@ -102,8 +102,9 @@ export default {
       
     },
     updateEvent() {
+      const event = this.events[this.view_poll]
       axios
-        .put(`${Global.backend}/event/${now.id}`, this.events[this.view_poll])
+        .put(`${Global.backend}/event/${event.id}`, event)
         .then((res) => {
           alert('資料更新成功');
           this.getEvents();
@@ -180,14 +181,7 @@ export default {
                   <button style="float: right" class="btn btn-dark" @click="myclose()" v-if="view_poll > -1">
                     Ｘ</button>
             </li>
-            <li v-if="this.view_poll < 0" style="
-                height: 64.25vmin;
-                max-height: 64.25vmin;
-                overflow: auto;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              ">
+            <li v-if="this.view_poll < 0" style="height: 64.25vmin;max-height: 64.25vmin;overflow: auto;display: flex;align-items: center;justify-content: center;">
               <h4>請選擇一個活動...</h4>
             </li>
             <li v-else class="list-group-item" style="height: 64.25vmin; max-height: 64.25vmin; overflow: auto">
@@ -295,13 +289,13 @@ export default {
                   電話：
                   <input type="checkbox" v-model="events[view_poll].phone" /><br />
                   名字：
-                  <input type="checkbox" v-model="events[view_poll].party_name" /><br />
+                  <input type="checkbox" v-model="events[view_poll].fullName" /><br />
                   地址：
                   <input type="checkbox" v-model="events[view_poll].address" /><br />
                 </div>
               </div>
               <div class="child">
-                <button class="btn btn-primary" @click="updateEvent()">
+                <button class="btn btn-primary" @click="updateEvent()" :disabled="events[view_poll].name==''">
                   確定
                 </button>
                 <button class="btn btn-danger" @click="deleteEvent()">
