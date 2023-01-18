@@ -5,17 +5,64 @@ export default {
     data() {
         return {
             userId: this.$route.params.id,
-            room_name: '',
+            newRoomName: '',
+            deleteRoomName: '',
             rooms: [
                 {
-                    id: '63bade318b1be06bd2358e0b',
-                    name: 'test',
-                    code: 'MC4yNj',
-                    admins: ['63babf42102799dada53bc11'],
-                    createdBy: '63babf42102799dada53bc11',
-                    createdAt: '2023-01-08T15:16:01.346Z',
-                    updatedAt: '2023-01-08T15:16:01.346Z',
+                    "name": "test",
+                    "code": "MC4yNj",
+                    "admins": [
+                        "63babf42102799dada53bc11"
+                    ],
+                    "createdBy": "63babf42102799dada53bc11",
+                    "createdAt": "2023-01-08T15:16:01.346Z",
+                    "updatedAt": "2023-01-08T15:16:01.346Z",
+                    "id": "63bade318b1be06bd2358e0b"
                 },
+                {
+                    "name": "123",
+                    "code": "MC44OD",
+                    "admins": [
+                        "63bae430f215b7bd0492d167"
+                    ],
+                    "createdBy": "63bae430f215b7bd0492d167",
+                    "createdAt": "2023-01-11T22:23:06.873Z",
+                    "updatedAt": "2023-01-11T22:23:06.873Z",
+                    "id": "63bf36ca4ab94bc64a71c7f7"
+                },
+                {
+                    "name": "年末尾牙",
+                    "code": "MC4wND",
+                    "admins": [
+                        "63bae430f215b7bd0492d167"
+                    ],
+                    "createdBy": "63bae430f215b7bd0492d167",
+                    "createdAt": "2023-01-18T07:30:24.211Z",
+                    "updatedAt": "2023-01-18T07:30:24.211Z",
+                    "id": "63c7a01000595faf24977058"
+                },
+                {
+                    "name": "test1",
+                    "code": "MC44ND",
+                    "admins": [
+                        "63bae430f215b7bd0492d167"
+                    ],
+                    "createdBy": "63bae430f215b7bd0492d167",
+                    "createdAt": "2023-01-18T07:34:56.342Z",
+                    "updatedAt": "2023-01-18T07:34:56.342Z",
+                    "id": "63c7a12000595faf2497705c"
+                },
+                {
+                    "name": "不該被找到",
+                    "code": "MC44ND",
+                    "admins": [
+                        "63bae430f21007bd0492d167"
+                    ],
+                    "createdBy": "63bae430f21007bd0492d167",
+                    "createdAt": "2023-01-18T07:34:56.342Z",
+                    "updatedAt": "2023-01-18T07:34:56.342Z",
+                    "id": "63c7a12000595fa55497705c"
+                }
             ],
         };
     },
@@ -29,26 +76,49 @@ export default {
         newRoom(roomName) {
             axios
                 .post(`${Global.backend}/room/`, {
-                    name: roomName,
+                    name: roomName
                 })
                 .catch((err) => {
                     console.log(err);
+                    alert('加入房間失敗，請再試一次...');
                 })
                 .then((res) => {
                     console.log(res);
                     this.getRooms();
                 });
+            console.log("Post Data: ", {
+                name: roomName
+            })
         },
         getRooms() {
             axios
                 .get(`${Global.backend}/room/`)
+                .then((res) => {
+                    console.log(res);
+                    console.log(this.rooms)
+                    this.rooms = [];
+                    for (let i = 0; i < res.data.length; i++) {
+                        if (res.data[i].admins.includes(this.userId)) {
+                            this.rooms.push(res.data[i]);
+                        }
+                    }
+                })
                 .catch((err) => {
                     console.log(err);
-                })
-                .then((res) => {
-                    this.rooms = res.data;
                 });
+            console.log(this.rooms, 'there is all rooms...')
         },
+        deleteRoom(id){
+            axios.delete(`${Global.backend}/room/${id}`)
+            .then((res)=>{
+                console.log(res);
+                this.getRooms();
+            })
+            .catch((err)=>{
+                alert('刪除錯誤，請重新再試一次...');
+                console.log(err);
+            })
+        }
     },
     mounted() {
         this.getRooms();
@@ -74,7 +144,7 @@ export default {
                 <div id="name_and_add" class="mt-3 mx-4 myfont" style="font-size: 2vmin">
                     <text style="font-size: 3vmin">以下為您的所有房間：</text>
                     <button style="float: right" class="mx-1 btn btn-dark" data-bs-toggle="modal"
-                        data-bs-target="#createModal" @click="room_name = ''">
+                        data-bs-target="#createModal" @click="newRoomName = ''">
                         + 新增房間
                     </button>
                     <button style="float: right" class="btn btn-dark" data-bs-toggle="modal"
@@ -89,7 +159,7 @@ export default {
             margin-left: vmin;
           " class="m-3 overflow-auto">
                     <ul class="list-group myfont gray-hover" style="width: 98%; font-size: 3vmin">
-                        <a class="list-group-item" v-for="item in this.room"
+                        <a class="list-group-item" v-for="item in this.rooms"
                             :href="`/dashboard/${this.userId}/${item.id}`">
                             <span class="material-symbols-outlined"> event </span>
                             {{ item.name }}
@@ -105,19 +175,19 @@ export default {
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">加入活動</h4>
+                        <h4 class="modal-title">加入房間</h4>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <label for="recipient-name" class="col-form-label">請輸入活動名稱:</label>
-                        <input type="text" class="form-control" id="recipient-name" v-model="room_name" />
+                        <label for="recipient-name" class="col-form-label">請輸入房間名稱:</label>
+                        <input type="text" class="form-control" id="recipient-name" v-model="newRoomName" />
                     </div>
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                            :disabled="room_name === ''" @click="newRoom(room_name)">
+                            :disabled="newRoomName === ''" @click="newRoom(newRoomName)">
                             確認
                         </button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
@@ -133,15 +203,29 @@ export default {
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">開發中，敬請期待...</h4>
+                        <h4 class="modal-title">刪除房間</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <!-- Modal body -->
-                    <div class="modal-body"></div>
+                    <div class="modal-body">
+                        <label for="recipient-name" class="col-form-label">請選擇要刪除的房間名稱:</label>
+                        <select class="form-select" aria-label="Default select example" v-model="deleteRoomName">
+                            <option selected value="">請選擇一個房間...</option>
+                            <option v-for="(item, index) in rooms" :key="index" :value="item.id">{{ item.name }}</option>
+                        </select>
+                    </div>
 
                     <!-- Modal footer -->
-                    <div class="modal-footer"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                            :disabled="deleteRoomName === ''" @click="deleteRoom(deleteRoomName)">
+                            確認
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            關閉
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
