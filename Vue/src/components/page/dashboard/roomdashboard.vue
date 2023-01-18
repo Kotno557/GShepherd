@@ -76,12 +76,13 @@ export default {
               this.events.push(res.data[i]);
             }
           }
+          console.log('fielted events: ', this.events);
         })
         .catch((err) => {
           alert('資料載入失敗，請再試一次...');
           console.error(err);
         });
-      console.log('fielted events: ', this.events);
+      
     },
     createEvent() {
       let newRoom = Global.typeObject[this.new_type - 1];
