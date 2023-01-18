@@ -68,9 +68,10 @@ export default {
       axios
         .get(`${Global.backend}/event/`)
         .then((res) => {
+          console.log('get Room: ',res)
           this.events = [];
           for (let i = 0; i < res.data.length; i++) {
-            if (res.data[i].id === this.roomId) {
+            if (res.data[i].roomId === this.roomId) {
               this.events.push(res.data[i]);
             }
           }
@@ -79,7 +80,7 @@ export default {
           alert('資料載入失敗，請再試一次...');
           console.error(err);
         });
-      console.log(this.events);
+      console.log('fielted events: ',this.events);
     },
     createEvent() {
       let newRoom = Global.typeObject[this.new_type - 1];
