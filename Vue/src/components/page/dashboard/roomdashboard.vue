@@ -82,7 +82,7 @@ export default {
           alert('資料載入失敗，請再試一次...');
           console.error(err);
         });
-      
+
     },
     createEvent() {
       let newRoom = Global.typeObject[this.new_type - 1];
@@ -93,13 +93,13 @@ export default {
         .then((response) => {
           console.log('res: ', response);
           alert('新增成功!');
-          this.getEvents();
+          window.location.reload();
         })
         .catch((error) => {
           alert('新增失敗，請稍後再試...');
           console.log(error);
         });
-      
+
     },
     updateEvent() {
       const event = this.events[this.view_poll]
@@ -109,6 +109,7 @@ export default {
           alert('資料更新成功');
           this.getEvents();
           console.log(res);
+          window.location.reload();
         })
         .catch((err) => {
           alert('資料更新失敗...');
@@ -116,17 +117,16 @@ export default {
         });
     },
     deleteEvent() {
-      let id = this.events[view_poll].id;
+      let id = this.events[this.view_poll].id;
       axios
         .delete(`${Global.backend}/event/${id}`)
         .then((res) => {
           console.log(res);
-          this.getEvents();
+          window.location.reload();
           alert('活動刪除成功');
         })
         .catch((err) => {
           console.log(err);
-          this.valid = false;
           alert('活動刪除失敗，請稍後再試...');
         });
     },
@@ -181,7 +181,8 @@ export default {
                   <button style="float: right" class="btn btn-dark" @click="myclose()" v-if="view_poll > -1">
                     Ｘ</button>
             </li>
-            <li v-if="this.view_poll < 0" style="height: 64.25vmin;max-height: 64.25vmin;overflow: auto;display: flex;align-items: center;justify-content: center;">
+            <li v-if="this.view_poll < 0"
+              style="height: 64.25vmin;max-height: 64.25vmin;overflow: auto;display: flex;align-items: center;justify-content: center;">
               <h4>請選擇一個活動...</h4>
             </li>
             <li v-else class="list-group-item" style="height: 64.25vmin; max-height: 64.25vmin; overflow: auto">
@@ -295,10 +296,11 @@ export default {
                 </div>
               </div>
               <div class="child">
-                <button class="btn btn-primary" @click="updateEvent()" :disabled="events[view_poll].name==''">
-                  確定
+                <button class="btn btn-primary" @click="updateEvent()" :disabled="events[view_poll].name == ''">
+                  更改確定
                 </button>
-                <button class="btn btn-danger" @click="deleteEvent()">
+                <!-- <button class="btn btn-danger" @click="deleteEvent()"> -->
+                <button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#sureDlete">
                   刪除此活動
                 </button>
               </div>
@@ -340,6 +342,23 @@ export default {
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
             關閉
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" id="sureDlete" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">確定刪除</h5>
+        </div>
+        <div class="modal-body">
+          <p>刪除後資料將無法恢復，你確定嗎？</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button class="btn btn-danger" data-bs-dismiss="modal" @click="deleteEvent()">確定刪除</button>
         </div>
       </div>
     </div>
