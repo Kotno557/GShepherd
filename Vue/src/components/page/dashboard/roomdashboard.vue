@@ -43,7 +43,8 @@ export default {
     axios
       .get(`${Global.backend}/room/${this.roomId}`)
       .then((res) => {
-        this.roomId=res.data.name;
+        this.roomName=res.data.name;
+        console.log('Get room Name: ',this.roomName);
       })
       .catch((err) => {
         alert('獲取房名失敗，請再試一次...');
