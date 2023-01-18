@@ -137,7 +137,7 @@ export default {
       <span class="material-symbols-outlined">
         <button class="btn" @click="jumpToBack()">arrow_back</button>
       </span>
-      <div id="band">#{{ this.roomid }}</div>
+      <div id="band">#{{ this.roomName }}</div>
       <span class="material-symbols-outlined">
         <button class="btn" @click="jumpToLogin()">logout</button>
       </span>
