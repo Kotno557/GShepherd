@@ -88,16 +88,17 @@ export default {
       newRoom.name = this.new_name;
       newRoom.roomId = this.roomId;
       axios
-        .put(`${Global.backend}/event/`, newRoom)
+        .post(`${Global.backend}/event/`, newRoom)
         .then((response) => {
-          console.log('res: ', response.data);
+          console.log('res: ', response);
           alert('新增成功!');
+          this.getEvents();
         })
         .catch((error) => {
           alert('新增失敗，請稍後再試...');
           console.log(error);
         });
-      this.getEvents();
+      
     },
     updateEvent() {
       axios
