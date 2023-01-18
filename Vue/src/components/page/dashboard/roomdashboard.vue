@@ -39,17 +39,17 @@ export default {
   },
   mounted() {
     console.log('userID: ', this.userId, 'roomId: ', this.roomId);
-    this.getEvents();
     axios
       .get(`${Global.backend}/room/${this.roomId}`)
       .then((res) => {
-        this.roomName=res.data.name;
-        console.log('Get room Name: ',this.roomName);
+        this.roomName = res.data.name;
+        console.log('Get room Name: ', this.roomName);
       })
       .catch((err) => {
         alert('獲取房名失敗，請再試一次...');
         console.error(err);
       });
+    this.getEvents();
   },
   methods: {
     jumpToBack() {
@@ -68,10 +68,11 @@ export default {
       axios
         .get(`${Global.backend}/event/`)
         .then((res) => {
-          console.log('get Room: ',res)
+          console.log('get Room: ', res)
           this.events = [];
+          console.log(this.events);
           for (let i = 0; i < res.data.length; i++) {
-            if (res.data[i].roomId === this.roomId) {
+            if (res.data[i].roomId == this.roomId) {
               this.events.push(res.data[i]);
             }
           }
@@ -80,7 +81,7 @@ export default {
           alert('資料載入失敗，請再試一次...');
           console.error(err);
         });
-      console.log('fielted events: ',this.events);
+      console.log('fielted events: ', this.events);
     },
     createEvent() {
       let newRoom = Global.typeObject[this.new_type - 1];
