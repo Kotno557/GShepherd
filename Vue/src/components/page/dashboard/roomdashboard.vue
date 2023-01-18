@@ -41,7 +41,7 @@ export default {
     console.log('userID: ', this.userId, 'roomId: ', this.roomId);
     this.getEvents();
     axios
-      .get(`${Global.backend}/event/${this.roomId}`)
+      .get(`${Global.backend}/room/${this.roomId}`)
       .then((res) => {
         this.roomId=res.data.name;
       })
