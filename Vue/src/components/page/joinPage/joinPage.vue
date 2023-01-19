@@ -141,9 +141,8 @@ export default {
         </nav>
         <div id="middle">
             <div id="sheet">
-                {{ pointer }}
                 <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="pointer">
-                    <option value="" disabled selected>請選擇一個活動😀</option>
+                    <option value="" disabled>請選擇一個活動😀</option>
                     <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
                 </select>
                 <vote v-if="events[pointer].category === 1" :roomTopic="events[pointer].name"
