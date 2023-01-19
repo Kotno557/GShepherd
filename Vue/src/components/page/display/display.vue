@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import Global from '../../../Global';
 import Raffle from './raffle.vue';
 import Thought from './thought.vue';
 import Vote from './vote.vue';
@@ -8,7 +9,7 @@ export default {
   data() {
     return {
       roomId: this.$route.params.id,
-      room: {
+      roomInfo: {
         id: '63bade318b1be06bd2358e0b',
         name: 'test',
         code: 'MC4yNj',
@@ -19,6 +20,7 @@ export default {
       },
       events: [],
       currentPage: 1,
+      pointer: 0
     };
   },
   methods: {
@@ -28,23 +30,49 @@ export default {
     jumpToLogin: function () {
       window.location.href = '/login';
     },
+    getRoomName() {
+      axios.get(`${Global.backend}/room/${this.roomId}`)
+        .then((res) => {
+          this.roomInfo = res.data;
+        })
+        .catch((err) => {
+          alert('無法獲取房間資訊...，詳情請查看console');
+          console.log(err);
+        })
+    },
+    getEvent() {
+      axios.get(`${Global.backend}/event/${this.roomId}`)
+        .then((res) => {
+          this.events = [];
+          for (let i of res.data) {
+            if (i.roomId === this.roomInfo.id) {
+              this.events.push(i);
+            }
+          }
+          console.log(this.events);
+        })
+        .catch((err)=>{
+          alert('房間資料讀取失敗...');
+          console.log(err);
+        })
+    }
   },
-  mounted() {},
+  mounted() {
+    this.getRoomName();
+  },
   components: { Thought, Vote, Raffle },
 };
 </script>
 
 <template>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..300,0..1,-50..200"
-  />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..300,0..1,-50..200" />
   <div id="page">
     <nav>
       <span class="material-symbols-outlined">
         <button class="btn" @click="jumpToMain()">home</button>
       </span>
-      <div id="band">Welcome to {{ this.room_name }}</div>
+      <div id="band">Welcome to {{ roomInfo.name }}</div>
       <span class="material-symbols-outlined">
         <button class="btn" @click="jumpToLogin()">logout</button>
       </span>
@@ -83,33 +111,17 @@ export default {
 
           <!-- Modal body -->
           <div class="modal-body">
-            <label for="recipient-name" class="col-form-label"
-              >請輸入活動名稱:</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="recipient-name"
-              v-model="room_name"
-            />
+            <label for="recipient-name" class="col-form-label">請輸入活動名稱:</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="room_name" />
           </div>
 
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-success"
-              data-bs-dismiss="modal"
-              :disabled="room_name === ''"
-              @click="new_room(room_name)"
-            >
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" :disabled="room_name === ''"
+              @click="new_room(room_name)">
               確認
             </button>
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
               關閉
             </button>
           </div>
@@ -122,12 +134,7 @@ export default {
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">開發中，敬請期待...</h4>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
           <!-- Modal body -->
