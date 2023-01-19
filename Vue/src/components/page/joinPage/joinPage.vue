@@ -92,7 +92,7 @@ export default {
             window.location.href = '/login';
         },
         getRoomName() {
-            axios.get(`${Global.backend}/api/room/${this.roomId}`)
+            axios.get(`${Global.backend}/room/${this.roomId}`)
                 .then((res) => {
                     this.roomName = res.data.name;
                     console.log(res);
@@ -103,7 +103,7 @@ export default {
                 });
         },
         getEvents() {
-            axios.get(`${Global.backend}/api/event/`)
+            axios.get(`${Global.backend}/event/`)
                 .then((res) => {
                     this.events = [];
                     for (let item of res.data) {
