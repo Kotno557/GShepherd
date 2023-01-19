@@ -146,9 +146,9 @@ export default {
                     <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
                 </select>
                 <span v-if="pointer < 0"></span>
-                <vote v-else-if="events[pointer].category === 1" :roomTopic=events[pointer] />
-                <think v-else-if="events[pointer].category === 2" :roomTopic=events[pointer] />
-                <lotto v-else-if="events[pointer].category === 3" :roomTopic=events[pointer] />
+                <vote v-else-if="events[pointer].category === 1" :roomTopic="events[pointer]" />
+                <think v-else-if="events[pointer].category === 2" :roomTopic="events[pointer]" />
+                <lotto v-else-if="events[pointer].category === 3" :roomTopic="events[pointer]" />
             </div>
             <img id="logo" src="../../../assets/GShepherd_Logo.png" />
         </div>
