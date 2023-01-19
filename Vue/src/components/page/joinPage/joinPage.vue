@@ -81,7 +81,7 @@ export default {
                     "id": "63c8f765a111b46da965c1e6"
                 }
             ],
-            pointer: -1
+            pointer: ''
         }
     },
     methods: {
@@ -143,10 +143,10 @@ export default {
             <div id="sheet">
                 {{ pointer }}
                 <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="pointer">
-                    <option :value="-1" disabled selected>請選擇一個活動😀</option>
+                    <option value="" disabled selected>請選擇一個活動😀</option>
                     <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
                 </select>
-                <span v-if="pointer < 0"></span>
+                <span v-if="pointer == ''"></span>
                 <vote v-else-if="events[pointer].category === 1" :roomTopic="events[pointer].name"
                     :id="events[pointer].id" />
                 <think v-else-if="events[pointer].category === 2" :roomTopic="events[pointer]" />
