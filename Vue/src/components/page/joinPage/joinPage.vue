@@ -143,12 +143,12 @@ export default {
             <div id="sheet">
                 <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="pointer">
                     <option value="-1" disabled selected>請選擇一個活動😀</option>
-                    <option v-for="(item, index) in all_event" :value="index">{{ item.name }}</option>
+                    <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
                 </select>
                 <span v-if="pointer < 0"></span>
-                <vote v-else-if="all_event[pointer].category === 1" :roomTopic=all_event[pointer] />
-                <think v-else-if="all_event[pointer].category === 2" :roomTopic=all_event[pointer] />
-                <lotto v-else-if="all_event[pointer].category === 3" :roomTopic=all_event[pointer] />
+                <vote v-else-if="events[pointer].category === 1" :roomTopic=events[pointer] />
+                <think v-else-if="events[pointer].category === 2" :roomTopic=events[pointer] />
+                <lotto v-else-if="events[pointer].category === 3" :roomTopic=events[pointer] />
             </div>
             <img id="logo" src="../../../assets/GShepherd_Logo.png" />
         </div>
