@@ -81,7 +81,7 @@ export default {
                     "id": "63c8f765a111b46da965c1e6"
                 }
             ],
-            pointer: ''
+            pointer: 0
         }
     },
     methods: {
@@ -146,11 +146,12 @@ export default {
                     <option value="" disabled selected>請選擇一個活動😀</option>
                     <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
                 </select>
-                <span v-if="pointer == ''"></span>
-                <vote v-else-if="events[pointer].category === 1" :roomTopic="events[pointer].name"
+                <vote v-if="events[pointer].category === 1" :roomTopic="events[pointer].name"
                     :id="events[pointer].id" />
                 <think v-else-if="events[pointer].category === 2" :roomTopic="events[pointer]" />
                 <lotto v-else-if="events[pointer].category === 3" :roomTopic="events[pointer]" />
+                <span v-else>somthing is wrong </span>
+
             </div>
             <img id="logo" src="../../../assets/GShepherd_Logo.png" />
         </div>
