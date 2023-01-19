@@ -121,18 +121,16 @@ export default {
         </nav>
         <div id="middle">
             <div id="sheet">
-                <span v-if="view_now<0"></span>
+                <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="view_now">
+                    <option value="-1" disabled selected>請選擇一個活動😀</option>
+                    <option v-for="(item, index) in all_event" :value="index">{{ item.name }}</option>
+                </select>
+                <span v-if="view_now < 0"></span>
                 <vote v-else-if="all_event[view_now].category === 1" :roomTopic=all_event[view_now] />
                 <think v-else-if="all_event[view_now].category === 2" :roomTopic=all_event[view_now] />
                 <lotto v-else-if="all_event[view_now].category === 3" :roomTopic=all_event[view_now] />
             </div>
             <img id="logo" src="../../../assets/GShepherd_Logo.png" />
-            <div id="cheetBar" style="border-radius: 2vmin" class="p-3 pt-2">
-                <label for="cars">選擇活動：</label>
-                <select id="activate" v-model="view_now">
-                    <option v-for="(item, index) in all_event" :value="index">{{ item.name }}</option>
-                </select>
-            </div>
         </div>
     </div>
 </template>

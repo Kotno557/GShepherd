@@ -106,8 +106,8 @@ export default {
       axios
         .put(`${Global.backend}/event/${event.id}`, event)
         .then((res) => {
+          console.log(event);
           alert('資料更新成功');
-          this.getEvents();
           console.log(res);
           window.location.reload();
         })
@@ -288,11 +288,11 @@ export default {
                 <h5>資訊需求：</h5>
                 <div style="margin-left: 2rem">
                   電話：
-                  <input type="checkbox" v-model="events[view_poll].phone" /><br />
+                  <input type="checkbox" v-model="events[view_poll].phone" disabled checked/><br />
                   名字：
-                  <input type="checkbox" v-model="events[view_poll].fullName" /><br />
+                  <input type="checkbox" v-model="events[view_poll].fullName" disabled checked/><br />
                   地址：
-                  <input type="checkbox" v-model="events[view_poll].address" /><br />
+                  <input type="checkbox" v-model="events[view_poll].address" disabled checked/><br />
                 </div>
               </div>
               <div class="child">

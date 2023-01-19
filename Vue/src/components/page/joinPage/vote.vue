@@ -30,7 +30,7 @@ export default {
 
 <template>
     <div id="safe">
-        <div class="myfont" style="jusfy-content: center;">
+        <div class="myfont mb-5" style="jusfy-content: center;">
             <h4>{{ roomTopic.name }}</h4>
             <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto">
                 <ul class="list-group myfont" style="width: 35vw;">
@@ -43,7 +43,7 @@ export default {
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-dark" @click="submit()">Submmit</button>
+            <button class="btn btn-dark" @click="submit()">繳交</button>
         </div>
     </div>
 </template>

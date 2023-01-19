@@ -12,9 +12,9 @@ const typeObject = [
     category: 2,
   },
   {
-    phone: false,
-    fullName: false,
-    address: false,
+    phone: true,
+    fullName: true,
+    address: true,
     roomId: "",
     name: "",
     category: 3,
