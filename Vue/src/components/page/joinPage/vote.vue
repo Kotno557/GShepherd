@@ -3,7 +3,11 @@ import axios from 'axios';
 import Global from '../../../Global.js';
 
 export default {
-    props: ['roomTopic'],
+    props: {
+        roomTopic: {
+            type: Object
+        }
+    },
     data() {
         return {
             slection: ""
