@@ -26,6 +26,7 @@ export default {
             })
                 .then(res => {
                     alert('資料送出成功');
+                    this.lock=true;
                     console.log(res);
                 })
                 .catch(error => {

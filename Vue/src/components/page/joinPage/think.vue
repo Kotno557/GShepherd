@@ -19,6 +19,7 @@ export default {
         "option": this.anwser
       })
         .then(response => {
+          this.lock=true;
           console.log(response);
         })
         .catch(error => {
