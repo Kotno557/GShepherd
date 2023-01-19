@@ -41,7 +41,7 @@ export default {
         })
     },
     getEvent() {
-      axios.get(`${Global.backend}/event/${this.roomId}`)
+      axios.get(`${Global.backend}/event/`)
         .then((res) => {
           this.events = [];
           for (let i of res.data) {
