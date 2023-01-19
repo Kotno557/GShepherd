@@ -59,6 +59,7 @@ export default {
   },
   mounted() {
     this.getRoomName();
+    this.getEvent()
   },
   components: { Thought, Vote, Raffle },
 };
