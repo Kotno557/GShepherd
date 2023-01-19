@@ -81,7 +81,7 @@ export default {
                     "id": "63c8f765a111b46da965c1e6"
                 }
             ],
-            pointer: 0
+            view_poll: 0
         }
     },
     methods: {
@@ -141,13 +141,13 @@ export default {
         </nav>
         <div id="middle">
             <div id="sheet">
-                <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="pointer">
+                <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="view_poll">
                     <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
                 </select>
-                <vote v-if="events[pointer].category === 1" :roomTopic="events[pointer].name"
-                    :id="events[pointer].id" />
-                <think v-else-if="events[pointer].category === 2" :roomTopic="events[pointer]" />
-                <lotto v-else-if="events[pointer].category === 3" :roomTopic="events[pointer]" />
+                <vote v-if="events[view_poll].category === 1" :roomTopic="events[view_poll].name"
+                    :id="events[view_poll].id" />
+                <think v-else-if="events[view_poll].category === 2" :roomTopic="events[view_poll]" />
+                <lotto v-else-if="events[view_poll].category === 3" :roomTopic="events[view_poll]" />
                 <span v-else>somthing is wrong </span>
 
             </div>
