@@ -15,39 +15,73 @@ import Global from '../../../Global.js';
 export default {
     data() {
         return {
-            roomid: this.$route.params.id,
-            roomName: '新春尾牙大會',
-            participantName: "",
-            all_event: [{
-                "options": [
-                    "春雞",
-                    "烤鴨",
-                    "乳豬",
-                    "羊腿"
-                ],
-                "roomId": "63b9823dedd082accf34c947",
-                "name": "新春尾牙投票",
-                "active": true,
-                "category": 1,
-                "id": "63bf06506484d41e59995282"
-            },
-            {
-                "options": [],
-                "roomId": "63b9823dedd082accf34c947",
-                "name": "下次聚餐地點",
-                "active": true,
-                "category": 2,
-                "id": "63bf083b6484d41e5999528d"
-            },
-            {
-                "category": 3,
-                "roomId": "63b9823dedd082accf34c947",
-                "name": "尾牙大獎",
-                "phone": true,
-                "party_name": true,
-                "address": true
-            }],
-            view_now: -1
+            roomId: this.$route.params.id,
+            roomName: '',
+            events: [
+                {
+                    "options": [],
+                    "name": "尾牙大獎",
+                    "address": "true",
+                    "roomId": "63b9823dedd082accf34c947",
+                    "active": true,
+                    "category": 3,
+                    "id": "63bf08966484d41e59995293"
+                },
+                {
+                    "options": [
+                        "圓山",
+                        "凱薩",
+                        "長榮"
+                    ],
+                    "roomId": "63c7a9ea00595faf24977074",
+                    "name": "下次員工旅遊飯店",
+                    "active": true,
+                    "category": 1,
+                    "id": "63c81b830c5a87fdaf0b6f1b"
+                },
+                {
+                    "options": [],
+                    "roomId": "63c7a9ea00595faf24977074",
+                    "name": "新年聚餐地點募集",
+                    "active": true,
+                    "category": 2,
+                    "id": "63c81ba10c5a87fdaf0b6f23"
+                },
+                {
+                    "options": [],
+                    "fullName": true,
+                    "address": true,
+                    "phone": true,
+                    "roomId": "63c7a9ea00595faf24977073",
+                    "name": "尾牙大獎",
+                    "active": true,
+                    "category": 3,
+                    "id": "63c8205631193c9646274492"
+                },
+                {
+                    "fullName": true,
+                    "address": true,
+                    "phone": true,
+                    "roomId": "63c7a9ea00595faf24977073",
+                    "name": "尾牙抽獎11",
+                    "active": false,
+                    "category": 3,
+                    "options": [],
+                    "id": "63c8357ad48cbc25f78f475d"
+                },
+                {
+                    "fullName": true,
+                    "address": true,
+                    "phone": true,
+                    "roomId": "63c7a9ea00595faf24977074",
+                    "name": "尾牙抽獎",
+                    "active": true,
+                    "category": 3,
+                    "options": [],
+                    "id": "63c8f765a111b46da965c1e6"
+                }
+            ],
+            pointer: -1
         }
     },
     methods: {
@@ -57,51 +91,36 @@ export default {
         jumpToDashbord: function () {
             window.location.href = '/login';
         },
-        getParticipantName: function () {
-            console.log('test');
-            this.participantName = "temp_name";
+        getRoomName() {
+            axios.get(`${Global.backend}/api/room/${this.roomId}`)
+                .then((res) => {
+                    this.roomName = res.data.name;
+                })
+                .catch((err) => {
+                    alert('房間名稱讀取錯誤，請稍後再試...');
+                    console.log(err);
+                });
         },
-        setValue: function () {
-            this.roomType = this.arr[document.getElementById('activate').value];
-            console.log(this.roomType);
-            this.sRroomTopic = document.getElementById('topicName').value;
-            document.getElementById('topicName').value = "";
-        },
-        mytest() {
-            console.log(this.roomName);
-        }
-    },
-    beforeMount() {
-        this.getParticipantName()
-    },
-    mounted() {
-        axios.get(`${Global.backend}/api/event`)
-            .then(response => {
-                console.log(response);
-                if (response.status === 200) {
-                    for (let i = 0; i < response.data.length; i++) {
-                        if (this.roomid === response.data[i].roomId) {
-                            this.all_event.push(response.data[i]);
+        getEvents() {
+            axios.get(`${Global.backend}/api/event/`)
+                .then((res) => {
+                    this.events = [];
+                    for (let item of res.data) {
+                        if (this.roomId === item.roomId) {
+                            this.events.push(item);
                         }
                     }
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        axios.get(`${Global.backend}/api/room/${this.roomid}`)
-            .then(response => {
-                console.log(response);
-                if (response.status === 200 && response.data !== "") {
-                    this.roomName = response.data.name;
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        console.log(this.all_event)
+                    console.log('Fielter event: ', this.events);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    alert('活動資料擷取失敗請稍後再試...');
+                })
+        }
+    },
+    mounted() {
+        this.getRoomName();
+        this.getEvents();
     }
 }
 </script>
@@ -121,14 +140,14 @@ export default {
         </nav>
         <div id="middle">
             <div id="sheet">
-                <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="view_now">
+                <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="pointer">
                     <option value="-1" disabled selected>請選擇一個活動😀</option>
                     <option v-for="(item, index) in all_event" :value="index">{{ item.name }}</option>
                 </select>
-                <span v-if="view_now < 0"></span>
-                <vote v-else-if="all_event[view_now].category === 1" :roomTopic=all_event[view_now] />
-                <think v-else-if="all_event[view_now].category === 2" :roomTopic=all_event[view_now] />
-                <lotto v-else-if="all_event[view_now].category === 3" :roomTopic=all_event[view_now] />
+                <span v-if="pointer < 0"></span>
+                <vote v-else-if="all_event[pointer].category === 1" :roomTopic=all_event[pointer] />
+                <think v-else-if="all_event[pointer].category === 2" :roomTopic=all_event[pointer] />
+                <lotto v-else-if="all_event[pointer].category === 3" :roomTopic=all_event[pointer] />
             </div>
             <img id="logo" src="../../../assets/GShepherd_Logo.png" />
         </div>
