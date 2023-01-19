@@ -4,7 +4,7 @@ import axios from 'axios';
 import Global from '../../../Global.js';
 
 export default {
-    props: ['roomTopic','id'],
+    props: ['roomTopic', 'id'],
     data() {
         return {
             lock: false,
@@ -40,27 +40,25 @@ export default {
 <template>
     <div id="safe">
         <div class="myfont mb-5" style="jusfy-content: center;">
-            <h4>{{roomTopic}}</h4>
-            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="!lock">
+            <h4>{{ roomTopic }}</h4>
+            <div style="text-align: center; max-height: 45vh;" class="mt-1 mb-3 overflow-auto" v-if="!lock">
                 <ul class="list-group myfont" style="width: 35vw;">
                     <li class="list-group-item">
-                        <input class="form-control" type="text"
-                            :placeholder="`輸入抽獎人真實姓名：`" v-model="name">
+                        <input class="form-control" type="text" :placeholder="`輸入抽獎人真實姓名：`" v-model="name">
                     </li>
                     <li class="list-group-item">
-                        <input class="form-control" type="text"
-                            :placeholder="`寄送獎品地址：`" v-model="address">
+                        <input class="form-control" type="text" :placeholder="`寄送獎品地址：`" v-model="address">
                     </li>
                     <li class="list-group-item">
-                        <input class="form-control" type="text"
-                            :placeholder="`抽獎人電話號碼：`" v-model="phone">
+                        <input class="form-control" type="text" :placeholder="`抽獎人電話號碼：`" v-model="phone">
                     </li>
                 </ul>
             </div>
-            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-else>
-                <h5>已提交{{roomTopic}}活動資料！</h5>
+            <div style="text-align: center; max-height: 45vh;" class="mt-1 mb-3 overflow-auto" v-else>
+                <h5>已提交{{ roomTopic }}活動資料！</h5>
             </div>
-            <button class="btn btn-dark mx-2" @click="submitt()" v-if="!lock">送出</button>
+            <button class="btn btn-dark mx-2" @click="submitt()" v-if="!lock"
+                :disabled="name == '' || address == '' || phone == ''">送出</button>
         </div>
     </div>
 </template>

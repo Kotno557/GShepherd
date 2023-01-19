@@ -59,7 +59,7 @@ export default {
     <div id="safe">
         <div class="myfont mb-5" style="jusfy-content: center;">
             <h4>{{ roomTopic }}</h4>
-            <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="!lock">
+            <div style="text-align: left; max-height: 45vh;" class="mt-1 mb-3 overflow-auto" v-if="!lock">
                 <ul class="list-group myfont" style="width: 35vw;">
                     <li class="list-group-item" v-for="item in options">
                         <input class="form-check-input me-4" type="radio" name="exampleRadios" id="exampleRadios1"
@@ -70,10 +70,10 @@ export default {
                     </li>
                 </ul>
             </div>
-            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-else>
+            <div style="text-align: center; max-height: 45vh;" class="mt-1 mb-3 overflow-auto" v-else>
                 <h5>已提交{{ roomTopic }}活動資料！</h5>
             </div>
-            <button class="btn btn-dark" @click="submit()" v-if="!lock">繳交</button>
+            <button class="btn btn-dark" @click="submit()" v-if="!lock" :disabled="awnser==''">繳交</button>
         </div>
     </div>
 </template>

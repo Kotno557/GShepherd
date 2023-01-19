@@ -2,19 +2,20 @@
 import axios from 'axios';
 import Global from '../../../Global.js';
 export default {
-  props: ['roomTopic'],
+  props: ['roomTopic', 'id'],
   data() {
     return {
-      anwser: ''
+      anwser: '',
+      lock: false
     };
   },
   methods: {
     submit() {
       console.log(this.anwser);
       axios.post(`${Global.backend}/record/`, {
-        "category": 2,
-        "eventId": this.roomTopic.id,
-        "userId": "還沒設定",
+        "id": this.id,
+        "eventId": this.id,
+        "userId": this.id,
         "option": this.anwser
       })
         .then(response => {
@@ -31,8 +32,8 @@ export default {
 <template>
   <div id="safe">
     <div class="myfont mb-5" style="jusfy-content: center">
-      <h4>{{ roomTopic.name }}</h4>
-      <div style="text-align: left; max-height: 45vh" class="mt-3 mb-3 overflow-auto">
+      <h4>{{ roomTopic }}</h4>
+      <div style="text-align: left; max-height: 45vh" class="mt-1 mb-3 overflow-auto" v-if="!lock">
         <ul class="list-group myfont" style="width: 35vw">
           <li class="list-group-item">
             <input class="form-control" type="text" placeholder="Type Some Idea..." v-model="anwser" />
@@ -42,7 +43,10 @@ export default {
       <!-- <button class="btn btn-light" @click="anwser.push({ name: '' })">
         + Idea
       </button> -->
-      <button class="btn btn-dark mx-2" @click="submit()">繳交</button>
+      <div style="text-align: center; max-height: 45vh;" class="mt-1 mb-3 overflow-auto" v-else>
+        <h5>已提交{{ roomTopic }}活動資料！</h5>
+      </div>
+      <button class="btn btn-dark mx-2" @click="submit()" :disabled="anwser == ''">繳交</button>
       <!-- <button class="btn btn-light" @click="anwser.length > 1 ? anwser.pop() : pass">
         - Idea
       </button> -->
