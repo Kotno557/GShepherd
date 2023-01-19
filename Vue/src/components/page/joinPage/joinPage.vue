@@ -146,7 +146,7 @@ export default {
                     <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
                 </select>
                 <span v-if="pointer < 0"></span>
-                <vote v-else-if="events[pointer].category === 1" :roomTopic="events[pointer]" />
+                <vote v-else-if="events[pointer].category === 1" :roomTopic="events[pointer].name" :id="events[pointer].id" :opstions="events[pointer].opstions" />
                 <think v-else-if="events[pointer].category === 2" :roomTopic="events[pointer]" />
                 <lotto v-else-if="events[pointer].category === 3" :roomTopic="events[pointer]" />
             </div>

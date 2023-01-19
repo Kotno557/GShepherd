@@ -55,7 +55,7 @@ export default {
                 </ul>
             </div>
             <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-else>
-                <h5>已提交資料！</h5>
+                <h5>已提交{{roomTopic}}活動資料！</h5>
             </div>
             <button class="btn btn-dark mx-2" @click="submitt()" v-if="submit === false">送出</button>
         </div>

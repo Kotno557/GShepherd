@@ -4,30 +4,53 @@ import Global from '../../../Global.js';
 
 export default {
     props: {
-        roomTopic: {
-            type: Object
-        }
+        roomTopic: String,
+        id: String,
     },
     data() {
         return {
-            slection: ""
+            awnser: '',
+            lock: false,
+            options: [
+                "圓山",
+                "凱薩",
+                "長榮"
+            ]
         }
     },
     methods: {
         submit() {
             axios.post(`${Global.backend}/record`, {
-                category: 1,
-                eventId: this.roomTopic.id,
-                userId: "還沒設定",
-                option: this.slection
+                id: this.id,
+                eventId: this.id,
+                userId: this.id,
+                option: this.awnser
             })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+                .then((res) => {
+                    alert('投票成功');
+                    this.lock = true;
+                    console.log(res)
+                })
+                .catch((err) => {
+                    alert('投票失敗，請稍後再試...')
+                    console.log(err);
+                })
+        },
+        getSelection() {
+            axios.get(`${Global.backend}/event/${this.id}`)
+                .then((res) => {
+                    this.options = res.data.options;
+                    console.log('Get options: ', this.options);
+                })
+                .catch((err) => {
+                    alert('無法取得選項資料，請稍後再試...');
+                    console.log(err);
+                })
         }
+    },
+    mounted() {
+        console.log('Datas: ', this.$props)
+        this.getSelection();
     }
 }
 </script>
@@ -35,19 +58,22 @@ export default {
 <template>
     <div id="safe">
         <div class="myfont mb-5" style="jusfy-content: center;">
-            <h4>{{ roomTopic.name }}</h4>
-            <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto">
+            <h4>{{ roomTopic }}</h4>
+            <div style="text-align: left; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="!lock">
                 <ul class="list-group myfont" style="width: 35vw;">
-                    <li class="list-group-item" v-for="item in roomTopic.options">
+                    <li class="list-group-item" v-for="item in options">
                         <input class="form-check-input me-4" type="radio" name="exampleRadios" id="exampleRadios1"
-                            @click="slection = item">
+                            @click="awnser = item">
                         <label class="form-check-label" for="exampleRadios1">
                             {{ item }}
                         </label>
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-dark" @click="submit()">繳交</button>
+            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-else>
+                <h5>已提交{{ roomTopic }}活動資料！</h5>
+            </div>
+            <button class="btn btn-dark" @click="submit()" v-if="!lock">繳交</button>
         </div>
     </div>
 </template>
