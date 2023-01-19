@@ -146,8 +146,8 @@ export default {
                         class="btn btn-secondary mx-2" @click="(view_poll==events.length-1)?view_poll+=0:view_poll++">下一個活動</button></div>
                 <vote v-if="events[view_poll].category === 1" :roomTopic="events[view_poll].name"
                     :id="events[view_poll].id" />
-                <think v-else-if="events[view_poll].category === 2" :roomTopic="events[view_poll]" />
-                <lotto v-else-if="events[view_poll].category === 3" :roomTopic="events[view_poll]" />
+                <think v-else-if="events[view_poll].category === 2" :roomTopic="events[view_poll]" :id="events[view_poll].id" />
+                <lotto v-else-if="events[view_poll].category === 3" :roomTopic="events[view_poll]" :id="events[view_poll].id" />
                 <span v-else>somthing is wrong </span>
 
             </div>

@@ -4,11 +4,11 @@ import axios from 'axios';
 import Global from '../../../Global.js';
 
 export default {
-    props: ['roomTopic'],
+    props: ['roomTopic','id'],
     data() {
         return {
-            submit: false,
-            par_name: '',
+            lock: false,
+            name: '',
             address: '',
             phone: ''
         }
@@ -17,16 +17,19 @@ export default {
         submitt() {
             this.submit = true;
             axios.post(`${Global.backend}/record`, {
-                eventId: this.roomTopic.id,
-                userId: "還沒設定",
-                address: this.slection,
+                id: this.id,
+                eventId: this.id,
+                userId: this.id,
+                address: this.name,
                 name: this.par_name,
                 phone: this.phone
             })
-                .then(response => {
-                    console.log(response);
+                .then(res => {
+                    alert('資料送出成功');
+                    console.log(res);
                 })
                 .catch(error => {
+                    alert('資料送出失敗...')
                     console.log(error);
                 })
         }
@@ -37,27 +40,27 @@ export default {
 <template>
     <div id="safe">
         <div class="myfont mb-5" style="jusfy-content: center;">
-            <h4>提交抽獎基本資料</h4>
-            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="submit === false">
+            <h4>{{roomTopic}}</h4>
+            <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-if="!lock">
                 <ul class="list-group myfont" style="width: 35vw;">
                     <li class="list-group-item">
                         <input class="form-control" type="text"
-                            :placeholder="`輸入抽獎人真實姓名：（${roomTopic.party_name === true ? '必填' : '選填'}）`" v-model="">
+                            :placeholder="`輸入抽獎人真實姓名：`" v-model="name">
                     </li>
                     <li class="list-group-item">
                         <input class="form-control" type="text"
-                            :placeholder="`寄送獎品地址：（${roomTopic.address === true ? '必填' : '選填'}）`" v-model="address">
+                            :placeholder="`寄送獎品地址：`" v-model="address">
                     </li>
                     <li class="list-group-item">
                         <input class="form-control" type="text"
-                            :placeholder="`抽獎人電話號碼：（${roomTopic.phone === true ? '必填' : '選填'}）`" v-model="phone">
+                            :placeholder="`抽獎人電話號碼：`" v-model="phone">
                     </li>
                 </ul>
             </div>
             <div style="text-align: center; max-height: 45vh;" class="mt-3 mb-3 overflow-auto" v-else>
                 <h5>已提交{{roomTopic}}活動資料！</h5>
             </div>
-            <button class="btn btn-dark mx-2" @click="submitt()" v-if="submit === false">送出</button>
+            <button class="btn btn-dark mx-2" @click="submitt()" v-if="!lock">送出</button>
         </div>
     </div>
 </template>
