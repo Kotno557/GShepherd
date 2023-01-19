@@ -95,6 +95,7 @@ export default {
             axios.get(`${Global.backend}/api/room/${this.roomId}`)
                 .then((res) => {
                     this.roomName = res.data.name;
+                    console.log(res);
                 })
                 .catch((err) => {
                     alert('房間名稱讀取錯誤，請稍後再試...');
@@ -115,7 +116,7 @@ export default {
                 .catch((err) => {
                     console.log(err);
                     alert('活動資料擷取失敗請稍後再試...');
-                })
+                });
         }
     },
     mounted() {
