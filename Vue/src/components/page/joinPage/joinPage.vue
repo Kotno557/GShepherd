@@ -141,9 +141,9 @@ export default {
         </nav>
         <div id="middle">
             <div id="sheet">
-                <select class="form-select form-select-lg" aria-label=".form-select-lg example" v-model="view_poll">
-                    <option v-for="(item, index) in events" :value="index">{{ item.name }}</option>
-                </select>
+                <div class="d-flex justify-content-center mt-4"><button
+                        class="btn btn-secondary mx-2" @click="(view_poll!=0)?view_poll--:view_poll+=0">上一個活動</button><button
+                        class="btn btn-secondary mx-2" @click="(view_poll==events.length-1)?view_poll+=0:view_poll++">下一個活動</button></div>
                 <vote v-if="events[view_poll].category === 1" :roomTopic="events[view_poll].name"
                     :id="events[view_poll].id" />
                 <think v-else-if="events[view_poll].category === 2" :roomTopic="events[view_poll]" />

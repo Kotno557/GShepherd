@@ -42,7 +42,7 @@ export default {
                 <ul class="list-group myfont" style="width: 35vw;">
                     <li class="list-group-item">
                         <input class="form-control" type="text"
-                            :placeholder="`輸入中獎人真實姓名：（${roomTopic.party_name === true ? '必填' : '選填'}）`" v-model="par_name">
+                            :placeholder="`輸入抽獎人真實姓名：（${roomTopic.party_name === true ? '必填' : '選填'}）`" v-model="">
                     </li>
                     <li class="list-group-item">
                         <input class="form-control" type="text"
@@ -50,7 +50,7 @@ export default {
                     </li>
                     <li class="list-group-item">
                         <input class="form-control" type="text"
-                            :placeholder="`中獎人電話號碼：（${roomTopic.phone === true ? '必填' : '選填'}）`" v-model="phone">
+                            :placeholder="`抽獎人電話號碼：（${roomTopic.phone === true ? '必填' : '選填'}）`" v-model="phone">
                     </li>
                 </ul>
             </div>
