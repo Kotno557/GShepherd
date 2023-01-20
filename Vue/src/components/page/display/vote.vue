@@ -1,7 +1,7 @@
 <template>
   <div>
     <table class="table table-striped">
-      <thead>
+      <thead class="table-primary">
         <th>排名</th>
         <th>名稱</th>
       </thead>
