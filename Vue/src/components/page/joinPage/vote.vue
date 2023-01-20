@@ -21,7 +21,6 @@ export default {
     methods: {
         submit() {
             axios.post(`${Global.backend}/record`, {
-                id: this.id,
                 eventId: this.id,
                 userId: this.id,
                 option: this.awnser

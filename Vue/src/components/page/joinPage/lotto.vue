@@ -17,7 +17,6 @@ export default {
         submitt() {
             this.submit = true;
             axios.post(`${Global.backend}/record`, {
-                id: this.id,
                 eventId: this.id,
                 userId: this.id,
                 address: true,//this.address,

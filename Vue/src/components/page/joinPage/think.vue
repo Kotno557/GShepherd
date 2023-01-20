@@ -13,7 +13,6 @@ export default {
     submit() {
       console.log(this.anwser);
       axios.post(`${Global.backend}/record/`, {
-        "id": this.id,
         "eventId": this.id,
         "userId": this.id,
         "idea": this.anwser
