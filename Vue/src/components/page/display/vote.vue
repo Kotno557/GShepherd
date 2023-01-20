@@ -57,7 +57,7 @@ export default {
           for (let name of res.data.options) {
             this.options.push({ name: name, poll: 0 });
           }
-          console.log('Get options: ', res);
+          console.log('Get options: ', this.options);
         })
         .catch((err) => {
           alert('無法取得選項資訊...');
