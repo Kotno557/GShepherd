@@ -1,14 +1,16 @@
 <template>
   <div>
-    <table class="table table-striped">
-      <thead class="thead-light">
-        <th>排名</th>
-        <th>名稱</th>
+    <table class="table table-striped thead-light">
+      <thead>
+        <th scope="col">排名</th>
+        <th scope="col">名稱</th>
+        <th scope="col">票數</th>
       </thead>
       <tbody>
         <tr v-for="(option, index) in options" :key="option.id" class="table-light">
-          <td>{{ index + 1 }}</td>
+          <th scope="row">{{ index + 1 }}</th>
           <td>{{ option.name }}</td>
+          <td>{{ option.poll }}</td>
         </tr>
       </tbody>
     </table>
