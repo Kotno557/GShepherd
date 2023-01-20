@@ -16,11 +16,16 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { getUnixTime } from 'date-fns';
+import Global from '../../../Global';
+
 export default {
-  props: ['res'],
+  props: ['eventId'],
   data() {
     return {
-      options: [],
+      options: {},
+      events: []
     };
   },
   methods: {
@@ -31,9 +36,46 @@ export default {
       }
       return a.amount < b.amount;
     },
+    getRecord() {
+      axios.get(`${Global.backend}/record`)
+        .then((res) => {
+          for (let item of res.data) {
+            if (item.eventId === this.eventId) {
+              this.options[item.option]++;
+            }
+          }
+          console.log('Get event: ',res.data);
+        })
+        .catch((err)=>{
+          alert('無法讀取投票資料...');
+          console.log(err);
+        }); 
+    },
+    getEventInfo() {
+      axios.get(`${Global.backend}/event/${this.eventId}`)
+        .then((res) => {
+          this.options={};
+          for (let item of res.data) {
+            if (item.id === this.eventId) {
+              for(let option in item.options){
+                this.options[option]=0;
+              }
+            }
+          }
+          console.log('Get options: ', this.options);
+        })
+        .catch((err) => {
+          alert('無法取得選項資訊...');
+          console.log(err);
+        })
+    }
   },
-  mounted() {},
-};
+  mounted() {
+
+  }
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

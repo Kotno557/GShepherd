@@ -145,22 +145,25 @@ export default {
     <div id="middle">
       <div id="sheet">
         <template v-for="(event, index) in events" :key="index">
-          <div v-show="currentPage === index">
-            <span>{{ event.id }}</span>
-            <span>{{ event.name }}</span>
+          <div v-show="currentPage === index" class="">
+            <div class="d-flex justify-content-center mt-2 mb-2" >
+              <h4><b>{{ event.name }}</b></h4>
+            </div>
+            <div class="mx-5">
             <template v-if="event.category === 1">
-              <Vote :eventId="event.id"/>
+              <Vote :eventId="event.id" />
             </template>
             <template v-else-if="event.category === 2">
-              <Thought :eventId="event.id"/>
+              <Thought :eventId="event.id" />
             </template>
             <template v-else-if="event.category === 3">
-              <Raffle :eventId="event.id"/>
+              <Raffle :eventId="event.id" />
             </template>
             <template v-else>
               <p>undefined category</p>
             </template>
             <!-- TODO: add different event components -->
+            </div>
           </div>
         </template>
       </div>
