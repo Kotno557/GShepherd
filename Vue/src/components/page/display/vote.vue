@@ -53,7 +53,7 @@ export default {
             }
           }
           console.log('Poll options: ', this.options);
-          this.options.sort(this.sortByAmount(a,b));
+          this.options.sort(this.sortByAmount);
         })
         .catch((err) => {
           alert('無法讀取投票資料...');
