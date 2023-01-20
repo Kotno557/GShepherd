@@ -20,16 +20,35 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Global from '../../../Global';
+
 export default {
-  props: ['res'],
+  props: ['eventId'],
   data() {
     return {
       tickets: [],
     };
   },
-  methods: {},
+  methods: {
+    getRecord(){
+      axios.get(`${Global.backend}/record`)
+      .then((res)=>{
+        for(let item of res.data){
+          if(item.eventId===this.eventId){
+            this.tickets.push(item);
+          }
+        }
+        console.log(this.tickets);
+      })
+      .catch((err)=>{
+        alert('讀取票記錄錯誤...');
+        console.log(err);
+      })
+    }
+  },
   mounted() {
-    this.tickets = this.res;
+    this.getRecord();
   },
 };
 </script>

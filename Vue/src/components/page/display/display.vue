@@ -10,17 +10,79 @@ export default {
     return {
       roomId: this.$route.params.id,
       roomInfo: {
-        id: '63bade318b1be06bd2358e0b',
-        name: 'test',
-        code: 'MC4yNj',
-        admins: ['63babf42102799dada53bc11'],
-        createdBy: '63babf42102799dada53bc11',
-        createdAt: '2023-01-08T15:16:01.346Z',
-        updatedAt: '2023-01-08T15:16:01.346Z',
+        "name": "期末尾牙大會",
+        "code": "MC44Mz",
+        "admins": [
+          "63bae430f215b7bd0492d167"
+        ],
+        "createdBy": "63bae430f215b7bd0492d167",
+        "createdAt": "2023-01-18T08:12:26.595Z",
+        "updatedAt": "2023-01-18T08:12:26.595Z",
+        "id": "63c7a9ea00595faf24977074"
       },
-      events: [],
-      currentPage: 1,
-      pointer: 0
+      events: [{
+        "options": [],
+        "name": "尾牙大獎",
+        "address": "true",
+        "roomId": "63b9823dedd082accf34c947",
+        "active": true,
+        "category": 3,
+        "id": "63bf08966484d41e59995293"
+      },
+      {
+        "options": [
+          "圓山",
+          "凱薩",
+          "長榮"
+        ],
+        "roomId": "63c7a9ea00595faf24977074",
+        "name": "下次員工旅遊飯店",
+        "active": true,
+        "category": 1,
+        "id": "63c81b830c5a87fdaf0b6f1b"
+      },
+      {
+        "options": [],
+        "roomId": "63c7a9ea00595faf24977074",
+        "name": "新年聚餐地點募集",
+        "active": true,
+        "category": 2,
+        "id": "63c81ba10c5a87fdaf0b6f23"
+      },
+      {
+        "options": [],
+        "fullName": true,
+        "address": true,
+        "phone": true,
+        "roomId": "63c7a9ea00595faf24977073",
+        "name": "尾牙大獎",
+        "active": true,
+        "category": 3,
+        "id": "63c8205631193c9646274492"
+      },
+      {
+        "fullName": true,
+        "address": true,
+        "phone": true,
+        "roomId": "63c7a9ea00595faf24977073",
+        "name": "尾牙抽獎11",
+        "active": false,
+        "category": 3,
+        "options": [],
+        "id": "63c8357ad48cbc25f78f475d"
+      },
+      {
+        "fullName": true,
+        "address": true,
+        "phone": true,
+        "roomId": "63c7a9ea00595faf24977074",
+        "name": "尾牙抽獎",
+        "active": true,
+        "category": 3,
+        "options": [],
+        "id": "63c8f765a111b46da965c1e6"
+      }],
+      currentPage: 0,
     };
   },
   methods: {
@@ -53,7 +115,7 @@ export default {
           }
           console.log(this.events);
         })
-        .catch((err)=>{
+        .catch((err) => {
           alert('房間資料讀取失敗...');
           console.log(err);
         })
@@ -82,18 +144,18 @@ export default {
     </nav>
     <div id="middle">
       <div id="sheet">
-        <template v-for="event in events" :key="event.id">
-          <div v-show="currentPage === event.order">
+        <template v-for="(event, index) in events" :key="index">
+          <div v-show="currentPage === index">
             <span>{{ event.id }}</span>
             <span>{{ event.name }}</span>
             <template v-if="event.category === 1">
-              <Vote />
+              <Vote :eventId="event.id"/>
             </template>
             <template v-else-if="event.category === 2">
-              <Thought />
+              <Thought :eventId="event.id"/>
             </template>
             <template v-else-if="event.category === 3">
-              <Raffle />
+              <Raffle :eventId="event.id"/>
             </template>
             <template v-else>
               <p>undefined category</p>
@@ -103,50 +165,6 @@ export default {
         </template>
       </div>
       <img id="logo" src="../../../assets/GShepherd_Logo.png" />
-    </div>
-    <div class="modal fade" id="createModal" data-bs-backdrop="static">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">加入活動</h4>
-          </div>
-
-          <!-- Modal body -->
-          <div class="modal-body">
-            <label for="recipient-name" class="col-form-label">請輸入活動名稱:</label>
-            <input type="text" class="form-control" id="recipient-name" v-model="room_name" />
-          </div>
-
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal" :disabled="room_name === ''"
-              @click="new_room(room_name)">
-              確認
-            </button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-              關閉
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="deleteModal" data-bs-backdrop="static">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">開發中，敬請期待...</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-
-          <!-- Modal body -->
-          <div class="modal-body"></div>
-
-          <!-- Modal footer -->
-          <div class="modal-footer"></div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
