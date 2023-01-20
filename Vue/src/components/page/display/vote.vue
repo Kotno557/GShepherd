@@ -24,7 +24,7 @@ export default {
   props: ['eventId'],
   data() {
     return {
-      options: {},
+      options: [],
       events: []
     };
   },
@@ -58,7 +58,7 @@ export default {
           for (let item of res.data) {
             if (item.id === this.eventId) {
               for(let option in item.options){
-                this.options[option]=0;
+                this.options.push({name: option, poll: 0});
               }
             }
           }
