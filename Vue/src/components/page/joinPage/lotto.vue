@@ -20,9 +20,9 @@ export default {
                 id: this.id,
                 eventId: this.id,
                 userId: this.id,
-                address: this.address,
-                name: this.name,
-                phone: this.phone
+                address: true,//this.address,
+                name: true,//this.name,
+                phone: true//this.phone
             })
                 .then(res => {
                     alert('資料送出成功');
