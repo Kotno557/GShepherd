@@ -52,6 +52,9 @@ export default {
               }
             }
           }
+          let temp=this.options;
+          temp.sort(this.sortByAmount);
+          this.options=temp;
           console.log('Poll options: ', this.options);
         })
         .catch((err) => {
@@ -76,8 +79,6 @@ export default {
   mounted() {
     this.getEventInfo();
     this.getRecord();
-    this.options.sort(this.sortByAmount);
-    console.log('Sort after',this.options);
   }
 }
 </script>
