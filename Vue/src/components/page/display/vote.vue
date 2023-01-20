@@ -1,10 +1,12 @@
 <template>
   <div>
-    <table class="table table-striped thead-light">
+    <table class="table table-hover">
       <thead>
-        <th scope="col">排名</th>
-        <th scope="col">名稱</th>
-        <th scope="col">票數</th>
+        <tr class="table-primary">
+          <th scope="col">排名</th>
+          <th scope="col">名稱</th>
+          <th scope="col">票數</th>
+        </tr>
       </thead>
       <tbody>
         <tr v-for="(option, index) in options" :key="option.id" class="table-light">
@@ -43,8 +45,8 @@ export default {
         .then((res) => {
           for (let item of res.data) {
             if (item.eventId === this.eventId) {
-              for(let option of this.options){
-                if(item.option===option.name){
+              for (let option of this.options) {
+                if (item.option === option.name) {
                   option.poll++;
                 }
               }
