@@ -9,6 +9,7 @@ export default {
       userId: this.$route.params.id,
       roomId: this.$route.params.roomId,
       roomName: "",
+      roomCode: "",
       eventType: { 1: 'check_box', 2: 'cloudy', 3: 'token' },
       events: [
         {
@@ -43,6 +44,7 @@ export default {
       .get(`${Global.backend}/room/${this.roomId}`)
       .then((res) => {
         this.roomName = res.data.name;
+        this.roomCode = res.data.code;
         console.log('Get room Name: ', this.roomName);
       })
       .catch((err) => {
@@ -176,7 +178,7 @@ export default {
           <ul class="list-group myfont" style="width: 100%; font-size: 2vmin">
             <li class="list-group-item active flex-center" style="justify-content: space-between">
               <text>{{
-                this.view_poll < 0 ? 'null' : events[view_poll].name
+                this.view_poll < 0 ? "房間密碼："+roomCode : events[view_poll].name
               }}</text>
                   <button style="float: right" class="btn btn-dark" @click="myclose()" v-if="view_poll > -1">
                     Ｘ</button>
