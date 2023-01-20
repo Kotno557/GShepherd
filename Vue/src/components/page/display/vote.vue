@@ -1,4 +1,5 @@
 <template>
+  {{options}}
   <div style="border-radius: 10px;">
     <table class="table table-hover">
       <thead>
