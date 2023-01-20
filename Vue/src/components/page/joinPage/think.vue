@@ -47,7 +47,7 @@ export default {
       <div style="text-align: center; max-height: 45vh;" class="mt-1 mb-3 overflow-auto" v-else>
         <h5>已提交{{ roomTopic }}活動資料！</h5>
       </div>
-      <button class="btn btn-dark mx-2" @click="submit()" :disabled="anwser == ''">繳交</button>
+      <button class="btn btn-dark mx-2" @click="submit()" :disabled="anwser == ''" v-if="!lock">繳交</button>
       <!-- <button class="btn btn-light" @click="anwser.length > 1 ? anwser.pop() : pass">
         - Idea
       </button> -->
