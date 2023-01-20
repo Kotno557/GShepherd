@@ -40,13 +40,11 @@ export default {
                     username: this.userName,
                     password: this.password.value
                 })
-                    .then(response => {
-                        this.okForSignin = response.status === 200;
-                        //看這裡要不要加重設輸入
-                        console.log(response);
+                    .then((res) => {
+                        this.okForSignin = true;
                     })
-                    .catch(function (error) {
-                        console.log(error);
+                    .catch((error) =>{
+                        this.okForSignin = false;
                     });
             } else {
                 this.okForSubmmit = false;
