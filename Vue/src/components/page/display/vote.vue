@@ -53,7 +53,6 @@ export default {
             }
           }
           console.log('Poll options: ', this.options);
-          this.options.sort(this.sortByAmount);
         })
         .catch((err) => {
           alert('無法讀取投票資料...');
@@ -77,7 +76,8 @@ export default {
   mounted() {
     this.getEventInfo();
     this.getRecord();
-
+    this.options.sort(this.sortByAmount);
+    console.log('Sort after',this.options);
   }
 }
 </script>
