@@ -45,7 +45,7 @@ export default {
         .then((res) => {
           this.events = [];
           console.log(res);
-          consolelog(this.roomInfo.id);
+          console.log(this.roomInfo.id);
           for (let i of res.data) {
             if (i.roomId === this.roomInfo.id) {
               this.events.push(i);
