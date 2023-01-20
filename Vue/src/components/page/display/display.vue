@@ -147,26 +147,29 @@ export default {
 
         <template v-for="(event, index) in events" :key="index">
           <div v-show="currentPage === index" class="">
-            <div class="d-flex justify-content-center mt-2 mb-2">
+            <div class="d-flex justify-content-center mt-4 mb-2">
               <h4 class="font-weight-bold">
                 <button @click="currentPage == 0 ? '' : currentPage--" class="btn btn-secondary">▲</button>
                 {{ event.name }}
-                <button @click="currentPage == events.length-1 ? '' : currentPage++" class="btn btn-secondary">▼</button>
+                <button @click="currentPage == events.length - 1 ? '' : currentPage++"
+                  class="btn btn-secondary">▼</button>
               </h4>
             </div>
-            <template v-if="event.category === 1">
-              <Vote :eventId="event.id" />
-            </template>
-            <template v-else-if="event.category === 2">
-              <Thought :eventId="event.id" />
-            </template>
-            <template v-else-if="event.category === 3">
-              <Raffle :eventId="event.id" />
-            </template>
-            <template v-else>
-              <p>undefined category</p>
-            </template>
-            <!-- TODO: add different event components -->
+            <div class="mx-5">
+              <template v-if="event.category === 1">
+                <Vote :eventId="event.id" />
+              </template>
+              <template v-else-if="event.category === 2">
+                <Thought :eventId="event.id" />
+              </template>
+              <template v-else-if="event.category === 3">
+                <Raffle :eventId="event.id" />
+              </template>
+              <template v-else>
+                <p>undefined category</p>
+              </template>
+              <!-- TODO: add different event components -->
+            </div>
           </div>
         </template>
       </div>

@@ -73,6 +73,7 @@ export default {
   mounted() {
     this.getEventInfo();
     this.getRecord();
+    console.log('我要的',this.options);
   }
 }
 </script>
