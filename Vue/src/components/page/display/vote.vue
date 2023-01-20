@@ -71,7 +71,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.eventId);
+    this.getEventInfo();
   }
 }
 </script>
