@@ -54,15 +54,15 @@ export default {
     getEventInfo() {
       axios.get(`${Global.backend}/event/${this.eventId}`)
         .then((res) => {
-          this.options={};
-          for (let item of res.data) {
-            if (item.id === this.eventId) {
-              for(let option in item.options){
-                this.options.push({name: option, poll: 0});
-              }
-            }
-          }
-          console.log('Get options: ', this.options);
+          // this.options={};
+          // for (let item of res.data) {
+          //   if (item.id === this.eventId) {
+          //     for(let option in item.options){
+          //       this.options.push({name: option, poll: 0});
+          //     }
+          //   }
+          // }
+          console.log('Get options: ', res);
         })
         .catch((err) => {
           alert('無法取得選項資訊...');
