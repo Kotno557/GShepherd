@@ -35,10 +35,10 @@ export default {
   methods: {
     sortByAmount(a, b) {
       // TODO: deal with -1, not 0
-      if (a.amount === b.amount) {
-        return a.id < b.id;
+      if (a.poll === b.poll) {
+        return a.name < b.name;
       }
-      return a.amount < b.amount;
+      return a.poll < b.poll;
     },
     getRecord() {
       axios.get(`${Global.backend}/record`)
@@ -53,6 +53,7 @@ export default {
             }
           }
           console.log('Poll options: ', this.options);
+          this.options.sort(this.sortByAmount)
         })
         .catch((err) => {
           alert('無法讀取投票資料...');
@@ -76,6 +77,7 @@ export default {
   mounted() {
     this.getEventInfo();
     this.getRecord();
+
   }
 }
 </script>
