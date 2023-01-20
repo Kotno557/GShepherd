@@ -25,6 +25,7 @@
 import axios from 'axios';
 import { getUnixTime } from 'date-fns';
 import Global from '../../../Global';
+import Test from '../joinPage/test.vue';
 
 export default {
   props: ['eventId'],
@@ -69,12 +70,16 @@ export default {
         })
     },
     sort() {
-      this.options.sort((a, b) => {
+      let temp=this.options;
+      console.log('Befor',temp);
+      temp.sort((a, b) => {
         if (a.poll === b.poll) {
           return a.name < b.name;
         }
         return a.poll < b.poll;
       });
+      console.log(temp);
+      this.options=temp;
     }
   },
   mounted() {
