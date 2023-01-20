@@ -144,12 +144,16 @@ export default {
     </nav>
     <div id="middle">
       <div id="sheet">
+
         <template v-for="(event, index) in events" :key="index">
           <div v-show="currentPage === index" class="">
-            <div class="d-flex justify-content-center mt-2 mb-2" >
-              <h4><b>{{ event.name }}</b></h4>
+            <div class="d-flex justify-content-center mt-2 mb-2">
+              <h4 class="font-weight-bold">
+                <button @click="currentPage == 0 ? '' : currentPage--" class="btn btn-secondary">▲</button>
+                {{ event.name }}
+                <button @click="currentPage == events.length-1 ? '' : currentPage++" class="btn btn-secondary">▼</button>
+              </h4>
             </div>
-            <div class="mx-5">
             <template v-if="event.category === 1">
               <Vote :eventId="event.id" />
             </template>
@@ -163,7 +167,6 @@ export default {
               <p>undefined category</p>
             </template>
             <!-- TODO: add different event components -->
-            </div>
           </div>
         </template>
       </div>

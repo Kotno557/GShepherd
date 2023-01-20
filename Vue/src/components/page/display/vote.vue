@@ -71,8 +71,8 @@ export default {
     }
   },
   mounted() {
-    getEventInfo();
-    getRecord();
+    this.getEventInfo();
+    this.getRecord();
   }
 }
 </script>
