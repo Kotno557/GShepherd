@@ -1,7 +1,7 @@
 <template>
   <div>
     <table class="table table-striped">
-      <thead class="table-primary">
+      <thead class="thead-light">
         <th>排名</th>
         <th>名稱</th>
       </thead>
@@ -41,10 +41,14 @@ export default {
         .then((res) => {
           for (let item of res.data) {
             if (item.eventId === this.eventId) {
-              this.options[item.option]++;
+              for(let option of this.options){
+                if(item.option===option.name){
+                  option.poll++;
+                }
+              }
             }
           }
-          console.log('Get event: ', res.data);
+          console.log('Poll options: ', this.options);
         })
         .catch((err) => {
           alert('無法讀取投票資料...');
@@ -67,6 +71,7 @@ export default {
   },
   mounted() {
     this.getEventInfo();
+    this.getRecord();
   }
 }
 </script>
