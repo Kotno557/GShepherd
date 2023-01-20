@@ -82,7 +82,7 @@ export default {
     <div id="container">
       <div>
         <div id="logo" class="d-flex justify-content-center">
-          <img src="../../../assets/GShepherd_Logo.png" />
+          <a href="/"><img src="../../../assets/GShepherd_Logo.png" /></a>
         </div>
         <div id="select-bar">
           <div id="sign-up" :class="selectBar[0]" @click="
