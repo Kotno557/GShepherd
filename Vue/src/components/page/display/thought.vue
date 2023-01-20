@@ -3,7 +3,7 @@
     <table class="table table-hover">
       <thead>
         <tr class="table-primary">
-          <th scope="col">順位</th>
+          <th scope="col">標號</th>
           <th scope="col">想法</th>
         </tr>
       </thead>

@@ -20,8 +20,8 @@ export default {
                 id: this.id,
                 eventId: this.id,
                 userId: this.id,
-                address: this.name,
-                name: this.par_name,
+                address: this.address,
+                name: this.name,
                 phone: this.phone
             })
                 .then(res => {
