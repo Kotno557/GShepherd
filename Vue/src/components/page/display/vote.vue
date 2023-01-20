@@ -21,9 +21,7 @@
 
 <script>
 import axios from 'axios';
-import { getUnixTime } from 'date-fns';
 import Global from '../../../Global';
-import Test from '../joinPage/test.vue';
 
 export default {
   props: ['eventId'],

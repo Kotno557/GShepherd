@@ -146,7 +146,7 @@ export default {
       <div id="sheet" style="overflow-y: scroll; height: 100%;">
 
         <template v-for="(event, index) in events" :key="index">
-          <div v-show="currentPage === index" class="">
+          <div v-show="currentPage === index">
             <div class="d-flex justify-content-center mt-4 mb-2">
               <h4 class="font-weight-bold">
                 <button @click="currentPage == 0 ? '' : currentPage--" class="btn btn-secondary">▲</button>
