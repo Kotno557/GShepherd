@@ -44,6 +44,8 @@ export default {
       axios.get(`${Global.backend}/event/`)
         .then((res) => {
           this.events = [];
+          console.log(res);
+          consolelog(this.roomInfo.id);
           for (let i of res.data) {
             if (i.roomId === this.roomInfo.id) {
               this.events.push(i);
