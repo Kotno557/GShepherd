@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table class="table table-hover rounded">
+  <div class="rounded">
+    <table class="table table-hover">
       <thead>
         <tr class="table-primary">
           <th scope="col">排名</th>
