@@ -18,6 +18,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Global from '../../../Global';
+
 export default {
   props: ['eventId'],
   data() {
