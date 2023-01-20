@@ -44,24 +44,19 @@ export default {
               this.options[item.option]++;
             }
           }
-          console.log('Get event: ',res.data);
+          console.log('Get event: ', res.data);
         })
-        .catch((err)=>{
+        .catch((err) => {
           alert('無法讀取投票資料...');
           console.log(err);
-        }); 
+        });
     },
     getEventInfo() {
       axios.get(`${Global.backend}/event/${this.eventId}`)
         .then((res) => {
-          // this.options={};
-          // for (let item of res.data) {
-          //   if (item.id === this.eventId) {
-          //     for(let option in item.options){
-          //       this.options.push({name: option, poll: 0});
-          //     }
-          //   }
-          // }
+          for (let name of res.data.options) {
+            this.options.push({ name: name, poll: 0 });
+          }
           console.log('Get options: ', res);
         })
         .catch((err) => {
