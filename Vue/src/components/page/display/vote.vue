@@ -70,16 +70,15 @@ export default {
         })
     },
     sort() {
-      let temp=this.options;
-      console.log('Befor',temp);
-      temp.sort((a, b) => {
-        if (a.poll === b.poll) {
-          return a.name < b.name;
+      for(let i=0;i<this.options.length;i++){
+        for(let j=0;j<this.options.length;j++){
+          if(this.options[j].poll>this.options[j].poll){
+            let temp=this.options[j];
+            this.options[j]=this.options[i];
+            this.options[i]=temp;
+          }
         }
-        return a.poll < b.poll;
-      });
-      console.log(temp);
-      this.options=temp;
+      }
     }
   },
   mounted() {
