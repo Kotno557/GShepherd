@@ -6,7 +6,7 @@
         <th>名稱</th>
       </thead>
       <tbody>
-        <tr v-for="(option, index) in options" :key="option.id">
+        <tr v-for="(option, index) in options" :key="option.id" class="table-light">
           <td>{{ index + 1 }}</td>
           <td>{{ option.name }}</td>
         </tr>
