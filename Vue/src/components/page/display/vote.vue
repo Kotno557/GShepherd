@@ -1,5 +1,6 @@
 <template>
   {{ options }}
+  <button @click="sort">!</button>
   <div style="border-radius: 10px;">
     <table class="table table-hover">
       <thead>
@@ -46,12 +47,7 @@ export default {
               }
             }
           }
-          this.options.sort((a, b) => {
-            if (a.poll === b.poll) {
-              return a.name < b.name;
-            }
-            return a.poll < b.poll;
-          });
+          this.sort();
           console.log('Poll options: ', this.options);
         })
         .catch((err) => {
@@ -71,6 +67,14 @@ export default {
           alert('無法取得選項資訊...');
           console.log(err);
         })
+    },
+    sort() {
+      this.options.sort((a, b) => {
+        if (a.poll === b.poll) {
+          return a.name < b.name;
+        }
+        return a.poll < b.poll;
+      });
     }
   },
   mounted() {
