@@ -16,7 +16,7 @@ export default {
         "id": this.id,
         "eventId": this.id,
         "userId": this.id,
-        "option": this.anwser
+        "idea": this.anwser
       })
         .then(response => {
           this.lock=true;
