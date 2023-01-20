@@ -143,7 +143,7 @@ export default {
       </span>
     </nav>
     <div id="middle">
-      <div id="sheet">
+      <div id="sheet" style="overflow-y: scroll; height: 100%;">
 
         <template v-for="(event, index) in events" :key="index">
           <div v-show="currentPage === index" class="">
