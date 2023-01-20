@@ -1,5 +1,5 @@
 <template>
-  {{options}}
+  {{ options }}
   <div style="border-radius: 10px;">
     <table class="table table-hover">
       <thead>
@@ -34,13 +34,6 @@ export default {
     };
   },
   methods: {
-    sortByAmount(a, b) {
-      // TODO: deal with -1, not 0
-      if (a.poll === b.poll) {
-        return a.name < b.name;
-      }
-      return a.poll < b.poll;
-    },
     getRecord() {
       axios.get(`${Global.backend}/record`)
         .then((res) => {
@@ -53,9 +46,12 @@ export default {
               }
             }
           }
-          let temp=this.options;
-          temp.sort(this.sortByAmount);
-          this.options=temp;
+          this.options.sort((a, b) => {
+            if (a.poll === b.poll) {
+              return a.name < b.name;
+            }
+            return a.poll < b.poll;
+          });
           console.log('Poll options: ', this.options);
         })
         .catch((err) => {
