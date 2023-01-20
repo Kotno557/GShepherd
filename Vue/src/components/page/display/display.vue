@@ -185,7 +185,6 @@ export default {
   width: 65vw;
   height: 75vh;
   background-color: rgba(175, 179, 174, 0.6);
-  border-radius: 2vmin;
   max-height: fit-content;
 }
 
