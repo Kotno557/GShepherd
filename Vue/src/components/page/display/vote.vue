@@ -1,11 +1,9 @@
 <template>
-  {{ options }}
-  <button @click="sort">!</button>
   <div style="border-radius: 10px;">
     <table class="table table-hover">
       <thead>
         <tr class="table-primary">
-          <th scope="col">排名</th>
+          <th scope="col">選項</th>
           <th scope="col">名稱</th>
           <th scope="col">票數</th>
         </tr>
