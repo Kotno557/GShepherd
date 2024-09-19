@@ -1,7 +1,3 @@
-# Untitled
-
-Date: September 20, 2024
-
 ### Project Introduction
 
 GShepherd is a small project we created based on Slido. As more and more courses and events now require interaction between the stage and the audience, we attempted to design a website like Slido, hoping to make the design more tailored to course needs.
