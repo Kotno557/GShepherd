@@ -59,7 +59,7 @@ GShepherd is a small project we created based on Slido. As more and more courses
         
 - and RESTful API (Representational State Transfer)
 
-### Some Screenshot of the project
+### Some Screenshot of Project
 
 ![image.png](/picture/image%204.png)
 
